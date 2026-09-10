@@ -5,6 +5,48 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.1] - 2026-09-11
+
+### Corrigé
+
+- **Les parties étaient visibles mais impossibles à rejoindre, ou n'apparaissaient pas du
+  tout.** Tout ce qui rend une partie rejoignable arrive en *entrée* par le tunnel, et
+  Windows bloque l'ensemble par défaut : l'annonce relayée par le pair est de l'UDP
+  entrant, et rejoindre une partie est une connexion TCP entrante. La version en ligne de
+  commande ouvrait les deux ; l'application ne l'a jamais fait, si bien que la machine
+  qui ne gardait aucune règle héritée d'elle restait injoignable dans un sens ou dans les
+  deux. Une session ouvre désormais le port de découverte pour le seul sous-réseau du VPN
+  — et non pour tous les réseaux auxquels la machine est raccordée —, sort l'adaptateur
+  du tunnel de la catégorie « public » que Windows lui attribue, et rétablit les deux à
+  la fin.
+- **L'interface se disloquait dès que la taille du texte dépassait la valeur par défaut,
+  et un redémarrage n'y changeait rien.** La couche agrandie était d'abord centrée, puis
+  grandissait depuis son propre coin supérieur gauche : tout commençait donc plus bas et
+  plus à droite que prévu et débordait en bas et à droite, emportant le bouton des
+  paramètres. Comme la taille du texte est mémorisée, chaque redémarrage retombait dans le
+  même état, sans moyen d'atteindre le réglage responsable.
+- **Le téléchargement d'une mise à jour n'affichait aucune progression.** La fenêtre se
+  fermait dès l'appui sur *Télécharger* et le transfert se faisait sans rien à l'écran, ce
+  qui ne se distingue pas d'un téléchargement qui n'a jamais commencé. Les notes de version
+  restent maintenant ouvertes, avec une barre de progression, la quantité transférée et une
+  *Annulation* qui fonctionne.
+- **Réactiver la vérification automatique des mises à jour restait sans effet pendant
+  jusqu'à quatre heures.** La vérification en arrière-plan ne relisait le réglage qu'à son
+  prochain passage ; elle regarde désormais tout de suite.
+- **Le choix du comportement à la fermeture semblait perdu** lorsque la langue était
+  changée au cours de la même visite dans les paramètres. Traduire la liste remplace
+  l'entrée sélectionnée, ce qui efface la sélection : les autres listes se rétablissent
+  seules, pas celle-ci.
+
+### Ajouté
+
+- **Les mises à jour sont vérifiées même lorsque l'application est dans la zone de
+  notification**, toutes les quatre heures au lieu du seul démarrage. Une nouvelle version
+  est annoncée par une bulle dans la zone de notification, et l'info-bulle de l'icône
+  continue de le signaler une fois la bulle disparue.
+- **Un bouton « Vérifier maintenant » dans les paramètres**, pour quand attendre la
+  prochaine vérification programmée n'a pas d'intérêt.
+
 ## [0.5.0] - 2026-09-11
 
 ### Corrigé
@@ -136,6 +178,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - Relais générique de diffusion UDP pour d'autres jeux, configuré par port.
 - Version en ligne de commande du même moteur.
 
+[0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
 [0.3.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.3.0

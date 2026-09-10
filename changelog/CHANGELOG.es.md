@@ -5,6 +5,46 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.1] - 2026-09-11
+
+### Corregido
+
+- **Las partidas se veían pero no se podía entrar, o no aparecían en absoluto.** Todo lo
+  que hace que una partida se pueda jugar llega *entrante* por el túnel, y Windows lo
+  bloquea todo de forma predeterminada: el anuncio que reenvía el relé del compañero es
+  UDP entrante, y entrar en la partida es una conexión TCP entrante. La versión de línea
+  de órdenes abría ambos; la aplicación nunca lo hizo, así que la máquina que no
+  conservara una regla suya quedaba inalcanzable en uno de los dos sentidos o en los dos.
+  Ahora cada sesión abre el puerto de descubrimiento solo para la subred de la VPN —no
+  para todas las redes a las que está conectada la máquina—, saca al adaptador del túnel
+  de la categoría *pública* que Windows le asigna y deshace ambas cosas al terminar.
+- **La interfaz se descuadraba con cualquier tamaño de texto mayor que el predeterminado,
+  y reiniciar no la recuperaba.** La capa que se amplía se centraba primero y luego crecía
+  desde su propia esquina superior izquierda, así que todo empezaba más abajo y más a la
+  derecha de lo debido y se salía por el borde inferior y el derecho, llevándose consigo
+  el botón de configuración. Como el tamaño del texto se recuerda, cada reinicio volvía al
+  mismo estado roto sin forma de llegar al ajuste que lo causaba.
+- **La descarga de una actualización no mostraba ningún progreso.** La ventana se cerraba
+  en cuanto se pulsaba *Descargar* y la transferencia ocurría sin nada en pantalla, algo
+  indistinguible de una descarga que nunca empezó. Las notas de la versión ahora siguen
+  abiertas, con una barra de progreso, la cantidad transferida y un *Cancelar* que
+  funciona.
+- **Volver a activar la comprobación automática de actualizaciones no hacía nada durante
+  hasta cuatro horas.** La comprobación en segundo plano solo revisaba el ajuste en su
+  siguiente ejecución programada; ahora mira de inmediato.
+- **La elección de qué hacer al cerrar la ventana parecía descartarse** al cambiar el
+  idioma en la misma visita a Configuración. Traducir la lista sustituye la entrada
+  seleccionada, lo que borra la selección: las demás listas se recuperan solas, esta no.
+
+### Añadido
+
+- **Las comprobaciones de actualización también se ejecutan con la aplicación en el área
+  de notificación**, cada cuatro horas en vez de solo al arrancar. Una versión nueva se
+  anuncia con un globo en el área de notificación, y la información sobre el icono lo
+  sigue indicando cuando el globo desaparece.
+- **Un botón *Comprobar ahora* en Configuración**, para cuando esperar a la siguiente
+  comprobación programada no tiene sentido.
+
 ## [0.5.0] - 2026-09-11
 
 ### Corregido
@@ -131,6 +171,7 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 - Retransmisión genérica de difusión UDP para otros juegos, configurada por puerto.
 - Versión de línea de comandos del mismo motor.
 
+[0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
 [0.3.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.3.0
