@@ -5,6 +5,49 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.1] - 2026-09-11
+
+### Behoben
+
+- **Spiele waren sichtbar, ließen sich aber nicht betreten, oder tauchten gar nicht erst
+  auf.** Alles, was ein Spiel betretbar macht, kommt *eingehend* durch den Tunnel, und
+  Windows blockiert das standardmäßig vollständig: Die Ankündigung, die das Relais der
+  Gegenstelle weiterleitet, ist eingehendes UDP, und das Beitreten ist eine eingehende
+  TCP-Verbindung. Die Kommandozeilenfassung öffnete beides; die Anwendung hat das nie
+  übernommen, weshalb der Rechner ohne übrig gebliebene Regel in einer oder in beiden
+  Richtungen nicht erreichbar war. Eine Sitzung öffnet den Suchport jetzt nur für das
+  VPN-Subnetz – nicht für jedes Netz, mit dem der Rechner verbunden ist –, holt den
+  Tunneladapter aus der Kategorie „öffentlich“, die Windows ihm gibt, und nimmt beides am
+  Ende wieder zurück.
+- **Die Oberfläche zerfiel bei jeder Textgröße oberhalb der Voreinstellung, und ein
+  Neustart half nicht.** Die skalierte Ebene wurde erst zentriert und dann von ihrer
+  eigenen linken oberen Ecke aus vergrößert. Dadurch begann die Oberfläche weiter unten
+  und weiter rechts als vorgesehen und lief unten und rechts aus dem Fenster – samt der
+  Schaltfläche für die Einstellungen. Da die Textgröße gespeichert wird, landete jeder
+  Neustart im selben Zustand, ohne einen Weg zurück zu der Einstellung, die ihn verursacht
+  hat.
+- **Beim Herunterladen einer Aktualisierung war kein Fortschritt zu sehen.** Das Fenster
+  schloss sich, sobald *Herunterladen* gedrückt wurde, und die Übertragung lief ohne jede
+  Anzeige – von einem Download, der nie begonnen hat, nicht zu unterscheiden. Die
+  Versionshinweise bleiben jetzt offen und zeigen einen Fortschrittsbalken, die übertragene
+  Menge und ein *Abbrechen*, das wirkt.
+- **Die automatische Aktualisierungsprüfung wieder einzuschalten blieb bis zu vier Stunden
+  wirkungslos.** Die Prüfung im Hintergrund sah sich die Einstellung erst beim nächsten
+  geplanten Durchlauf wieder an; jetzt schaut sie sofort nach.
+- **Die Auswahl für das Schließen des Fensters wirkte verworfen**, wenn beim selben Besuch
+  der Einstellungen die Sprache gewechselt wurde. Das Übersetzen der Liste ersetzt den
+  ausgewählten Eintrag und löscht damit die Auswahl – die übrigen Listen stellen sich
+  selbst wieder her, diese nicht.
+
+### Hinzugefügt
+
+- **Nach Aktualisierungen wird auch dann gesucht, wenn die Anwendung im Infobereich
+  liegt**, alle vier Stunden statt nur beim Start. Eine neue Version wird mit einer
+  Sprechblase im Infobereich angekündigt, und der Tooltip des Symbols weist weiter darauf
+  hin, wenn die Sprechblase verschwunden ist.
+- **Eine Schaltfläche *Jetzt suchen* in den Einstellungen**, für den Fall, dass es keinen
+  Grund gibt, auf die nächste geplante Prüfung zu warten.
+
 ## [0.5.0] - 2026-09-11
 
 ### Behoben
@@ -134,6 +177,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
 [0.3.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.3.0

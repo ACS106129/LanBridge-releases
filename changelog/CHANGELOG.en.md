@@ -5,6 +5,45 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-09-11
+
+### Fixed
+
+- **Games were visible but could not be joined, or did not appear at all.** Everything
+  that makes a game joinable arrives *inbound* over the tunnel, and Windows blocks all of
+  it by default: the advertisement a peer's relay forwards is inbound UDP, and joining is
+  an inbound TCP connection. The command-line version opened both; the application never
+  did, so whichever machine had no rule left over from it was unreachable in one or both
+  directions. A session now opens the discovery port for the VPN subnet only — not for
+  every network the machine is attached to — moves the tunnel adapter out of the *public*
+  category Windows assigns it, and puts both back when the session ends.
+- **The interface fell apart at any text size above the default, and restarting never
+  brought it back.** The scaled layer was centred first and then grown from its own top
+  left corner, so the whole interface started lower and further right than it should and
+  ran off the bottom and right edges — taking the settings button with it. Because the
+  text size is remembered, every restart landed in the same broken state with no way to
+  reach the setting that caused it.
+- **Downloading an update showed no progress at all.** The window closed the moment
+  *Download* was pressed and the transfer ran with nothing on screen, which is
+  indistinguishable from a download that never started. The release notes now stay open
+  with a progress bar, the amount transferred, and a *Cancel* that works.
+- **Switching automatic update checks back on did nothing for up to four hours.** The
+  background check only reconsidered the setting at its next scheduled run; it now looks
+  straight away.
+- **The close-window choice looked as though it had been discarded** when the language was
+  changed during the same visit to Settings. Translating the list replaces the selected
+  entry, which clears the selection — the other dropdowns restore themselves, this one did
+  not.
+
+### Added
+
+- **Update checks now run while the application sits in the notification area**, every
+  four hours rather than only at startup. A new release is announced with a
+  notification-area balloon, and the icon's tooltip keeps saying so after the balloon
+  fades.
+- **A *Check now* button in Settings**, for when waiting for the next scheduled check is
+  not the point.
+
 ## [0.5.0] - 2026-09-11
 
 ### Fixed
@@ -124,6 +163,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
 [0.3.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.3.0

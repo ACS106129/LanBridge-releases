@@ -5,6 +5,47 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.1] - 2026-09-11
+
+### Corretto
+
+- **Le partite si vedevano ma non si riusciva a entrare, oppure non comparivano affatto.**
+  Tutto ciò che rende una partita accessibile arriva *in entrata* attraverso il tunnel, e
+  Windows lo blocca per intero in modo predefinito: l'annuncio inoltrato dal relè del
+  compagno è UDP in entrata, ed entrare in partita è una connessione TCP in entrata. La
+  versione a riga di comando apriva entrambi; l'applicazione non l'ha mai fatto, così la
+  macchina rimasta senza una sua regola risultava irraggiungibile in un verso o in
+  entrambi. Ora ogni sessione apre la porta di individuazione soltanto per la sottorete
+  della VPN — non per tutte le reti a cui la macchina è collegata —, sposta la scheda del
+  tunnel fuori dalla categoria *pubblica* che Windows le assegna, e ripristina entrambe le
+  cose alla fine.
+- **L'interfaccia si sfasciava con qualsiasi dimensione del testo superiore a quella
+  predefinita, e riavviare non la recuperava.** Il livello ingrandito veniva prima centrato
+  e poi fatto crescere dal proprio angolo in alto a sinistra, così tutto partiva più in
+  basso e più a destra del dovuto e usciva dal bordo inferiore e da quello destro,
+  portandosi via il pulsante delle impostazioni. Poiché la dimensione del testo viene
+  ricordata, ogni riavvio ricadeva nello stesso stato, senza un modo per raggiungere
+  l'impostazione che lo aveva causato.
+- **Lo scaricamento di un aggiornamento non mostrava alcun avanzamento.** La finestra si
+  chiudeva appena premuto *Scarica* e il trasferimento avveniva senza nulla sullo schermo,
+  cosa indistinguibile da uno scaricamento mai iniziato. Le note di versione ora restano
+  aperte, con una barra di avanzamento, la quantità trasferita e un *Annulla* che funziona.
+- **Riattivare il controllo automatico degli aggiornamenti non faceva nulla per un massimo
+  di quattro ore.** Il controllo in secondo piano rileggeva l'impostazione solo alla
+  successiva esecuzione programmata; ora guarda subito.
+- **La scelta sul comportamento alla chiusura sembrava scartata** se nella stessa visita
+  alle impostazioni si cambiava lingua. Tradurre l'elenco sostituisce la voce selezionata e
+  questo azzera la selezione: gli altri elenchi si ripristinano da soli, questo no.
+
+### Aggiunto
+
+- **Gli aggiornamenti vengono cercati anche mentre l'applicazione è nell'area di
+  notifica**, ogni quattro ore invece che solo all'avvio. Una nuova versione viene
+  annunciata con un fumetto nell'area di notifica, e il suggerimento dell'icona continua a
+  segnalarla dopo che il fumetto è scomparso.
+- **Un pulsante «Controlla ora» nelle impostazioni**, per quando aspettare il prossimo
+  controllo programmato non ha senso.
+
 ## [0.5.0] - 2026-09-11
 
 ### Corretto
@@ -134,6 +175,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
 [0.3.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.3.0
