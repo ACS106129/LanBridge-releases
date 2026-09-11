@@ -5,6 +5,66 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.3] - 2026-09-12
+
+### Corrigé
+
+- **Une partie hébergée sur une machine était visible depuis l'autre mais impossible à
+  rejoindre.** Seul le port de découverte était ouvert en entrée, or ce n'est pas forcément
+  celui sur lequel l'hôte écoute : Warcraft III prend le 6112 s'il le peut et monte jusqu'au
+  6119 sinon, en annonçant celui qu'il a obtenu. Un hôte chassé du 6112 était donc visible
+  et inaccessible — et dans ce sens seulement, ce qui donnait l'impression qu'une des deux
+  machines était en cause. Toute la plage d'hébergement est désormais ouverte, toujours au
+  seul sous-réseau du VPN.
+- **Une partie restait dans la liste de l'autre joueur après que l'hôte l'a fermée.**
+  Warcraft III annonce la fermeture par diffusion, et une diffusion peut sortir par
+  l'adaptateur du VPN, où le relais n'écoute délibérément pas : l'annonce n'était donc
+  jamais recueillie et le pair continuait de proposer une partie qui n'existait plus. Le
+  relais remarque désormais que l'hôte ne répond plus à ses sondes et la retire lui-même,
+  en s'appuyant sur la dernière annonce relayée pour dire laquelle.
+- **Changer de langue vidait les listes déroulantes de l'application cible et de la
+  découverte réseau**, et choisir « Par défaut du système » vidait la liste des langues
+  elle-même. Retraduire une liste revient à remplacer les entrées qu'elle contient, et une
+  liste déroulante considère le remplacement de l'entrée sélectionnée comme sa
+  disparition : elle effaçait la sélection, et la liaison réécrivait ce vide par-dessus le
+  choix. Les entrées conservent maintenant leur identité et seul leur texte change, il n'y
+  a donc plus rien à effacer. Deux tentatives précédentes rétablissaient la sélection après
+  coup ; celle-ci supprime la cause.
+- **La fenêtre des paramètres gardait l'ancienne langue dans son titre et son bouton**
+  lorsque la langue était changée depuis l'intérieur. Tout le contenu de la fenêtre était
+  réétiqueté, mais le titre et le bouton de fermeture n'en font pas partie.
+- **Le journal d'activité ne suivait pas les nouvelles lignes de façon fiable.** Il
+  défilait avant que la nouvelle ligne ne soit mise en page, allant donc là où se trouvait
+  l'ancienne fin et restant toujours une ligne en retard. Il défile désormais après la mise
+  en page et cesse de suivre dès que vous remontez pour lire, reprenant au retour en bas.
+- **Chaque mise à niveau réécrivait tous les fichiers, modifiés ou non.** L'ancienne
+  version était entièrement supprimée avant l'écriture du moindre fichier neuf, si bien que
+  chaque mise à niveau réécrivait toute l'installation. La nouvelle version est désormais
+  écrite d'abord et l'ancienne supprimée ensuite, ce qui permet à l'installateur d'ignorer
+  les fichiers identiques et ne laisse à écrire que ce qui a réellement changé.
+- **L'un des boutons du journal était disposé et cliquable, mais n'était jamais dessiné.**
+  *Ouvrir le dossier des journaux* occupait sa place et répondait aux clics sans rien
+  afficher du tout. Les actions du journal tiennent désormais sur une seule rangée
+  horizontale au lieu d'une colonne chacune, ce qui supprime la disposition par colonne
+  qui échouait.
+
+### Ajouté
+
+- **Un bouton d'informations sur l'application** à côté de celui des paramètres : la
+  version en cours d'exécution, le copyright, et un lien vers ses notes et téléchargements.
+- **Une case « Lancer LanBridge » sur la dernière page de l'installateur**, cochée par
+  défaut. Elle démarre l'application sans élévation, comme LanBridge doit s'exécuter : le
+  consentement est demandé au démarrage d'une session, pas avant.
+
+### Modifié
+
+- **Fermer l'application cible ne met fin à la session que si le tunnel lui est lié.**
+  Avec « Seule cette application peut utiliser le VPN » activé, le tunnel existe pour ce
+  seul processus et disparaît avec lui ; sinon il resterait un tunnel qu'aucun programme de
+  la machine n'a le droit d'utiliser. Sans cette option, le tunnel n'est délimité que par
+  destination et peut encore transporter le trafic d'autre chose : il reste donc en place
+  jusqu'à ce que vous l'arrêtiez.
+
 ## [0.5.2] - 2026-09-11
 
 ### Corrigé
@@ -190,6 +250,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - Relais générique de diffusion UDP pour d'autres jeux, configuré par port.
 - Version en ligne de commande du même moteur.
 
+[0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0

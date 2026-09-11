@@ -5,6 +5,66 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.3] - 2026-09-12
+
+### Corretto
+
+- **Una partita ospitata su una macchina si vedeva dall'altra ma non si riusciva a
+  entrarci.** In entrata veniva aperta solo la porta di individuazione, che non è
+  necessariamente quella su cui l'host resta in ascolto: Warcraft III prende la 6112 se può
+  e sale fino alla 6119 se non può, annunciando quella che ha ottenuto. Un host spinto via
+  dalla 6112 risultava quindi visibile e irraggiungibile, e solo in quella direzione, il che
+  faceva sembrare che il problema fosse di una delle due macchine. Ora viene aperto l'intero
+  intervallo di hosting, sempre e solo verso la sottorete della VPN.
+- **Una partita restava nell'elenco dell'altro giocatore dopo che l'host l'aveva
+  lasciata.** Warcraft III annuncia la chiusura in broadcast, e un broadcast può uscire
+  dalla scheda della VPN, dove il relè deliberatamente non ascolta: l'annuncio non veniva
+  mai raccolto e l'altro capo continuava a proporre una partita che non esisteva più. Ora
+  il relè si accorge che l'host ha smesso di rispondere alle sue sonde e la ritira da sé,
+  usando l'ultimo annuncio inoltrato per dire di quale si trattava.
+- **Cambiare lingua svuotava gli elenchi dell'applicazione di destinazione e
+  dell'individuazione in rete**, e scegliere *Predefinito di sistema* svuotava l'elenco
+  delle lingue stesso. Ritradurre un elenco significa sostituire le voci che contiene, e un
+  elenco a discesa interpreta la sostituzione della voce selezionata come la sua scomparsa:
+  azzerava la selezione, e l'associazione riscriveva quel vuoto sopra la scelta. Ora le
+  voci mantengono la propria identità e cambia soltanto il loro testo, quindi non resta
+  nulla da azzerare. Due tentativi precedenti rimettevano a posto la selezione dopo il
+  fatto; questo elimina la causa.
+- **La finestra delle impostazioni manteneva la lingua precedente nel proprio titolo e
+  pulsante** quando la lingua veniva cambiata dall'interno. Tutto il contenuto della
+  finestra veniva rietichettato, ma il titolo e il pulsante di chiusura non ne fanno parte.
+- **Il registro attività non seguiva le righe nuove in modo affidabile.** Scorreva prima
+  che la riga nuova fosse disposta, finendo dove prima stava la fine e restando sempre una
+  riga indietro. Ora scorre dopo la disposizione e smette di seguire appena si sale a
+  leggere qualcosa, riprendendo quando si torna in fondo.
+- **L'aggiornamento riscriveva tutti i file, modificati o no.** La versione precedente
+  veniva rimossa per intero prima che fosse scritto un solo file nuovo, così ogni
+  aggiornamento riscriveva l'intera installazione. Ora la versione nuova viene scritta per
+  prima e quella precedente rimossa dopo: il programma di installazione salta i file
+  identici e resta da scrivere soltanto ciò che è davvero cambiato.
+- **Uno dei pulsanti del registro era disposto e cliccabile, ma non veniva mai disegnato.**
+  *Apri la cartella dei log* occupava il suo spazio e rispondeva ai clic senza mostrare
+  nulla. Le azioni del registro stanno ora su una sola fila orizzontale invece che una
+  colonna ciascuna, eliminando la disposizione per colonne che non funzionava.
+
+### Aggiunto
+
+- **Un pulsante con le informazioni sull'applicazione** accanto a quello delle
+  impostazioni: quale versione è in esecuzione, il copyright e un collegamento alle sue
+  note e ai download.
+- **Una casella *Avvia LanBridge* nell'ultima pagina del programma di installazione**,
+  selezionata per impostazione predefinita. Avvia l'applicazione senza elevazione, che è
+  come LanBridge deve funzionare: il consenso viene chiesto all'avvio di una sessione, non
+  prima.
+
+### Modificato
+
+- **Chiudere l'applicazione di destinazione termina la sessione solo quando il tunnel è
+  legato a essa.** Con *Solo questa applicazione può usare la VPN* attivo, il tunnel esiste
+  per quel processo e cade con lui: altrimenti resterebbe un tunnel che nulla sulla macchina
+  ha il permesso di usare. Senza quell'opzione il tunnel è delimitato solo per destinazione
+  e potrebbe ancora trasportare traffico di altro, quindi resta attivo finché non lo fermi.
+
 ## [0.5.2] - 2026-09-11
 
 ### Corretto
@@ -187,6 +247,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0

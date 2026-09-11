@@ -5,6 +5,61 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.3] - 2026-09-12
+
+### Fixed
+
+- **A game hosted on one machine could be seen but not joined from the other.** Only the
+  discovery port was opened inbound, and that is not necessarily the port a host listens
+  on: Warcraft III takes 6112 when it can and walks up to 6119 when it cannot, advertising
+  whichever it got. A host pushed off 6112 was therefore visible and unreachable — and only
+  in that one direction, which is what made it look like one machine was at fault. The
+  whole hosting range is now opened, still to the VPN subnet alone.
+- **A room stayed in the other player's list after the host left it.** Warcraft III
+  announces a closed room by broadcast, and a broadcast can leave by the VPN adapter, where
+  the relay is deliberately not listening — so the announcement was never picked up and the
+  peer went on offering a room that no longer existed. The relay now notices that the host
+  has stopped answering its probes and retracts the room itself, using the advertisement it
+  last forwarded to say which one.
+- **Switching language emptied the target-application and LAN-discovery dropdowns**, and
+  choosing *System default* emptied the language dropdown itself. Retranslating a list
+  means replacing the entries inside it, and a dropdown treats the replacement of the
+  entry it has selected as that entry being gone — so it cleared its selection, and the
+  binding wrote that emptiness back over the choice. Entries now keep their identity and
+  only their text changes, so there is nothing left to clear. Two earlier attempts put the
+  selection back afterwards; this removes the cause.
+- **The settings window kept the old language in its own title and button** when the
+  language was changed from inside it. Everything in the window's content was relabelled,
+  but the title and the close button are not part of that content and were missed.
+- **The activity log did not reliably follow new lines.** It scrolled before the new line
+  had been laid out, so it went to where the bottom used to be and stayed one line behind
+  for ever. It now scrolls after the layout, and stops following the moment you scroll up
+  to read something — resuming when you scroll back down.
+- **Upgrading rewrote every file, changed or not.** The old version was removed in full
+  before a single new file was written, so each upgrade rewrote the whole install. The new
+  version is now written first and the old one removed afterwards, which lets the
+  installer skip files that are identical and leaves only what actually changed to write.
+- **One of the log buttons was laid out and clickable but never painted.** *Open log
+  folder* occupied its space and responded to clicks while showing nothing at all. The log
+  actions now sit in a single horizontal run instead of a column each, removing the
+  per-column arrangement that was going wrong.
+
+### Added
+
+- **An application information button** beside the settings one: which version is running,
+  the copyright, and a link to the notes and downloads for that version.
+- **A *Launch LanBridge* checkbox on the installer's last page**, ticked by default. It
+  starts the application unelevated, which is how LanBridge is meant to run — consent is
+  asked for when a session starts, not before.
+
+### Changed
+
+- **Closing the target application now ends the session only when the tunnel is bound to
+  it.** With *Only this application may use the VPN* switched on, the tunnel exists for
+  that one process and goes down with it — what would otherwise be left is a tunnel nothing
+  on the machine is allowed to use. Without it, the tunnel is only scoped by destination
+  and may still be carrying traffic for something else, so it stays up until you stop it.
+
 ## [0.5.2] - 2026-09-11
 
 ### Fixed
@@ -174,6 +229,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
