@@ -5,6 +5,31 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.8] - 2026-09-12
+
+### Corrigido
+
+- **Limitar o túnel a um único aplicativo só funcionava em um sentido.** Descartava o tráfego
+  que outros programas daqui mandavam para a VPN e não fazia nada com o que vinha dela —
+  então todos os outros programas desta máquina continuavam alcançáveis do outro lado, que é
+  a metade que importa quando não se sabe quem está lá. Agora vale nos dois sentidos, e a
+  explicação diz isso em vez de prometer mais do que fazia.
+
+### Alterado
+
+- **A opção de roteamento está agora ao contrário.** Manter o resto da máquina fora do túnel
+  é o estado seguro e o que quase todo mundo quer, então não deveria ser preciso ligá-lo. A
+  caixa agora diz *Enviar todo o tráfego pela VPN*, vem desligada e explica o que ligá-la
+  significa: tudo o que esta máquina envia passa primeiro pelo servidor VPN, então quem o
+  administra vê tudo. Isso importa sobretudo com um perfil que outra pessoa lhe deu.
+
+### Adicionado
+
+- **Aparência clara e escura**, ou acompanhar o sistema, aplicada na hora e lembrada. Em
+  Aparência, nas configurações.
+- **Ícones pela interface** — em cada seção, em Iniciar e Parar e nas ações do registro — e
+  uma luz de status verde enquanto houver uma sessão em andamento.
+
 ## [0.5.7] - 2026-09-12
 
 ### Corrigido
@@ -351,6 +376,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5

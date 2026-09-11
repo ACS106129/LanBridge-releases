@@ -5,6 +5,33 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.8] - 2026-09-12
+
+### Corretto
+
+- **Riservare il tunnel a una sola applicazione funzionava in una direzione soltanto.**
+  Scartava il traffico che gli altri programmi di qui mandavano alla VPN e non faceva nulla
+  di quello che ne arrivava: tutti gli altri programmi di questo computer restavano quindi
+  raggiungibili dall'altro capo, che è la metà che conta quando non si sa chi ci sia. Ora
+  vale in entrambe le direzioni, e la spiegazione lo dice invece di promettere più di quanto
+  facesse.
+
+### Modificato
+
+- **L'opzione di instradamento è ora al contrario.** Tenere il resto del computer fuori dal
+  tunnel è lo stato sicuro e quello che vogliono quasi tutti, quindi non dovrebbe essere da
+  attivare. La casella ora dice *Inviare tutto il traffico attraverso la VPN*, è disattivata
+  per impostazione predefinita e spiega cosa comporta attivarla: tutto ciò che questo
+  computer invia passa prima dal server VPN, e chi lo gestisce vede tutto. Conta soprattutto
+  con un profilo che ti ha dato qualcun altro.
+
+### Aggiunto
+
+- **Aspetto chiaro e scuro**, o come il sistema, applicato subito e ricordato. In Aspetto,
+  nelle impostazioni.
+- **Icone in tutta l'interfaccia** — su ogni sezione, su Avvia e Arresta e sulle azioni del
+  registro — e una spia di stato verde finché una sessione è in corso.
+
 ## [0.5.7] - 2026-09-12
 
 ### Corretto
@@ -364,6 +391,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
