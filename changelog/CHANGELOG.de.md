@@ -5,6 +5,37 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.4] - 2026-09-12
+
+### Behoben
+
+- **Das Aktualisierungsfenster zeigte die Versionshinweise als Markdown-Quelltext** –
+  Rauten, Sternchen und Backticks – statt sie zu formatieren, was ausgerechnet das
+  mühsam zu lesen machte, was zum Lesen geschrieben ist. Überschriften, Aufzählungen,
+  Hervorhebungen und Inline-Code werden jetzt formatiert.
+- **Die Aktualisierung schloss die Anwendung nicht vorher.** Das Installationsprogramm
+  startete, während Tunnel und privilegierter Helfer noch die Dateien hielten, die es
+  ersetzen wollte. Jetzt wird die Sitzung beendet und dieser Prozess läuft aus, bevor das
+  Installationsprogramm startet; dieses beendet eine übrig gebliebene Instanz, statt sie
+  aus einer Aktualisierung eine Neustartaufforderung machen zu lassen.
+- **Fenster und Taskleiste behielten ein allgemeines Platzhaltersymbol**, während
+  Infobereich und „Apps & Features“ das richtige zeigten. Ein nicht paketiertes Fenster
+  übernimmt das Symbol nicht von selbst aus der ausführbaren Datei.
+- **Die chinesische Beschriftung von „Den Rest des Rechners aus dem Tunnel halten“ beschrieb
+  die falsche Einstellung.** Sie las sich als „den Verkehr anderer Anwendungen aus dem
+  Tunnel halten“, was die anwendungsbezogene Beschränkung tut — die beiden Optionen wirkten
+  dadurch wie Dubletten. Sie stehen quer zueinander: die eine begrenzt, welche Ziele den
+  Tunnel nutzen, die andere, welcher Prozess ihn nutzen darf.
+
+### Geändert
+
+- **Name und Untertitel belegen nicht länger den oberen Fensterrand.** Die Titelleiste sagt
+  bereits, worum es geht, und die Angaben sind ins Informationsfenster gewandert.
+- **Das Informationsfenster wiederholt nicht länger den Namen, mit dem es überschrieben
+  ist**, und überlässt das Öffnen des Protokollordners der Protokollleiste, wo diese
+  Schaltfläche ohnehin sitzt. Die Version, derentwegen man es öffnet, steht jetzt groß
+  genug, um sie auf einen Blick zu lesen.
+
 ## [0.5.3] - 2026-09-12
 
 ### Behoben
@@ -249,6 +280,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1

@@ -5,6 +5,35 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.4] - 2026-09-12
+
+### Fixed
+
+- **The update window showed the release notes as their Markdown source** — hashes,
+  asterisks and backticks — rather than rendering them, which made the thing written to be
+  read painful to read. Headings, bullets, emphasis and inline code are now formatted.
+- **Updating did not close the application first.** The installer was started while the
+  tunnel and the elevated helper were still holding the files it was about to replace. The
+  session is now shut down and this process exits before the installer runs, and the
+  installer terminates a stray instance rather than letting one turn an update into a
+  request to reboot.
+- **The window and taskbar kept a generic placeholder icon** while the notification area
+  and Add or remove programs showed the real one. An unpackaged window does not take the
+  icon from the executable on its own.
+- **The Chinese label for "Keep the rest of the machine off the tunnel" described the wrong
+  setting.** It read as "keep other applications' traffic out of the tunnel", which is what
+  the separate per-application confinement does, leaving the two options looking like
+  duplicates. They are orthogonal: one limits which destinations use the tunnel, the other
+  limits which process may.
+
+### Changed
+
+- **The name and tagline no longer occupy the top of the window.** The title bar already
+  says what this is, and the details moved to the application information dialog.
+- **The application information dialog no longer repeats the name it is titled with**, and
+  leaves opening the log folder to the log panel, where that button already lives. The
+  version it exists to answer is now shown large enough to read at a glance.
+
 ## [0.5.3] - 2026-09-12
 
 ### Fixed
@@ -229,6 +258,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1

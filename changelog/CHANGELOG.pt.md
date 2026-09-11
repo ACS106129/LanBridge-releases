@@ -5,6 +5,36 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.4] - 2026-09-12
+
+### Corrigido
+
+- **A janela de atualização mostrava as notas como código Markdown** — cerquilhas,
+  asteriscos e crases — em vez de formatá-las, o que tornava penoso ler justamente o que
+  foi escrito para ser lido. Títulos, marcadores, ênfase e código embutido agora são
+  formatados.
+- **A atualização não fechava o aplicativo antes.** O instalador era iniciado enquanto o
+  túnel e o auxiliar com privilégios ainda seguravam os arquivos que ele iria substituir.
+  Agora a sessão é encerrada e este processo termina antes de o instalador rodar, e o
+  instalador encerra uma instância remanescente em vez de deixá-la transformar uma
+  atualização em um pedido de reinicialização.
+- **A janela e a barra de tarefas mantinham um ícone genérico** enquanto a área de
+  notificação e Adicionar ou remover programas mostravam o real. Uma janela sem empacotar
+  não pega o ícone do executável sozinha.
+- **O rótulo em chinês de "Manter o resto da máquina fora do túnel" descrevia a
+  configuração errada.** Ele se lia como "manter o tráfego de outros aplicativos fora do
+  túnel", que é o que faz o confinamento por aplicativo, deixando as duas opções parecendo
+  duplicadas. Elas são ortogonais: uma limita quais destinos usam o túnel, a outra qual
+  processo pode usá-lo.
+
+### Alterado
+
+- **O nome e o lema não ocupam mais o topo da janela.** A barra de título já diz o que isto
+  é, e os detalhes foram para a caixa de informações do aplicativo.
+- **A caixa de informações não repete mais o nome que a intitula** e deixa abrir a pasta de
+  logs para o painel do registro, onde esse botão já ficava. A versão, que é o motivo de
+  abri-la, agora aparece grande o bastante para ler de relance.
+
 ## [0.5.3] - 2026-09-12
 
 ### Corrigido
@@ -237,6 +267,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1

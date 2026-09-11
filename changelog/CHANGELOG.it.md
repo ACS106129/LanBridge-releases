@@ -5,6 +5,38 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.4] - 2026-09-12
+
+### Corretto
+
+- **La finestra di aggiornamento mostrava le note come sorgente Markdown** — cancelletti,
+  asterischi e apici inversi — invece di formattarle, rendendo faticoso leggere proprio ciò
+  che è scritto per essere letto. Titoli, elenchi, enfasi e codice in linea ora sono
+  formattati.
+- **L'aggiornamento non chiudeva prima l'applicazione.** Il programma di installazione
+  partiva mentre il tunnel e il processo ausiliario con privilegi tenevano ancora i file
+  che stava per sostituire. Ora la sessione viene chiusa e questo processo termina prima
+  che l'installazione parta, e il programma di installazione chiude un'istanza rimasta
+  invece di lasciare che trasformi un aggiornamento in una richiesta di riavvio.
+- **La finestra e la barra delle applicazioni mantenevano un'icona generica** mentre l'area
+  di notifica e Installazione applicazioni mostravano quella vera. Una finestra non
+  pacchettizzata non prende l'icona dall'eseguibile da sola.
+- **L'etichetta cinese di «Tenere il resto del computer fuori dal tunnel» descriveva
+  l'impostazione sbagliata.** Si leggeva come «tenere fuori dal tunnel il traffico delle
+  altre applicazioni», che è ciò che fa il confinamento per applicazione, e faceva sembrare
+  le due opzioni dei doppioni. Sono ortogonali: una limita quali destinazioni usano il
+  tunnel, l'altra quale processo può usarlo.
+
+### Modificato
+
+- **Il nome e il sottotitolo non occupano più la parte alta della finestra.** La barra del
+  titolo dice già di cosa si tratta, e i dettagli sono passati nella finestra delle
+  informazioni.
+- **La finestra delle informazioni non ripete più il nome che le fa da titolo** e lascia
+  l'apertura della cartella dei log al pannello del registro, dove quel pulsante già stava.
+  La versione, che è il motivo per cui la si apre, è ora abbastanza grande da leggersi al
+  volo.
+
 ## [0.5.3] - 2026-09-12
 
 ### Corretto
@@ -247,6 +279,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
