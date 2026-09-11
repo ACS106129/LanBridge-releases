@@ -5,6 +5,32 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.9] - 2026-09-12
+
+### Fixed
+
+- **Dark mode was unusable.** The page never painted a background of its own, so the text
+  followed the theme while the ground behind it did not — light text on a light surface.
+  Dialogs kept the system's appearance too, because a dialog is hosted by the window root
+  rather than by the element the theme was set on, and had to be told separately.
+
+### Added
+
+- **The two confinement switches are now a picture.** A grid of who is sending against
+  where to, with traffic moving along each route: through the tunnel, out the ordinary way,
+  or stopped. The four cells are every combination of the two settings, which answers in a
+  glance what two paragraphs of prose had been failing to.
+- **Attaching picks from a list of running programs** instead of asking for a process id
+  typed in from somewhere else, with a button to refresh it.
+
+### Changed
+
+- The routing warning appears only while that option is on, says one thing, and says it in
+  the colour of a warning.
+- The sections lost their numbering; they were never steps to follow in order.
+- Settings and application information moved to the top right, with the status cards
+  directly beneath them.
+
 ## [0.5.8] - 2026-09-12
 
 ### Fixed
@@ -366,6 +392,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
