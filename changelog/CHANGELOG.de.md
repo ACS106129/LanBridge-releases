@@ -5,6 +5,38 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.6] - 2026-09-12
+
+### Behoben
+
+- **Eine neue Version wird jetzt etwa eine Minute nach ihrer Veröffentlichung bemerkt**,
+  statt erst bei der nächsten geplanten Prüfung. So häufig zu fragen ist tragbar, weil die
+  Anfrage bedingt ist: Der Validator der letzten Antwort wird zurückgeschickt, und solange
+  sich die Version nicht ändert, lautet die Antwort „nicht geändert“ – ohne Inhalt und ohne
+  Anrechnung auf das Anfragelimit. Nur eine tatsächlich neue Version kostet eine Anfrage.
+  Das bleibt Nachfragen statt Benachrichtigtwerden, also eine Minute statt eines Augenblicks
+  — aber es muss nichts gedrückt und nichts neu gestartet werden.
+- **Den Aktualisierungshinweis wegzuklicken ließ keinen Weg zurück.** Das Schließen galt für
+  die ganze Sitzung, und nur ein Neustart brachte ihn wieder. Sowohl das Informationsfenster
+  als auch die Einstellungen bieten nun „Jetzt aktualisieren“, solange eine Aktualisierung
+  wartet — den Hinweis wegzuklicken klickt damit nur den Hinweis weg.
+- **Die Schaltfläche hieß „Anhalten“, obwohl nichts mehr anzuhalten war.** Wenn die
+  Zielanwendung endet, wartet die Sitzung bis zu zwanzig Sekunden darauf, ob ein Starter an
+  einen anderen Prozess übergibt — in dieser Zeit ist das, wofür die Sitzung existiert,
+  bereits tot. In diesem Fenster heißt die Schaltfläche „Erzwungen beenden“, und genau das
+  tut sie: die Sitzung jetzt beenden, statt die Übergabe abzuwarten.
+
+### Geändert
+
+- **Alles zum Thema Aktualisieren steht jetzt im Informationsfenster**, dessen Schaltfläche
+  eine Markierung trägt, solange eine Aktualisierung wartet. Automatische Prüfung, sofort
+  prüfen, der Zeitpunkt der letzten Prüfung und die Aktualisierung selbst stehen neben der
+  Version, mit der verglichen wird, statt zwischen dort und den Einstellungen aufgeteilt zu
+  sein.
+- **Ein heruntergeladenes Installationsprogramm bleibt erhalten, wenn Sie „Später“
+  wählen.** Bisher warf das Verschieben den Download weg; jetzt bietet dieselbe
+  Schaltfläche „Jetzt installieren“ an, bis die zugehörige Version überholt ist.
+
 ## [0.5.5] - 2026-09-12
 
 ### Behoben
@@ -309,6 +341,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
