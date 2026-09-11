@@ -5,6 +5,62 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.3] - 2026-09-12
+
+### Corrigido
+
+- **Uma partida hospedada em uma máquina era vista da outra, mas não dava para entrar.**
+  Só a porta de descoberta era aberta de entrada, e ela não é necessariamente a porta em que
+  o anfitrião escuta: o Warcraft III pega a 6112 quando pode e sobe até a 6119 quando não
+  pode, anunciando a que conseguiu. Um anfitrião empurrado para fora da 6112 ficava visível
+  e inalcançável — e só nesse sentido, o que fazia parecer problema de uma das máquinas.
+  Agora toda a faixa de hospedagem é aberta, ainda assim apenas para a sub-rede da VPN.
+- **Uma partida continuava na lista do outro jogador depois que o anfitrião saiu dela.**
+  O Warcraft III anuncia o fechamento por difusão, e uma difusão pode sair pelo adaptador
+  da VPN, onde o retransmissor deliberadamente não escuta — então o anúncio nunca era
+  captado e a outra ponta seguia oferecendo uma partida que já não existia. Agora o
+  retransmissor percebe que o anfitrião parou de responder às sondagens e retira a partida
+  ele mesmo, usando o último anúncio que encaminhou para dizer qual era.
+- **Trocar de idioma esvaziava as listas do aplicativo alvo e da descoberta na rede**, e
+  escolher *Padrão do sistema* esvaziava a própria lista de idiomas. Retraduzir uma lista
+  significa substituir os itens dentro dela, e uma lista suspensa trata a substituição do
+  item selecionado como o desaparecimento dele: limpava a seleção, e a associação gravava
+  esse vazio por cima da escolha. Agora os itens mantêm sua identidade e só o texto muda,
+  então não sobra nada para limpar. Duas tentativas anteriores devolviam a seleção depois;
+  esta remove a causa.
+- **A janela de configurações mantinha o idioma antigo no próprio título e botão** quando o
+  idioma era trocado de dentro dela. Todo o conteúdo da janela era reetiquetado, mas o
+  título e o botão de fechar não fazem parte desse conteúdo.
+- **O registro de atividade não acompanhava as linhas novas de forma confiável.** Ele rolava
+  antes de a linha nova ter sido disposta, indo para onde o fim ficava antes e permanecendo
+  sempre uma linha atrás. Agora rola depois da disposição e para de acompanhar assim que
+  você sobe para ler algo, retomando quando você volta ao fim.
+- **Atualizar reescrevia todos os arquivos, tendo mudado ou não.** A versão anterior era
+  removida por inteiro antes de um único arquivo novo ser escrito, então cada atualização
+  reescrevia a instalação toda. Agora a versão nova é escrita primeiro e a anterior removida
+  depois, o que deixa o instalador pular os arquivos idênticos e sobra para escrever apenas
+  o que de fato mudou.
+- **Um dos botões do registro ficava posicionado e clicável, mas nunca era desenhado.**
+  *Abrir a pasta de logs* ocupava seu espaço e respondia aos cliques sem mostrar nada. As
+  ações do registro agora ficam em uma única fileira horizontal em vez de uma coluna cada,
+  o que elimina a disposição por coluna que estava falhando.
+
+### Adicionado
+
+- **Um botão de informações do aplicativo** ao lado do de configurações: qual versão está
+  em execução, os direitos autorais e um link para as notas e downloads dessa versão.
+- **Uma caixa *Iniciar o LanBridge* na última página do instalador**, marcada por padrão.
+  Ela inicia o aplicativo sem elevação, que é como o LanBridge deve rodar: o consentimento é
+  pedido quando uma sessão começa, não antes.
+
+### Alterado
+
+- **Fechar o aplicativo alvo agora encerra a sessão apenas quando o túnel está atrelado a
+  ele.** Com *Só este aplicativo pode usar a VPN* ligado, o túnel existe para aquele
+  processo e cai junto com ele — caso contrário sobraria um túnel que nada na máquina tem
+  permissão de usar. Sem essa opção, o túnel está limitado apenas por destino e pode ainda
+  estar levando tráfego de outra coisa, então permanece até você parar.
+
 ## [0.5.2] - 2026-09-11
 
 ### Corrigido
@@ -181,6 +237,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0

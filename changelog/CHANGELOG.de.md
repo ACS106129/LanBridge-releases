@@ -5,6 +5,66 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.3] - 2026-09-12
+
+### Behoben
+
+- **Ein auf dem einen Rechner gehostetes Spiel war vom anderen aus sichtbar, aber nicht zu
+  betreten.** Eingehend war nur der Suchport geöffnet, und das ist nicht zwingend der Port,
+  auf dem ein Gastgeber lauscht: Warcraft III nimmt 6112, wenn es kann, und geht sonst bis
+  6119 hinauf — angekündigt wird der, den es bekommen hat. Ein von 6112 verdrängter
+  Gastgeber war damit sichtbar und unerreichbar, und das nur in dieser einen Richtung, was
+  wie ein Fehler eines der beiden Rechner aussah. Jetzt wird der gesamte Hosting-Bereich
+  geöffnet, weiterhin nur für das VPN-Subnetz.
+- **Ein Spiel blieb in der Liste des anderen Spielers, nachdem der Gastgeber es verlassen
+  hatte.** Warcraft III kündigt ein geschlossenes Spiel per Broadcast an, und ein Broadcast
+  kann über den VPN-Adapter hinausgehen, wo das Relais bewusst nicht lauscht — die
+  Ankündigung wurde also nie aufgegriffen, und die Gegenstelle bot weiter ein Spiel an, das
+  es nicht mehr gab. Das Relais bemerkt jetzt, dass der Gastgeber nicht mehr auf seine
+  Anfragen antwortet, und nimmt das Spiel selbst zurück — anhand der zuletzt
+  weitergeleiteten Ankündigung, die sagt, um welches es ging.
+- **Ein Sprachwechsel leerte die Auswahllisten für Zielanwendung und LAN-Suche**, und die
+  Wahl von „Systemstandard“ leerte die Sprachliste selbst. Eine Liste neu zu übersetzen
+  heißt, ihre Einträge zu ersetzen, und ein Auswahlfeld deutet das Ersetzen des gewählten
+  Eintrags als dessen Verschwinden: Es löschte die Auswahl, und die Bindung schrieb diese
+  Leere über die getroffene Wahl. Die Einträge behalten jetzt ihre Identität und nur ihr
+  Text ändert sich, also bleibt nichts mehr zu löschen. Zwei frühere Anläufe stellten die
+  Auswahl nachträglich wieder her; dieser beseitigt die Ursache.
+- **Das Einstellungsfenster behielt in Titel und Schaltfläche die alte Sprache**, wenn die
+  Sprache darin gewechselt wurde. Der gesamte Inhalt des Fensters wurde neu beschriftet,
+  aber Titel und Schließen-Schaltfläche gehören nicht dazu.
+- **Das Aktivitätsprotokoll folgte neuen Zeilen nicht zuverlässig.** Es scrollte, bevor die
+  neue Zeile gesetzt war, landete also dort, wo das Ende vorher lag, und blieb dauerhaft
+  eine Zeile zurück. Jetzt wird nach dem Setzen gescrollt, und das Folgen endet, sobald Sie
+  zum Lesen nach oben scrollen — und setzt wieder ein, wenn Sie nach unten zurückkehren.
+- **Jede Aktualisierung schrieb sämtliche Dateien neu, geändert oder nicht.** Die alte
+  Version wurde vollständig entfernt, bevor auch nur eine neue Datei geschrieben war, sodass
+  jede Aktualisierung die gesamte Installation neu schrieb. Jetzt wird zuerst die neue
+  Version geschrieben und die alte danach entfernt. Dadurch überspringt das
+  Installationsprogramm identische Dateien, und zu schreiben bleibt nur, was sich
+  tatsächlich geändert hat.
+- **Eine der Protokoll-Schaltflächen war angeordnet und anklickbar, wurde aber nie
+  gezeichnet.** „Protokollordner öffnen“ belegte ihren Platz und reagierte auf Klicks, ohne
+  irgendetwas anzuzeigen. Die Protokollaktionen stehen jetzt in einer einzigen waagerechten
+  Reihe statt in je einer Spalte, womit die fehlerhafte spaltenweise Anordnung entfällt.
+
+### Hinzugefügt
+
+- **Eine Schaltfläche mit Programminformationen** neben der für die Einstellungen: welche
+  Version läuft, das Copyright und ein Link zu deren Hinweisen und Downloads.
+- **Ein Kontrollkästchen „LanBridge starten“ auf der letzten Seite des
+  Installationsprogramms**, standardmäßig aktiviert. Es startet die Anwendung ohne erhöhte
+  Rechte – so, wie LanBridge laufen soll: Die Zustimmung wird beim Start einer Sitzung
+  erfragt, nicht vorher.
+
+### Geändert
+
+- **Das Schließen der Zielanwendung beendet die Sitzung nur noch, wenn der Tunnel an sie
+  gebunden ist.** Ist „Nur diese Anwendung darf das VPN verwenden“ aktiv, besteht der Tunnel
+  für genau diesen Prozess und endet mit ihm — sonst bliebe ein Tunnel übrig, den nichts auf
+  dem Rechner benutzen darf. Ohne die Option ist der Tunnel nur nach Ziel eingegrenzt und
+  trägt womöglich noch anderen Verkehr, bleibt also bestehen, bis Sie ihn anhalten.
+
 ## [0.5.2] - 2026-09-11
 
 ### Behoben
@@ -189,6 +249,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
