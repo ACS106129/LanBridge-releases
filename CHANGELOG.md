@@ -5,6 +5,32 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.8] - 2026-09-12
+
+### Fixed
+
+- **Confining the tunnel to one application only worked in one direction.** It dropped
+  traffic that other programs here sent to the VPN, and did nothing about traffic arriving
+  from it — so every other program on this machine stayed reachable from the other end,
+  which is the half that matters when you do not know who is there. It now applies to both
+  directions, and the explanation says so instead of promising more than it did.
+
+### Changed
+
+- **The routing option is now the other way up.** Keeping the rest of the machine off the
+  tunnel is the safe state and what almost everyone wants, so it should not be something
+  you have to switch on. The box now reads *Send all traffic through the VPN*, is off by
+  default, and says what turning it on means: everything this machine sends goes through
+  the VPN server first, so whoever runs that server sees all of it. That matters most with
+  a profile somebody else gave you.
+
+### Added
+
+- **Light and dark appearance**, or following the system, applied immediately and
+  remembered. Set under Appearance in settings.
+- **Icons through the interface** — on each section, on Start and Stop, and on the log
+  actions — and a status light that is green while a session is running.
+
 ## [0.5.7] - 2026-09-12
 
 ### Fixed
@@ -340,6 +366,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
