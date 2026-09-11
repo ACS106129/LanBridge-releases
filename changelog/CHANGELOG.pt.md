@@ -5,6 +5,29 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.7] - 2026-09-12
+
+### Corrigido
+
+- **Não dava para cancelar um download.** O botão dizia *Cancelar* e não podia ser
+  pressionado: o download rodava segurando o adiamento de clique da caixa de diálogo, e uma
+  caixa com um adiamento pendente desativa os próprios botões — inclusive o único que
+  poderia tê-lo parado. Agora a transferência corre ao lado da caixa em vez de dentro do
+  manipulador de clique, então o botão fica ativo exatamente enquanto houver algo a
+  cancelar.
+- **Um download cancelado ou com falha deixava seu arquivo parcial**, um por tentativa,
+  para sempre. O arquivo incompleto agora é descartado quando a transferência não termina, e
+  um download concluído limpa os instaladores anteriores.
+- **Apertar Iniciar sem nada para iniciar não fazia absolutamente nada**: nenhuma mensagem,
+  nenhuma linha de registro, nenhuma mudança. Sem perfil, ou sem aplicativo escolhido, agora
+  diz qual está faltando em vez de parecer quebrado.
+
+### Alterado
+
+- **Instalar uma atualização com uma sessão em andamento agora avisa antes**, e a resposta
+  segura é a padrão. Instalar para o túnel e desconecta o aplicativo alvo, o que não é algo
+  para se descobrir depois.
+
 ## [0.5.6] - 2026-09-12
 
 ### Corrigido
@@ -328,6 +351,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4

@@ -5,6 +5,28 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.7] - 2026-09-12
+
+### Fixed
+
+- **A download could not be cancelled.** The button said *Cancel* and could not be pressed:
+  the download was run while holding the dialog's click deferral, and a dialog with an
+  outstanding deferral disables its own buttons — including the only one that could have
+  stopped it. The transfer now runs alongside the dialog instead of inside its click
+  handler, so the button is live for exactly as long as there is something to cancel.
+- **A cancelled or failed download left its partial file behind**, one per attempt, for
+  ever. The incomplete file is now discarded when the transfer does not finish, and a
+  completed download clears the installers that came before it.
+- **Pressing Start with nothing to start did nothing at all** — no message, no log line, no
+  change. Without a profile, or without an application chosen, it now says which one is
+  missing instead of looking broken.
+
+### Changed
+
+- **Installing an update while a session is running now warns first**, and the safe answer
+  is the default. Installing stops the tunnel and disconnects the target application, which
+  is not something to discover afterwards.
+
 ## [0.5.6] - 2026-09-12
 
 ### Fixed
@@ -318,6 +340,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
