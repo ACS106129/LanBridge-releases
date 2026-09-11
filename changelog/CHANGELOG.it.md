@@ -5,6 +5,33 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.9] - 2026-09-12
+
+### Corretto
+
+- **La modalità scura era inutilizzabile.** La pagina non dipingeva mai uno sfondo proprio,
+  quindi il testo seguiva il tema e la superficie dietro no: testo chiaro su fondo chiaro.
+  Anche le finestre di dialogo mantenevano l'aspetto di sistema, perché una finestra di
+  dialogo è ospitata dalla radice della finestra e non dall'elemento su cui il tema è stato
+  impostato, e andava avvisata a parte.
+
+### Aggiunto
+
+- **I due interruttori di confinamento ora sono un disegno.** Una griglia di chi invia
+  contro dove, con il traffico che percorre ogni rotta: dal tunnel, dall'uscita di sempre,
+  oppure fermato. Le quattro celle sono tutte le combinazioni delle due impostazioni, e
+  rispondono a colpo d'occhio a ciò che due paragrafi di testo non riuscivano a spiegare.
+- **Il collegamento si sceglie da un elenco di programmi in esecuzione** invece di chiedere
+  un identificatore di processo cercato altrove, con un pulsante per aggiornarlo.
+
+### Modificato
+
+- L'avviso sull'instradamento compare solo finché quell'opzione è attiva, dice una cosa
+  sola, e la dice nel colore di un avviso.
+- Le sezioni hanno perso la numerazione: non sono mai stati passi da seguire in ordine.
+- Impostazioni e informazioni sull'applicazione sono passate in alto a destra, con le
+  schede di stato subito sotto.
+
 ## [0.5.8] - 2026-09-12
 
 ### Corretto
@@ -391,6 +418,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
