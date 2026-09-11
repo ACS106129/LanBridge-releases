@@ -5,6 +5,16 @@ LanBridge의 주요 변경 사항을 기록합니다.
 형식은 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 버전은
 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다.
 
+## [0.5.2] - 2026-09-11
+
+### 수정
+
+- **업데이트 창의 변경 내용이 첫 제목만 보였습니다.** 변경 내용은 변경 기록에서 꺼낼 때 단순한
+  줄 바꿈 문자로 통일되는데, Windows 텍스트 컨트롤은 캐리지 리턴으로 줄을 나누기 때문에 첫 줄
+  뒤로는 아무것도 그려지지 않았습니다. 영어 릴리스 본문에는 캐리지 리턴이 이미 들어 있어서,
+  번역된 내용만 비어 보였습니다. 이제 표시하기 전에 변환하고, 스크롤과 선택이 가능한 영역에
+  보여 줍니다.
+
 ## [0.5.1] - 2026-09-11
 
 ### 수정
@@ -143,6 +153,7 @@ LanBridge의 주요 변경 사항을 기록합니다.
 - 다른 게임을 위한 범용 UDP 브로드캐스트 릴레이(포트 지정).
 - 동일한 엔진의 명령줄 버전.
 
+[0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0

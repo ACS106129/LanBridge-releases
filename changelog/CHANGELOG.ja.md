@@ -5,6 +5,16 @@ LanBridge の重要な変更をここに記録します。
 書式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/)、バージョン番号は
 [セマンティック バージョニング](https://semver.org/lang/ja/) に従います。
 
+## [0.5.2] - 2026-09-11
+
+### 修正
+
+- **更新ウィンドウの変更内容が最初の見出ししか表示されませんでした。** 変更内容は変更履歴から
+  取り出す際に単純な改行へそろえられますが、Windows のテキストコントロールは復帰文字で行を
+  分けるため、最初の行より後がまったく描画されていませんでした。英語のリリース本文には最初
+  から復帰文字が含まれているので、翻訳された内容だけが空に見えていました。現在は表示前に変換
+  し、スクロールでき選択もできる領域に表示します。
+
 ## [0.5.1] - 2026-09-11
 
 ### 修正
@@ -151,6 +161,7 @@ LanBridge の重要な変更をここに記録します。
 - 他のゲーム向けの汎用 UDP ブロードキャスト リレー（ポート指定）。
 - 同じエンジンのコマンドライン版。
 
+[0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0

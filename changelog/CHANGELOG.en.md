@@ -5,6 +5,17 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.2] - 2026-09-11
+
+### Fixed
+
+- **Release notes in the update window showed only their first heading.** Notes are
+  normalized to bare line feeds when they are pulled out of the changelog, and a Windows
+  text control breaks lines on a carriage return — so everything after the first line was
+  never drawn. An English release body arrives with carriage returns already in it, which
+  is why only the translated notes looked empty. Notes are now converted before display
+  and shown in a scrollable, selectable block.
+
 ## [0.5.1] - 2026-09-11
 
 ### Fixed
@@ -163,6 +174,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0

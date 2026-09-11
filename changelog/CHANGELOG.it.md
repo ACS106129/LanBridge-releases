@@ -5,6 +5,18 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.2] - 2026-09-11
+
+### Corretto
+
+- **Le note di versione nella finestra di aggiornamento mostravano solo il primo titolo.**
+  Quando vengono estratte dal registro delle modifiche, le note sono normalizzate a
+  semplici avanzamenti di riga, mentre un controllo di testo di Windows spezza le righe sul
+  ritorno a capo: tutto ciò che seguiva la prima riga non veniva mai disegnato. Il corpo di
+  una versione in inglese contiene già i ritorni a capo, ed è per questo che sembravano
+  vuote solo le note tradotte. Ora vengono convertite prima di essere mostrate e compaiono
+  in un blocco scorrevole e selezionabile.
+
 ## [0.5.1] - 2026-09-11
 
 ### Corretto
@@ -175,6 +187,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0

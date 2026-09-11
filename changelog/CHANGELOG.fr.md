@@ -5,6 +5,18 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.2] - 2026-09-11
+
+### Corrigé
+
+- **Les notes de version dans la fenêtre de mise à jour n'affichaient que leur premier
+  titre.** Extraites du journal des modifications, les notes sont normalisées en simples
+  sauts de ligne, alors qu'un contrôle de texte Windows coupe les lignes sur le retour
+  chariot : tout ce qui suivait la première ligne n'était jamais dessiné. Le corps d'une
+  version en anglais contient déjà des retours chariot, d'où l'impression que seules les
+  notes traduites étaient vides. Elles sont désormais converties avant affichage et
+  présentées dans un bloc défilable et sélectionnable.
+
 ## [0.5.1] - 2026-09-11
 
 ### Corrigé
@@ -178,6 +190,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - Relais générique de diffusion UDP pour d'autres jeux, configuré par port.
 - Version en ligne de commande du même moteur.
 
+[0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
