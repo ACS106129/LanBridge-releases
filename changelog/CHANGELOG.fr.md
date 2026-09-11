@@ -5,6 +5,37 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.5] - 2026-09-12
+
+### Corrigé
+
+- **Les vérifications automatiques de mise à jour étaient trop rares pour paraître
+  automatiques.** Quatre heures d'intervalle faisaient qu'en pratique seul un redémarrage
+  semblait trouver quelque chose, laissant un bouton des paramètres comme véritable
+  mécanisme — et personne n'a envie d'appuyer sur un bouton pour s'entendre dire qu'il n'y
+  a rien de neuf. La vérification a désormais lieu toutes les trente minutes, et ramener la
+  fenêtre au premier plan vérifie aussi lorsque la dernière date de plus de cinq minutes.
+  Les paramètres affichent l'heure de la dernière vérification, pour qu'on voie qu'elle a
+  lieu.
+- **Les deux options de confinement se lisaient comme des doublons.** Toutes deux étaient
+  formulées comme limitant le tunnel, sans dire qu'elles ne limitent pas la même chose.
+  Chaque étiquette nomme maintenant son axe — « Seules les adresses du VPN passent par le
+  tunnel » face à « Seule l'application cible peut utiliser le tunnel » — et chaque
+  explication commence par la question à laquelle elle répond : quelles destinations, ou
+  quel programme.
+
+### Modifié
+
+- **Le bouton de la bannière s'appelle « Mettre à jour »**, et non « Nouveautés ». Ce qu'il
+  fait, c'est installer la mise à jour ; afficher les notes est ce qu'il fait en chemin.
+- **Les paramètres peuvent lancer une mise à jour**, pas seulement en chercher une.
+- **La bande vide en haut de la fenêtre a disparu.** Les paramètres et les informations sur
+  l'application sont descendus à côté des cartes d'état, la seule chose qui s'y trouvait.
+- **Le compteur d'annonces relayées ne s'affiche que pour Warcraft III.** C'est le seul
+  protocole dont les informations de partie doivent être demandées puis transmises ; pour
+  les autres le compteur resterait à zéro pour toujours, ce qui se lit comme une panne et
+  non comme « sans objet ».
+
 ## [0.5.4] - 2026-09-12
 
 ### Corrigé
@@ -281,6 +312,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - Relais générique de diffusion UDP pour d'autres jeux, configuré par port.
 - Version en ligne de commande du même moteur.
 
+[0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
