@@ -5,6 +5,15 @@
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循
 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [0.5.2] - 2026-09-11
+
+### 修正
+
+- **更新窗口里的更新内容只显示第一行标题。** 更新内容从变更记录取出时会统一成单纯的换行字符，
+  而 Windows 的文本控件是以回车符断行——于是第一行之后的内容完全没有被画出来。英文的发行
+  说明本身就带着回车符，所以只有翻译过的内容看起来是空的。现在会在显示前先转换，并改以可
+  滚动、可选择的区块呈现。
+
 ## [0.5.1] - 2026-09-11
 
 ### 修正
@@ -134,6 +143,7 @@
 - 适用于其他游戏的通用 UDP 广播中继，按端口配置。
 - 同一套引擎的无界面命令行版本。
 
+[0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
 [0.5.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.0
 [0.4.0]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.4.0
