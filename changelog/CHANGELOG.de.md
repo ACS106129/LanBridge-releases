@@ -5,6 +5,35 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.5] - 2026-09-12
+
+### Behoben
+
+- **Die automatische Aktualisierungsprüfung war zu selten, um automatisch zu wirken.** Vier
+  Stunden Abstand hießen in der Praxis, dass nur ein Neustart etwas zu finden schien — und
+  damit wurde eine Schaltfläche in den Einstellungen zum eigentlichen Mechanismus. Niemand
+  möchte eine Schaltfläche drücken, um zu erfahren, dass es nichts Neues gibt. Jetzt wird
+  alle dreißig Minuten geprüft, und auch dann, wenn das Fenster nach vorn geholt wird und
+  die letzte Prüfung mehr als fünf Minuten her ist. Die Einstellungen zeigen, wann zuletzt
+  geprüft wurde, damit sichtbar ist, dass es geschieht.
+- **Die beiden Beschränkungen lasen sich wie Dubletten.** Beide waren als „den Tunnel
+  begrenzen“ formuliert, ohne zu sagen, dass sie Verschiedenes begrenzen. Jede Beschriftung
+  nennt jetzt ihre eigene Achse – „Nur VPN-Adressen gehen durch den Tunnel“ gegenüber „Nur
+  die Zielanwendung darf den Tunnel nutzen“ – und jede Erläuterung beginnt mit der Frage,
+  die sie beantwortet: welche Ziele, oder welches Programm.
+
+### Geändert
+
+- **Die Schaltfläche im Hinweis heißt „Jetzt aktualisieren“**, nicht „Neuerungen“. Sie
+  installiert die Aktualisierung; die Hinweise zu zeigen ist das, was sie unterwegs tut.
+- **Die Einstellungen können eine Aktualisierung starten**, nicht nur nach einer suchen.
+- **Der leere Streifen am oberen Fensterrand ist weg.** Einstellungen und Programminfo sind
+  neben die Statuskarten gerückt — mehr war dort oben nicht.
+- **Die Zahl weitergeleiteter Ankündigungen erscheint nur bei Warcraft III.** Nur bei
+  diesem Protokoll müssen die Spielinformationen erfragt und weitergereicht werden; bei den
+  übrigen bliebe der Zähler für immer auf null, was sich wie ein Fehler liest und nicht wie
+  „nicht zutreffend“.
+
 ## [0.5.4] - 2026-09-12
 
 ### Behoben
@@ -280,6 +309,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2

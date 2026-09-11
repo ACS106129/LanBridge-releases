@@ -5,6 +5,35 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.5] - 2026-09-12
+
+### Fixed
+
+- **Automatic update checks were too rare to feel automatic.** Four hours between checks
+  meant that in practice only a restart seemed to find anything, which left a button in
+  settings as the real mechanism — and nobody wants to press a button to be told there is
+  nothing new. Checks now run every thirty minutes, and bringing the window forward checks
+  as well when the last one is more than five minutes old. Settings shows when the last
+  check ran, so it is visible that one happens.
+- **The two confinement options read as duplicates.** Both were phrased as restricting the
+  tunnel, without saying that they restrict different things. Each label now names its own
+  axis — *Only VPN addresses go through the tunnel* against *Only the target application
+  may use the tunnel* — and each explanation opens by saying which question it answers:
+  which destinations, or which program.
+
+### Changed
+
+- **The banner button is called *Update now*** rather than *What's new*. It installs the
+  update; showing the notes is what it does on the way.
+- **Settings can start an update**, not only look for one.
+- **The empty strip along the top of the window is gone.** Settings and application
+  information moved down beside the status cards, which is the only thing that was up
+  there.
+- **The relayed-advertisement count is shown only for Warcraft III.** It is the one
+  protocol whose game information has to be asked for and forwarded; for the others the
+  counter would sit at zero for ever, which reads as a fault rather than as "not
+  applicable".
+
 ## [0.5.4] - 2026-09-12
 
 ### Fixed
@@ -258,6 +287,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2

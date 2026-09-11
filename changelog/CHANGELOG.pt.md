@@ -5,6 +5,36 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.5] - 2026-09-12
+
+### Corrigido
+
+- **As verificações automáticas de atualização eram raras demais para parecerem
+  automáticas.** Quatro horas entre elas significava que, na prática, só um reinício
+  encontrava algo, o que deixava um botão nas configurações como mecanismo real — e
+  ninguém quer apertar um botão para ouvir que não há nada novo. Agora a verificação ocorre
+  a cada trinta minutos, e trazer a janela para a frente também verifica quando a última
+  foi há mais de cinco minutos. As configurações mostram quando foi a última, para que se
+  veja que ela acontece.
+- **As duas opções de confinamento pareciam duplicadas.** Ambas eram redigidas como limitar
+  o túnel, sem dizer que limitam coisas diferentes. Cada rótulo agora nomeia o próprio eixo
+  — *Só endereços da VPN passam pelo túnel* contra *Só o aplicativo alvo pode usar o túnel*
+  — e cada explicação começa dizendo a que pergunta responde: quais destinos, ou qual
+  programa.
+
+### Alterado
+
+- **O botão do aviso se chama *Atualizar agora***, não *Novidades*. O que ele faz é
+  instalar a atualização; mostrar as notas é o que acontece no caminho.
+- **As configurações podem iniciar uma atualização**, não apenas procurar por uma.
+- **A faixa vazia no topo da janela acabou.** As configurações e as informações do
+  aplicativo desceram para junto dos cartões de status, que era tudo o que havia lá em
+  cima.
+- **A contagem de anúncios retransmitidos aparece só com o Warcraft III.** É o único
+  protocolo cujas informações de partida precisam ser pedidas e encaminhadas; nos demais o
+  contador ficaria em zero para sempre, o que se lê como defeito e não como "não se
+  aplica".
+
 ## [0.5.4] - 2026-09-12
 
 ### Corrigido
@@ -267,6 +297,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2

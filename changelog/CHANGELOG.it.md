@@ -5,6 +5,35 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.5] - 2026-09-12
+
+### Corretto
+
+- **I controlli automatici degli aggiornamenti erano troppo radi per sembrare automatici.**
+  Quattro ore fra l'uno e l'altro volevano dire che in pratica solo un riavvio trovava
+  qualcosa, e il meccanismo vero diventava un pulsante nelle impostazioni — e nessuno vuole
+  premere un pulsante per sentirsi dire che non c'è niente di nuovo. Ora il controllo
+  avviene ogni trenta minuti, e anche quando si porta la finestra in primo piano se
+  l'ultimo risale a più di cinque minuti fa. Le impostazioni mostrano quando è avvenuto
+  l'ultimo, così si vede che accade.
+- **Le due opzioni di confinamento si leggevano come doppioni.** Entrambe erano formulate
+  come «limitare il tunnel», senza dire che limitano cose diverse. Ora ogni etichetta nomina
+  il proprio asse — *Solo gli indirizzi della VPN passano dal tunnel* contro *Solo
+  l'applicazione di destinazione può usare il tunnel* — e ogni spiegazione apre dicendo a
+  quale domanda risponde: quali destinazioni, o quale programma.
+
+### Modificato
+
+- **Il pulsante dell'avviso si chiama *Aggiorna ora***, non *Novità*. Quello che fa è
+  installare l'aggiornamento; mostrare le note è ciò che fa strada facendo.
+- **Le impostazioni possono avviare un aggiornamento**, non solo cercarlo.
+- **La striscia vuota in cima alla finestra non c'è più.** Impostazioni e informazioni
+  sull'applicazione sono scese accanto alle schede di stato, l'unica cosa che stava lassù.
+- **Il conteggio degli annunci inoltrati compare solo con Warcraft III.** È l'unico
+  protocollo le cui informazioni di partita vanno chieste e inoltrate; con gli altri il
+  contatore resterebbe a zero per sempre, il che si legge come un guasto e non come «non
+  applicabile».
+
 ## [0.5.4] - 2026-09-12
 
 ### Corretto
@@ -279,6 +308,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
