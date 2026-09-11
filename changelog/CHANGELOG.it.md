@@ -5,6 +5,30 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.7] - 2026-09-12
+
+### Corretto
+
+- **Uno scaricamento non si poteva annullare.** Il pulsante diceva *Annulla* e non era
+  premibile: lo scaricamento veniva eseguito trattenendo il rinvio del clic della finestra
+  di dialogo, e una finestra con un rinvio in sospeso disabilita i propri pulsanti, compreso
+  l'unico che avrebbe potuto fermarlo. Ora il trasferimento procede accanto alla finestra
+  anziché dentro il suo gestore del clic, così il pulsante è attivo esattamente finché c'è
+  qualcosa da annullare.
+- **Uno scaricamento annullato o fallito lasciava il proprio file parziale**, uno per
+  tentativo, per sempre. Ora il file incompleto viene scartato quando il trasferimento non
+  arriva in fondo, e uno scaricamento completato ripulisce i programmi di installazione
+  precedenti.
+- **Premere Avvia senza nulla da avviare non faceva assolutamente niente**: nessun
+  messaggio, nessuna riga di registro, nessun cambiamento. Senza profilo, o senza
+  un'applicazione scelta, ora dice quale manca invece di sembrare guasto.
+
+### Modificato
+
+- **Installare un aggiornamento mentre una sessione è in corso ora avvisa prima**, e la
+  risposta prudente è quella predefinita. Installare ferma il tunnel e disconnette
+  l'applicazione di destinazione: non è una cosa da scoprire dopo.
+
 ## [0.5.6] - 2026-09-12
 
 ### Corretto
@@ -340,6 +364,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
 [0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
