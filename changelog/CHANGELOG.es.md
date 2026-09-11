@@ -5,6 +5,37 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.4] - 2026-09-12
+
+### Corregido
+
+- **La ventana de actualización mostraba las notas como su código Markdown** —almohadillas,
+  asteriscos y comillas invertidas— en lugar de darles formato, lo que hacía penoso leer
+  algo escrito precisamente para leerse. Ahora se formatean títulos, viñetas, énfasis y
+  código en línea.
+- **La actualización no cerraba la aplicación antes.** El instalador arrancaba mientras el
+  túnel y el asistente con privilegios seguían reteniendo los archivos que iba a
+  reemplazar. Ahora la sesión se detiene y este proceso termina antes de que el instalador
+  se ejecute, y el instalador cierra cualquier instancia rezagada en vez de dejar que
+  convierta una actualización en una petición de reinicio.
+- **La ventana y la barra de tareas conservaban un icono genérico** mientras el área de
+  notificación y Agregar o quitar programas mostraban el real. Una ventana sin empaquetar
+  no toma el icono del ejecutable por sí sola.
+- **La etiqueta china de «Mantener el resto del equipo fuera del túnel» describía el ajuste
+  equivocado.** Se leía como «mantener fuera del túnel el tráfico de otras aplicaciones»,
+  que es lo que hace el confinamiento por aplicación, y dejaba las dos opciones pareciendo
+  duplicadas. Son ortogonales: una limita qué destinos usan el túnel, la otra qué proceso
+  puede usarlo.
+
+### Cambiado
+
+- **El nombre y el lema ya no ocupan la parte superior de la ventana.** La barra de título
+  ya dice qué es esto, y los detalles se han movido al cuadro de información.
+- **El cuadro de información ya no repite el nombre con el que está titulado** y deja abrir
+  la carpeta de registros al panel del registro, donde ese botón ya estaba. La versión, que
+  es lo que se viene a consultar, se muestra ahora lo bastante grande para leerla de un
+  vistazo.
+
 ## [0.5.3] - 2026-09-12
 
 ### Corregido
@@ -241,6 +272,7 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 - Retransmisión genérica de difusión UDP para otros juegos, configurada por puerto.
 - Versión de línea de comandos del mismo motor.
 
+[0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
 [0.5.2]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.2
 [0.5.1]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.1
