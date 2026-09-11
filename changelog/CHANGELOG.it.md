@@ -5,6 +5,38 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.6] - 2026-09-12
+
+### Corretto
+
+- **Una nuova versione viene notata circa un minuto dopo la pubblicazione**, invece che al
+  controllo programmato successivo. Chiedere così spesso è sostenibile perché la richiesta è
+  condizionale: si rimanda indietro il validatore della risposta precedente e, finché la
+  versione non cambia, la risposta è «non modificato» — senza corpo e senza contare per il
+  limite di richieste. Solo una versione davvero nuova consuma una richiesta. Resta
+  comunque un'interrogazione e non una notifica, quindi un minuto e non un istante, ma non
+  c'è nulla da premere né da riavviare.
+- **Chiudere l'avviso di aggiornamento non lasciava modo di tornarci.** La chiusura valeva
+  per tutta la sessione e solo un riavvio lo riportava. Ora sia la finestra delle
+  informazioni sia le impostazioni offrono *Aggiorna ora* finché un aggiornamento è in
+  attesa, così chiudere l'avviso chiude soltanto l'avviso.
+- **Il pulsante diceva *Arresta* quando non restava più nulla da arrestare.** Quando
+  l'applicazione di destinazione esce, la sessione attende fino a venti secondi per vedere
+  se un launcher passa il testimone a un altro processo: in quel frattempo ciò per cui la
+  sessione esiste è già morto. In quella finestra il pulsante dice *Arresto forzato*, che è
+  ciò che fa davvero: chiudere subito la sessione invece di aspettare il passaggio.
+
+### Modificato
+
+- **Tutto ciò che riguarda l'aggiornamento è ora nella finestra delle informazioni
+  sull'applicazione**, e il suo pulsante porta un contrassegno finché un aggiornamento è in
+  attesa. Il controllo automatico, il controllo immediato, l'ora dell'ultimo controllo e
+  l'aggiornamento stesso stanno accanto alla versione con cui si confrontano, invece di
+  essere divisi fra lì e le impostazioni.
+- **Il programma di installazione scaricato viene conservato se si sceglie *Più tardi*.**
+  Prima, non installare subito buttava via lo scaricamento; ora lo stesso pulsante offre
+  *Installa ora* finché la versione a cui appartiene non viene superata.
+
 ## [0.5.5] - 2026-09-12
 
 ### Corretto
@@ -308,6 +340,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3

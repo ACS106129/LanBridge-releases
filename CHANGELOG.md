@@ -5,6 +5,37 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.6] - 2026-09-12
+
+### Fixed
+
+- **A new release is now noticed within about a minute of being published**, instead of at
+  the next scheduled check. Asking that often is affordable because the request is
+  conditional: the validator from the previous answer is sent back, and while the release
+  is unchanged the reply is "not modified" — no body, and not counted against the rate
+  limit. Only an actual new release costs a request. This is still polling rather than
+  being told, so it is a minute rather than an instant, but nothing has to be pressed and
+  nothing has to be restarted.
+- **Dismissing the update notice left no way back to it.** Closing it was permanent for the
+  session, and the update could only be reached again by restarting. Both the application
+  information dialog and settings now offer *Update now* while one is waiting, so
+  dismissing the notice only dismisses the notice.
+- **Stop said *Stop* while there was nothing left to stop.** When the target exits, the
+  session waits up to twenty seconds to see whether a launcher hands over to another
+  process — during which the thing the session exists for is already dead. The button says
+  *Force stop* for that window, which is what pressing it does: end the session now rather
+  than wait the handover out.
+
+### Changed
+
+- **Everything about updating is now in the application information dialog**, and its
+  button carries a badge while an update is waiting. Automatic checking, checking now, when
+  the last check ran and the update itself all live beside the version they are being
+  compared against, instead of being split between there and settings.
+- **A downloaded installer is kept when you choose *Later*.** Declining to install
+  immediately used to throw the download away; now the same button offers *Install now*
+  until the release it belongs to is superseded.
+
 ## [0.5.5] - 2026-09-12
 
 ### Fixed
@@ -287,6 +318,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3

@@ -5,6 +5,38 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.6] - 2026-09-12
+
+### Corrigé
+
+- **Une nouvelle version est repérée environ une minute après sa publication**, et non à la
+  prochaine vérification programmée. Demander aussi souvent ne coûte rien parce que la
+  requête est conditionnelle : le validateur de la réponse précédente est renvoyé et, tant
+  que la version ne change pas, la réponse est « non modifié » — sans corps et sans compter
+  dans la limite de requêtes. Seule une version réellement nouvelle consomme une requête.
+  Cela reste une consultation et non une notification : c'est donc une minute et non
+  l'instant même, mais il n'y a rien à cliquer ni à redémarrer.
+- **Écarter l'avis de mise à jour ne laissait aucun moyen d'y revenir.** La fermeture valait
+  pour toute la session et seul un redémarrage le ramenait. La fenêtre d'informations et
+  les paramètres proposent désormais « Mettre à jour » tant qu'une mise à jour attend :
+  écarter l'avis n'écarte donc que l'avis.
+- **Le bouton disait « Arrêter » alors qu'il n'y avait plus rien à arrêter.** À la fermeture
+  de l'application cible, la session attend jusqu'à vingt secondes pour voir si un lanceur
+  passe la main à un autre processus — pendant ce temps, ce pour quoi la session existe est
+  déjà mort. Durant cette fenêtre le bouton affiche « Arrêt forcé », ce qu'il fait
+  réellement : terminer la session maintenant plutôt qu'attendre le relais.
+
+### Modifié
+
+- **Tout ce qui touche aux mises à jour se trouve désormais dans la fenêtre d'informations
+  sur l'application**, dont le bouton porte une pastille tant qu'une mise à jour attend. La
+  vérification automatique, la vérification immédiate, la date de la dernière vérification
+  et la mise à jour elle-même côtoient la version à laquelle elles se comparent, au lieu
+  d'être réparties entre cette fenêtre et les paramètres.
+- **L'installateur téléchargé est conservé si vous choisissez « Plus tard ».** Auparavant,
+  ne pas installer tout de suite jetait le téléchargement ; désormais le même bouton
+  propose « Installer maintenant » jusqu'à ce que la version concernée soit dépassée.
+
 ## [0.5.5] - 2026-09-12
 
 ### Corrigé
@@ -312,6 +344,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - Relais générique de diffusion UDP pour d'autres jeux, configuré par port.
 - Version en ligne de commande du même moteur.
 
+[0.5.6]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.6
 [0.5.5]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.5
 [0.5.4]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.4
 [0.5.3]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.3
