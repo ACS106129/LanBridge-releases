@@ -5,6 +5,35 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.13] - 2026-09-12
+
+### Aggiunto
+
+- **Il suono.** WinUI ha un sistema sonoro dentro ogni controllo — messa a fuoco,
+  attivazione, finestre di dialogo che si aprono e si chiudono — e tace finché
+  un'applicazione non lo chiede. Questa non l'aveva mai chiesto: ogni pressione era muta per
+  omissione e non per scelta. Ora è una scelta, è spaziale, e nelle impostazioni c'è una
+  casella per chi preferisce un'utilità silenziosa.
+- **Movimento dove è successo qualcosa.** Le due colonne compaiono mentre la finestra si
+  monta, il testo di stato riemerge quando cambia, il conteggio inoltrato sobbalza quando
+  sale, la spia respira durante una sessione, e una riga di avviso spinge le vicine invece
+  di comparire dal nulla.
+- **Il disegno riferisce invece di recitare.** Faceva la stessa animazione che stesse
+  accadendo qualcosa o no: decorazione travestita da strumento. Senza sessione è smorzato e
+  fermo, con la sessione si muove, e la cella bloccata mostra quanti pacchetti la guardia
+  ha davvero scartato — un numero che all'interfaccia non era mai arrivato, perché nessuno
+  aveva mai ascoltato l'evento che lo porta.
+- **Un programma di installazione che somiglia a questo prodotto**, con immagini generate
+  al posto dei segnaposto di WiX.
+- **Un programma di installazione nella tua lingua**: un MSI per lingua invece dell'inglese
+  per tutti. Inglese e cinese tradizionale per cominciare.
+
+### Modificato
+
+- L'avviso sul confinamento per processo compare ora quando la casella è **vuota**, che è
+  lo stato che merita un avviso, e dice cosa significa quello stato invece di ripetere
+  l'etichetta.
+
 ## [0.5.12] - 2026-09-12
 
 ### Corretto
@@ -489,6 +518,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
 - Versione a riga di comando dello stesso motore.
 
+[0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10

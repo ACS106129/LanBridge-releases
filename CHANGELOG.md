@@ -5,6 +5,39 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.13] - 2026-09-12
+
+### Added
+
+- **Sound.** WinUI has a sound system built into every control — focus, invocation,
+  dialogs opening and closing — and it is silent unless an application asks for it. This
+  one never had, so every press has been quiet by omission rather than by choice. It is a
+  choice now, it is spatial, and it is a checkbox in settings for anyone who wants a
+  utility to keep its mouth shut.
+- **Motion where something happened.** The two columns fade in as the window assembles
+  itself, the status text fades up when it changes, the relayed count kicks when it goes
+  up, the status light breathes while a session runs, and a caution line slides its
+  neighbours down instead of appearing from nowhere.
+- **The diagram reports rather than mimes.** It ran the same animation whether or not
+  anything was happening, which is decoration in the clothes of instrumentation. It is
+  dimmed and still while there is no session, it runs when there is, and the blocked cell
+  shows the number of packets the guard has actually dropped — which the interface was
+  never told before, because nothing had ever subscribed to the event carrying it.
+- **An installer that looks like this product.** Generated banner and welcome artwork
+  instead of the WiX placeholders, which are the visual equivalent of shipping with the
+  default icon.
+- **An installer in your language.** One MSI per language rather than English for
+  everyone: WiX supplies its own page titles and buttons for the culture, and the parts
+  this project wrote come from localization files beside them. English and 正體中文 to
+  begin with.
+
+### Changed
+
+- The caution under per-process confinement now appears when the box is **clear**, which
+  is the state worth warning about, and says what that state means rather than repeating
+  the label above it. The two warnings also have different marks — a globe for where
+  traffic goes, an open padlock for who may use it.
+
 ## [0.5.12] - 2026-09-12
 
 ### Fixed
@@ -471,6 +504,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
