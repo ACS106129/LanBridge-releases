@@ -1,9 +1,47 @@
-# Registro delle modifiche
+﻿# Registro delle modifiche
 
 Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
+
+## [0.5.14] - 2026-09-12
+
+### Aggiunto
+
+- **Un profilo importato ora appartiene all'applicazione.** Prima si ricordava dove fosse
+  il file e lo si rileggeva a ogni avvio, il che regge finché il file non si sposta, la
+  chiavetta non esce o la cartella Download non viene svuotata. Ora viene copiato in una
+  cartella propria, insieme a ogni certificato e chiave a cui fa riferimento, e quei
+  riferimenti vengono riscritti verso le copie.
+- **Un posto dove vedere cosa è conservato.** Un pulsante Gestisci accanto a Importa: cosa
+  c'è, quale è in uso, rinomina, elimina e una porta sulla cartella.
+- **OpenVPN, se non ce l'hai.** Questa applicazione pilota il client community di OpenVPN;
+  non lo contiene. Ora lo dice prima di partire e propone di scaricare la versione attuale
+  dal server ufficiale di OpenVPN e installarla, rifiutando qualunque cosa Windows non
+  accetti o che non sia firmata da OpenVPN.
+- **Test per l'installer.** Cosa c'è nel pacchetto e un percorso fra le sue pagine nelle
+  due lingue. Si ferma al riepilogo e annulla: eseguire la suite non installa nulla.
+- **Un test che guarda i pixel.** Ogni riga di spiegazione viene fotografata in entrambi i
+  temi e misurata contro ciò che ha dietro.
+
+### Corretto
+
+- **Tre righe della finestra Informazioni erano invisibili.** Erano dipinte con un pennello
+  preso dalle risorse dell'applicazione, che si risolve sul tema dell'applicazione stessa —
+  e un'applicazione WinUI non pacchettizzata non può cambiarlo dopo l'avvio, mentre le
+  finestre di dialogo sono disegnate nel tema che hai scelto.
+- **Il controllo aggiornamenti ha smesso di bussare.** Sessanta all'ora è esattamente il
+  limite senza autenticazione. Ora legge quando torna la quota e aspetta.
+
+- **L'installer scriveva sopra la propria grafica.** Quelle immagini non sono disegni
+  accanto al testo: sono lo sfondo su cui la finestra scrive, nel suo colore scuro, e dove
+  lo decide lei. Riempire tutti i 493 pixel con una sfumatura blu metteva ogni titolo scuro
+  su scuro. Ora la grafica è una fascia a sinistra e un blocco a destra nel banner.
+### Modificato
+
+- Sotto ogni impostazione una riga che dice cosa cambia e dove viene conservata.
+- Informazioni spiega come vengono cercati gli aggiornamenti e cita OpenVPN e WinDivert.
 
 ## [0.5.13] - 2026-09-12
 

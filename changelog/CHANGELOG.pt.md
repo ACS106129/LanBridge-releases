@@ -1,9 +1,47 @@
-# Registro de alterações
+﻿# Registro de alterações
 
 Todas as alterações relevantes do LanBridge ficam registradas aqui.
 
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
+
+## [0.5.14] - 2026-09-12
+
+### Adicionado
+
+- **Um perfil importado agora pertence ao aplicativo.** Antes se guardava onde o arquivo
+  estava e se lia de novo a cada execução, o que funciona até o arquivo mudar de lugar, o
+  pendrive sair ou a pasta Downloads ser esvaziada. Agora ele é copiado para uma pasta
+  própria, junto com cada certificado e chave a que se refere, e essas referências são
+  reescritas para as cópias.
+- **Um lugar para ver o que está guardado.** Um botão Gerenciar ao lado de Importar: o que
+  está armazenado, qual está em uso, renomear, excluir e abrir a pasta.
+- **OpenVPN, se você não tiver.** Este aplicativo conduz o cliente comunitário do OpenVPN;
+  não o contém. Agora ele avisa antes de começar e oferece buscar a versão atual no
+  próprio servidor da OpenVPN e instalar, recusando qualquer coisa que o Windows não
+  aceite ou que não esteja assinada pela OpenVPN.
+- **Testes para o instalador.** O que há dentro do pacote e um percurso pelas suas páginas
+  nos dois idiomas. Ele para no resumo e cancela: rodar a suíte não instala nada.
+- **Um teste que olha os pixels.** Cada linha de explicação é fotografada nos dois temas e
+  medida contra o que está atrás dela.
+
+### Corrigido
+
+- **Três linhas do Sobre estavam invisíveis.** Eram pintadas com um pincel tirado dos
+  recursos do aplicativo, que resolve pelo tema do próprio aplicativo — e um aplicativo
+  WinUI sem empacotamento não pode mudá-lo depois de iniciar, enquanto as caixas de
+  diálogo são desenhadas no tema que você escolheu.
+- **A verificação de atualizações parou de bater na porta.** Sessenta por hora é
+  exatamente o limite sem autenticação. Agora ela lê quando a cota volta e espera.
+
+- **O instalador escrevia por cima da própria arte.** Esses bitmaps não são imagens ao lado
+  do texto: são o fundo em que a caixa de diálogo escreve, na cor escura dela, e é ela quem
+  escolhe onde. Preencher os 493 pixels com um degradê azul deixava cada título escuro sobre
+  escuro. Agora a arte é uma faixa à esquerda e um bloco à direita do banner.
+### Alterado
+
+- Cada configuração tem abaixo uma linha dizendo o que muda e onde fica guardada.
+- O Sobre explica como as atualizações são procuradas e credita OpenVPN e WinDivert.
 
 ## [0.5.13] - 2026-09-12
 

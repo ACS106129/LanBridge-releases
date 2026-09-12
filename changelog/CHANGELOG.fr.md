@@ -1,9 +1,51 @@
-# Journal des modifications
+﻿# Journal des modifications
 
 Toutes les modifications notables de LanBridge sont consignées ici.
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
+
+## [0.5.14] - 2026-09-12
+
+### Ajouté
+
+- **Un profil importé appartient désormais à l'application.** Avant, on mémorisait
+  l'emplacement du fichier et on le relisait à chaque démarrage, ce qui tient jusqu'à ce
+  que le fichier bouge, que la clé USB sorte ou que les Téléchargements soient vidés.
+  Il est maintenant copié dans son propre dossier, avec chaque certificat et chaque clé
+  qu'il référence, et ces références sont réécrites vers les copies.
+- **Un endroit pour voir ce qui est conservé.** Un bouton Gérer à côté d'Importer :
+  ce qui est stocké, ce qui sert, renommer, supprimer, ouvrir le dossier.
+- **OpenVPN, si vous ne l'avez pas.** Cette application pilote le client communautaire
+  OpenVPN, elle ne l'embarque pas. Elle le dit maintenant avant de démarrer et propose de
+  récupérer la version actuelle depuis le serveur officiel d'OpenVPN et de l'installer,
+  en refusant tout ce que Windows n'accepte pas ou qui n'est pas signé par OpenVPN.
+- **Des tests pour l'installateur.** Le contenu du paquet, et un parcours de ses pages
+  dans les deux langues. Il s'arrête au récapitulatif et annule : lancer la suite
+  n'installe rien.
+- **Un test qui regarde les pixels.** Chaque ligne d'explication est photographiée dans
+  les deux thèmes et mesurée contre ce qu'elle a derrière elle.
+
+### Corrigé
+
+- **Trois lignes d'À propos étaient invisibles.** Elles étaient peintes avec un pinceau
+  pris dans les ressources de l'application, qui se résout selon le thème de
+  l'application — qu'une application WinUI non empaquetée ne peut plus changer après le
+  démarrage — alors que les boîtes de dialogue sont dessinées dans le thème choisi.
+- **La vérification des mises à jour a cessé d'insister.** Soixante par heure, c'est
+  exactement la limite sans authentification. Elle lit maintenant quand le quota revient
+  et attend.
+
+- **L'installateur écrivait par-dessus sa propre illustration.** Ces images ne sont pas des
+  dessins à côté du texte : ce sont le fond sur lequel la boîte de dialogue écrit, dans sa
+  propre couleur sombre, et c'est elle qui choisit où. Remplir les 493 pixels d'un dégradé
+  bleu mettait chaque titre en sombre sur sombre. L'illustration est désormais une bande à
+  gauche et un bloc à droite de la bannière, le reste restant blanc.
+### Modifié
+
+- Chaque réglage porte une ligne disant ce qu'il change et où il est conservé.
+- À propos explique comment les mises à jour sont cherchées et crédite OpenVPN et
+  WinDivert.
 
 ## [0.5.13] - 2026-09-12
 

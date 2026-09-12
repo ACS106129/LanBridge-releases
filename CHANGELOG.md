@@ -1,9 +1,67 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to LanBridge are recorded here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.5.14] - 2026-09-12
+
+### Added
+
+- **An imported profile now belongs to the application.** Importing a .ovpn used to
+  remember where the file was and read it again on every run, which works until the file
+  moves, the stick comes out, or Downloads is cleared — and then the application is
+  holding a path to nothing. It is now copied into a folder of its own, and so is every
+  certificate and key it refers to, with those references rewritten to point at the
+  copies. Delete the original and nothing changes.
+- **Somewhere to see what is being kept.** A Manage button beside Import: what is stored,
+  which one is in use, rename, delete, and a way into the folder. Renaming and deleting
+  confirm inside the row rather than in a second dialog, because a confirmation that has
+  to close the list to ask its question loses the row it is about.
+- **OpenVPN, if you do not have it.** This application drives the OpenVPN community
+  client; it does not contain one. A machine without it used to get a sentence telling
+  the user to go and install it, which is a support instruction dressed up as an error
+  message. It now says so before anything is started, and offers to fetch the current
+  build from OpenVPN's own download host and install it — refusing to run anything
+  Windows does not trust or that is not signed by OpenVPN. Or point it at the copy you
+  already have.
+- **Tests for the installer.** What is inside the package — product identity, upgrade
+  code, both shortcuts as separate choices, the helper and the driver in the payload —
+  and a walk through its pages in both languages: the welcome page, the licence gate that
+  really gates, the feature tree, where it will install to, and the summary. It stops at
+  the summary and cancels, so running the suite installs nothing.
+- **A test that looks at the pixels.** Every explanatory line in Settings and About is
+  photographed in both themes and measured against what is behind it. Text that cannot be
+  read is now a failing test rather than a screenshot in a bug report.
+
+### Fixed
+
+- **Three lines in About were invisible.** The tagline, the copyright and the last-checked
+  line were painted with a brush taken from the application's resources, which resolves
+  against the application's own theme — and an unpackaged WinUI application cannot change
+  that after it starts, while the dialogs are drawn in the theme you picked. Choose the
+  theme the application did not start in and the two disagree: white on white, or grey on
+  grey. Everything in the markup was fine throughout, which is why this survived so long.
+- **The update check stopped asking politely.** Sixty checks an hour is exactly the
+  unauthenticated limit, so anything else on the machine using the same API pushed it
+  over, and every request after that was refused — once a minute, for an hour, into the
+  log. It now reads when the allowance comes back and waits until then, says so once
+  rather than sixty times, and the two checks that fired together at startup are one.
+
+- **The installer was writing on top of its own artwork.** Those bitmaps are not pictures
+  beside the text — they are the background the dialog writes on, in its own dark colour,
+  and the dialog decides where. Filling all 493 pixels with a blue gradient put every page
+  title over a dark ground and ran the wordmark through the middle of the welcome
+  paragraph. The artwork is now a strip down the left of the welcome page and a block at
+  the right of the banner, with the rest left as paper for the installer to write on. A
+  test photographs each page and measures the contrast where the text is.
+### Changed
+
+- Every setting has a line under it saying what it changes, and where the settings are
+  kept. Five labelled controls and nothing else is a form, not an explanation.
+- About says how often updates are looked for and what interrupts, and credits the two
+  projects that do the hard parts: OpenVPN's community client and WinDivert.
 
 ## [0.5.13] - 2026-09-12
 
