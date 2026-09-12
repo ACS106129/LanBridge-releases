@@ -13,7 +13,6 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
   falava dois. Agora são onze, cada um com a página de código ANSI correta.
 - **A janela abre onde você a deixou.** Tamanho, posição e se estava maximizada. Guarda-se
   o tamanho restaurado, e uma posição que não cai mais em nenhuma tela é descartada.
-
 - **Um ícone novo.** O anterior era uma barra com dois pontos e não dizia nada sobre o que
   isto faz. Agora é uma seta saindo pela abertura de um anel: o túnel, e o único aplicativo
   que passa por ele. Desenhado separadamente em cada tamanho. O anel é aberto do lado por

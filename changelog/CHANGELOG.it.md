@@ -14,7 +14,6 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 - **La finestra si apre dove l'hai lasciata.** Dimensione, posizione e se era ingrandita.
   Si salva la dimensione ripristinata, e una posizione che non cade più su nessuno schermo
   viene scartata.
-
 - **Una nuova icona.** La vecchia era una barra con due punti e non diceva nulla di cosa
   faccia questo programma. Ora è una freccia che esce dall'apertura di un anello: il
   tunnel, e l'unica applicazione che lo attraversa. Disegnata separatamente a ogni

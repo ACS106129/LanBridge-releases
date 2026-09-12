@@ -21,7 +21,6 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   display — a monitor unplugged, a dock left behind, a resolution changed — is dropped
   rather than trusted, because a window restored onto a screen that is not there is a
   window nobody can reach.
-
 - **A new icon.** The old one was a bar with two dots and said nothing about what this
   does. It is now an arrow leaving through the opening of a ring — the tunnel, and the one
   application going through it. Drawn separately at each size rather than scaled down from

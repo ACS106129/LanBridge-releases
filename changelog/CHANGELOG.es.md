@@ -13,7 +13,6 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
   hablaba dos. Ahora hay once, cada uno con la página de códigos ANSI correcta.
 - **La ventana se abre donde la dejaste.** Tamaño, posición y si estaba maximizada. Se
   guarda el tamaño restaurado, y una posición que ya no cae en ninguna pantalla se descarta.
-
 - **Un icono nuevo.** El anterior era una barra con dos puntos y no decía nada sobre lo
   que hace esto. Ahora es una flecha que sale por la abertura de un anillo: el túnel, y la
   única aplicación que lo cruza. Dibujado por separado en cada tamaño. El anillo está

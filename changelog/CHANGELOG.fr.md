@@ -14,7 +14,6 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - **La fenêtre s'ouvre là où vous l'avez laissée.** Taille, position et état agrandi. C'est
   la taille restaurée qui est retenue, et une position qui ne tombe plus sur aucun écran
   est abandonnée.
-
 - **Une nouvelle icône.** L'ancienne était une barre et deux points et ne disait rien de
   ce que fait ce programme. C'est maintenant une flèche qui sort par l'ouverture d'un
   anneau : le tunnel, et la seule application qui le traverse. Dessinée séparément à chaque
