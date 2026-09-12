@@ -14,7 +14,6 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **Das Fenster öffnet dort, wo Sie es gelassen haben.** Größe, Position und ob es
   maximiert war. Gespeichert wird die wiederhergestellte Größe; eine Position, die auf
   keinem Bildschirm mehr liegt, wird verworfen.
-
 - **Ein neues Symbol.** Das alte war ein Balken mit zwei Punkten und sagte nichts darüber,
   was dieses Programm tut. Jetzt ist es ein Pfeil, der durch die Öffnung eines Rings
   hinausgeht: der Tunnel und die eine Anwendung, die hindurchgeht. Für jede Größe einzeln
