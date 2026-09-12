@@ -5,6 +5,55 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.16] - 2026-09-13
+
+### Added
+
+- **An installer in every language the application speaks.** It spoke eleven and its
+  installer spoke two. There are now eleven, one per language, each with the right ANSI
+  codepage for its culture — 1252, 932, 949, 936, 950 and 1251 — because Windows Installer
+  will not take UTF-8 in its summary information and a mismatched codepage turns the text
+  into mojibake. The update offers the one matching the language the window is in.
+- **The window opens where you left it.** Size, position and whether it was maximised, kept
+  between runs. The restored size is what is saved rather than the size on screen: a
+  maximised window that saved its on-screen size would come back filling the display and
+  then collapse the moment it was un-maximised. A position that no longer lands on a
+  display — a monitor unplugged, a dock left behind, a resolution changed — is dropped
+  rather than trusted, because a window restored onto a screen that is not there is a
+  window nobody can reach.
+
+- **A new icon.** The old one was a bar with two dots and said nothing about what this
+  does. It is now an arrow leaving through the opening of a ring — the tunnel, and the one
+  application going through it. Drawn separately at each size rather than scaled down from
+  one large image: a sixteen-pixel icon is not a large one made smaller, and the first
+  attempt, a literal bridge with a deck and an arch and two piers, read below 48 pixels as
+  a table with something spilt on it. The ring is open on the side the arrow leaves by,
+  because a closed one with a line through it is the prohibition sign.
+
+### Fixed
+
+- **The target application was running as an administrator.** The helper that starts it
+  has to be one: openvpn configures a virtual adapter and WinDivert loads a driver. A
+  child process inherits its parent's token, so the application being launched inherited
+  administrator rights it never asked for.
+
+  An elevated program is fenced off from the unelevated desktop. Nothing can be dropped
+  onto it from Explorer, and nothing unelevated can hand it anything — which is how a game
+  that signs in through the browser never receives its authorization code. The browser is
+  unelevated; it launches a second, unelevated copy of the game to deliver the code; that
+  copy cannot reach the elevated one already running, and the handoff fails with nothing
+  on screen to say so. Settings and saves were also being written with the wrong token,
+  which can leave files that cannot be changed later without elevating again.
+
+  It is now started with the shell's token — explorer.exe runs as the signed-in user and
+  is never elevated — so it runs as you, with your environment. This is what the installer
+  already does with Impersonate="yes" on its launch action, for the same reason.
+- **Downloading an update held the whole window hostage.** A hundred megabytes is minutes,
+  and a modal dialog for the duration made the application unusable for those minutes over
+  something nothing else depends on. The download now runs in the background and reports
+  into a bar in the main window, with everything else still reachable and a cancel button
+  that works.
+
 ## [0.5.15] - 2026-09-13
 
 ### Fixed
@@ -78,6 +127,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   last step undoes the point of building them. It now asks for the one matching the
   language the window is in, and falls back to English when that language has no installer
   of its own.
+
 ### Changed
 
 - Every setting has a line under it saying what it changes, and where the settings are

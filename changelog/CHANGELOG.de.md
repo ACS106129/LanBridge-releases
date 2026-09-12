@@ -5,6 +5,32 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.16] - 2026-09-13
+
+### Hinzugefügt
+
+- **Ein Installer in jeder Sprache, die die Anwendung spricht.** Sie sprach elf, ihr
+  Installer zwei. Jetzt sind es elf, jeder mit der richtigen ANSI-Codepage.
+- **Das Fenster öffnet dort, wo Sie es gelassen haben.** Größe, Position und ob es
+  maximiert war. Gespeichert wird die wiederhergestellte Größe; eine Position, die auf
+  keinem Bildschirm mehr liegt, wird verworfen.
+
+- **Ein neues Symbol.** Das alte war ein Balken mit zwei Punkten und sagte nichts darüber,
+  was dieses Programm tut. Jetzt ist es ein Pfeil, der durch die Öffnung eines Rings
+  hinausgeht: der Tunnel und die eine Anwendung, die hindurchgeht. Für jede Größe einzeln
+  gezeichnet. Der Ring ist an der Seite offen, an der der Pfeil hinausgeht — ein
+  geschlossener mit einem Strich darin ist das Verbotszeichen.
+
+### Behoben
+
+- **Die Zielanwendung lief als Administrator.** Der Helfer, der sie startet, muss es sein,
+  und ein Kindprozess erbt das Token seines Elternteils. Ein erhöhtes Programm ist vom
+  nicht erhöhten Desktop abgeschottet — so bekommt ein Spiel, das sich über den Browser
+  anmeldet, seinen Autorisierungscode nie. Jetzt wird es mit dem Token der Shell gestartet,
+  als Sie.
+- **Ein Update herunterzuladen blockierte das ganze Fenster.** Das läuft jetzt im
+  Hintergrund, mit dem Fortschritt in einer Leiste im Hauptfenster.
+
 ## [0.5.15] - 2026-09-13
 
 ### Behoben
@@ -59,6 +85,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   MSI je Sprache, und das Update nahm die erste der Liste — also die zuerst hochgeladene.
   Jetzt wird die zur Sprache des Fensters passende angefordert, mit Rückfall auf Englisch,
   wenn es für diese Sprache keine gibt.
+
 ### Geändert
 
 - Unter jeder Einstellung steht eine Zeile, was sie ändert und wo sie liegt.

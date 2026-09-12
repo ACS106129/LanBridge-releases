@@ -5,6 +5,32 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.16] - 2026-09-13
+
+### Ajouté
+
+- **Un installateur dans chaque langue que parle l'application.** Elle en parlait onze, son
+  installateur deux. Il y en a onze maintenant, chacun avec la bonne page de codes ANSI.
+- **La fenêtre s'ouvre là où vous l'avez laissée.** Taille, position et état agrandi. C'est
+  la taille restaurée qui est retenue, et une position qui ne tombe plus sur aucun écran
+  est abandonnée.
+
+- **Une nouvelle icône.** L'ancienne était une barre et deux points et ne disait rien de
+  ce que fait ce programme. C'est maintenant une flèche qui sort par l'ouverture d'un
+  anneau : le tunnel, et la seule application qui le traverse. Dessinée séparément à chaque
+  taille. L'anneau est ouvert du côté où sort la flèche, parce qu'un anneau fermé barré est
+  le panneau d'interdiction.
+
+### Corrigé
+
+- **L'application cible tournait en administrateur.** L'assistant qui la lance doit l'être,
+  et un processus enfant hérite du jeton de son parent. Un programme élevé est isolé du
+  bureau non élevé : c'est ainsi qu'un jeu qui se connecte via le navigateur ne reçoit
+  jamais son code d'autorisation. Il est désormais lancé avec le jeton du shell, en tant
+  que vous.
+- **Télécharger une mise à jour bloquait toute la fenêtre.** Cela se fait maintenant en
+  arrière-plan, la progression s'affichant dans une barre de la fenêtre principale.
+
 ## [0.5.15] - 2026-09-13
 
 ### Corrigé
@@ -59,6 +85,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
   contient un MSI par langue et le programme de mise à jour prenait le premier de la liste,
   c'est-à-dire celui téléversé en premier. Il demande maintenant celui qui correspond à la
   langue de la fenêtre, et retombe sur l'anglais quand cette langue n'a pas le sien.
+
 ### Modifié
 
 - Chaque réglage porte une ligne disant ce qu'il change et où il est conservé.

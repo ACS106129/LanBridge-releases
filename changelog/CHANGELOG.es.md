@@ -5,6 +5,31 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.16] - 2026-09-13
+
+### Añadido
+
+- **Un instalador en cada idioma que habla la aplicación.** Hablaba once y su instalador
+  hablaba dos. Ahora hay once, cada uno con la página de códigos ANSI correcta.
+- **La ventana se abre donde la dejaste.** Tamaño, posición y si estaba maximizada. Se
+  guarda el tamaño restaurado, y una posición que ya no cae en ninguna pantalla se descarta.
+
+- **Un icono nuevo.** El anterior era una barra con dos puntos y no decía nada sobre lo
+  que hace esto. Ahora es una flecha que sale por la abertura de un anillo: el túnel, y la
+  única aplicación que lo cruza. Dibujado por separado en cada tamaño. El anillo está
+  abierto por donde sale la flecha, porque uno cerrado con una línea es la señal de
+  prohibido.
+
+### Corregido
+
+- **La aplicación destino se ejecutaba como administrador.** El ayudante que la inicia
+  tiene que serlo, y un proceso hijo hereda el token de su padre. Un programa con
+  privilegios está aislado del escritorio sin ellos: así es como un juego que inicia sesión
+  por el navegador nunca recibe su código de autorización. Ahora se inicia con el token del
+  shell, como tú.
+- **Descargar una actualización bloqueaba toda la ventana.** Ahora ocurre en segundo plano,
+  con el progreso en una barra de la ventana principal.
+
 ## [0.5.15] - 2026-09-13
 
 ### Corregido
@@ -59,6 +84,7 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
   MSI por idioma y el actualizador tomaba el primero de la lista, que es el que se subió
   antes. Ahora pide el que corresponde al idioma de la ventana, y recurre al inglés cuando
   ese idioma no tiene instalador propio.
+
 ### Cambiado
 
 - Cada ajuste lleva debajo una línea que dice qué cambia y dónde se guarda.
