@@ -9,11 +9,14 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- **Sound.** WinUI has a sound system built into every control — focus, invocation,
-  dialogs opening and closing — and it is silent unless an application asks for it. This
-  one never had, so every press has been quiet by omission rather than by choice. It is a
-  choice now, it is spatial, and it is a checkbox in settings for anyone who wants a
-  utility to keep its mouth shut.
+- **A grand piano.** WinUI has a sound system built into every control and it is silent
+  unless an application asks for it; this one never had, so every press has been quiet by
+  omission rather than by choice. Its own sounds cannot be replaced and wear thin within
+  an afternoon, so the notes come from the General MIDI synthesiser Windows already has,
+  on program 0 — Acoustic Grand Piano. No audio files to ship and no library to depend on.
+  A pentatonic scale, because presses arrive in whatever order you click in and that is
+  the one set where any two of them agree. There is a checkbox in settings for anyone who
+  wants a utility to keep its mouth shut.
 - **Motion where something happened.** The two columns fade in as the window assembles
   itself, the status text fades up when it changes, the relayed count kicks when it goes
   up, the status light breathes while a session runs, and a caution line slides its
