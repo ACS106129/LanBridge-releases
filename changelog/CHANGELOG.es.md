@@ -21,6 +21,11 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Corregido
 
+- **Iniciar quedaba por debajo del pliegue.** Los dos botones eran lo último de la columna
+  de tarjetas de configuración, y esa columna se desplaza. En cuanto las tarjetas bastaban
+  para llenarla —y a una altura de ventana normal bastan— la acción principal de la
+  aplicación era algo que había que buscar desplazándose. Ahora los botones están fijos
+  bajo las tarjetas y son las tarjetas las que se desplazan detrás.
 - **La aplicación destino se ejecutaba como administrador.** El ayudante que la inicia
   tiene que serlo, y un proceso hijo hereda el token de su padre. Un programa con
   privilegios está aislado del escritorio sin ellos: así es como un juego que inicia sesión

@@ -22,6 +22,11 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Behoben
 
+- **Starten lag unterhalb des Falzes.** Die beiden Schaltflächen waren das Letzte in der
+  Spalte mit den Konfigurationskarten, und diese Spalte scrollt. Sobald die Karten hoch
+  genug waren, sie zu füllen — bei gewöhnlicher Fensterhöhe sind sie das —, war die
+  wichtigste Handlung der Anwendung etwas, wonach man scrollen musste. Die Schaltflächen
+  sitzen jetzt fest unter den Karten, und die Karten scrollen dahinter.
 - **Die Zielanwendung lief als Administrator.** Der Helfer, der sie startet, muss es sein,
   und ein Kindprozess erbt das Token seines Elternteils. Ein erhöhtes Programm ist vom
   nicht erhöhten Desktop abgeschottet — so bekommt ein Spiel, das sich über den Browser

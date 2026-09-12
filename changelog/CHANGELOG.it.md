@@ -22,6 +22,11 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
 ### Corretto
 
+- **Avvia finiva sotto la piega.** I due pulsanti erano l'ultima cosa nella colonna delle
+  schede di configurazione, e quella colonna scorre. Non appena le schede bastavano a
+  riempirla — e a un'altezza di finestra ordinaria bastano — l'azione principale
+  dell'applicazione diventava qualcosa da cercare scorrendo. Ora i pulsanti sono fissati
+  sotto le schede, e sono le schede a scorrere dietro di loro.
 - **L'applicazione di destinazione girava come amministratore.** L'assistente che la avvia
   deve esserlo, e un processo figlio eredita il token del padre. Un programma elevato è
   isolato dal desktop non elevato: è così che un gioco che accede dal browser non riceve
