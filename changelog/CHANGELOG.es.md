@@ -5,6 +5,30 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.10] - 2026-09-12
+
+### Corregido
+
+- **La línea de advertencia ensanchaba la columna en vez de ajustarse.** Una pila
+  horizontal mide a sus hijos con anchura ilimitada, así que un bloque de texto ajustable
+  dentro de ella nunca se ajusta: ensancha todo lo que tiene al lado, incluido el botón de
+  arriba. Ambas notas están ahora en una cuadrícula que da al texto una anchura real.
+- **La configuración y la información de la aplicación aparecían dos veces.** El par que
+  estaba junto a las tarjetas de estado se quedó ahí al moverlas arriba a la derecha.
+- **El selector de procesos ofrecía esta misma aplicación.** Adjuntar el túnel a la ventana
+  que lo configura no es algo que nadie pretenda.
+
+### Cambiado
+
+- **El dibujo ocupa el espacio que se le dio.** Las rutas se estiran con la ventana en vez
+  de quedarse con una anchura fija en la esquina de una tarjeta grande y vacía, y los
+  paquetes recorren esa anchura entera.
+- **La nota del confinamiento por proceso solo aparece cuando está activo**, con la misma
+  marca de advertencia que la de enrutado, y dice lo que hace: se detienen los paquetes de
+  todos los demás programas de aquí.
+- La ruta del programa objetivo se ve completa al pasar el ratón, por estrecha que sea la
+  caja.
+
 ## [0.5.9] - 2026-09-12
 
 ### Corregido
@@ -410,6 +434,7 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 - Retransmisión genérica de difusión UDP para otros juegos, configurada por puerto.
 - Versión de línea de comandos del mismo motor.
 
+[0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7

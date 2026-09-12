@@ -5,6 +5,31 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.10] - 2026-09-12
+
+### Corrigido
+
+- **A linha de aviso alargava a coluna em vez de quebrar.** Uma pilha horizontal mede seus
+  filhos com largura ilimitada, então um bloco de texto com quebra dentro dela nunca quebra
+  — ele alarga tudo ao lado, inclusive o botão acima. As duas notas agora ficam em uma
+  grade que dá ao texto uma largura de verdade.
+- **As configurações e as informações do aplicativo apareciam duas vezes.** O par que ficava
+  ao lado dos cartões de status permaneceu quando elas subiram para o canto superior
+  direito.
+- **O seletor de processos oferecia o próprio aplicativo.** Anexar o túnel à janela que o
+  configura não é a intenção de ninguém.
+
+### Alterado
+
+- **O desenho ocupa o espaço que recebeu.** As rotas se esticam com a janela em vez de ficar
+  com largura fixa no canto de um cartão grande e vazio, e os pacotes percorrem essa largura
+  inteira.
+- **A nota do confinamento por processo só aparece enquanto ele está ligado**, com a mesma
+  marca de aviso da de roteamento, e diz o que ele faz: os pacotes de todos os outros
+  programas daqui são parados.
+- O caminho do programa alvo aparece por inteiro ao passar o ponteiro, por mais estreita que
+  seja a caixa.
+
 ## [0.5.9] - 2026-09-12
 
 ### Corrigido
@@ -403,6 +428,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7

@@ -5,6 +5,29 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.10] - 2026-09-12
+
+### Fixed
+
+- **The caution line widened the column instead of wrapping.** A horizontal stack measures
+  its children with unlimited width, so a wrapping text block inside one never wraps — it
+  pushes everything beside it wider, including the button above. Both notes now sit in a
+  grid that gives the text a real width to wrap into.
+- **Settings and application information appeared twice.** The pair beside the status cards
+  stayed behind when they moved to the top right.
+- **The process picker offered this application to itself.** Attaching the tunnel to the
+  window configuring it is not something anyone means to do.
+
+### Changed
+
+- **The diagram fills the space it was given.** The routes stretch with the window rather
+  than sitting at a fixed width in the corner of a large empty card, and the packets travel
+  the whole way across whatever width that turns out to be.
+- **The note under per-process confinement appears only while it is on**, with the same
+  caution marker as the routing one, and says what it does: packets from every other
+  program here are stopped.
+- The target path shows in full on hover, however narrow the box is.
+
 ## [0.5.9] - 2026-09-12
 
 ### Fixed
@@ -392,6 +415,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7

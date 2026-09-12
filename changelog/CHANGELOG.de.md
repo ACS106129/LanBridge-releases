@@ -5,6 +5,30 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.10] - 2026-09-12
+
+### Behoben
+
+- **Die Warnzeile verbreiterte die Spalte, statt umzubrechen.** Ein waagerechter Stapel
+  misst seine Kinder mit unbegrenzter Breite, ein umbrechender Textblock darin bricht also
+  nie um — er macht alles daneben breiter, die Schaltfläche darüber eingeschlossen. Beide
+  Hinweise stehen jetzt in einem Raster, das dem Text eine wirkliche Breite gibt.
+- **Einstellungen und Programminformationen erschienen zweimal.** Das Paar neben den
+  Statuskarten blieb stehen, als sie nach rechts oben zogen.
+- **Die Prozessauswahl bot diese Anwendung selbst an.** Den Tunnel an das Fenster zu
+  hängen, das ihn einrichtet, meint niemand.
+
+### Geändert
+
+- **Das Bild nutzt den Platz, den es bekommen hat.** Die Routen dehnen sich mit dem Fenster,
+  statt mit fester Breite in der Ecke einer großen leeren Karte zu sitzen, und die Pakete
+  legen diese Breite ganz zurück.
+- **Der Hinweis zur prozessweisen Beschränkung erscheint nur, solange sie an ist**, mit
+  demselben Warnzeichen wie beim Routing, und sagt, was sie tut: Pakete jedes anderen
+  Programms hier werden gestoppt.
+- Der Pfad der Zielanwendung erscheint beim Überfahren vollständig, so schmal das Feld auch
+  ist.
+
 ## [0.5.9] - 2026-09-12
 
 ### Behoben
@@ -421,6 +445,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
 [0.5.7]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.7
