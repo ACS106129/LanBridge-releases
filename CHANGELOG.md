@@ -5,6 +5,36 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.12] - 2026-09-12
+
+### Fixed
+
+- **The install folder held eighty-eight folders of translations for languages this
+  application does not offer** — af-ZA, sl-SI, fil-PH and the rest. They are the Windows
+  App SDK's own interface strings, shipped as Win32 resources rather than as .NET
+  satellite assemblies, so the usual setting for trimming them does not reach them. Only
+  the ones matching a language the interface speaks are kept now: fifteen instead of
+  eighty-eight.
+
+### Changed
+
+- The per-process option is called *Only the target application may talk to the VPN*,
+  which is what it does. It never governed the tunnel as a whole.
+
+### Added
+
+- **Ten more checks that drive the real window**, covering the dialogs and the choices
+  inside them: settings offers every control it should, the About box shows the version
+  actually running, switching language leaves no dropdown blank, the appearance choice
+  sticks, the custom port appears only for the custom protocol, the target mode decides
+  which picker is offered, refreshing the process list keeps it populated, and turning
+  confinement on does not move the controls above it.
+
+  Writing them found two things on its own. A dialog here is not a window and not called
+  what it looked like it was called, so four tests were looking for something that has
+  never existed; and Start is unavailable without a profile rather than pressing and
+  doing nothing, which the test asserted the wrong way round until the button said so.
+
 ## [0.5.11] - 2026-09-12
 
 ### Fixed
@@ -441,6 +471,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9

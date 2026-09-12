@@ -5,6 +5,29 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.12] - 2026-09-12
+
+### Corrigido
+
+- **A pasta de instalação tinha oitenta e oito pastas de traduções para idiomas que este
+  aplicativo não oferece** — af-ZA, sl-SI, fil-PH e as demais. São os textos do próprio
+  Windows App SDK, distribuídos como recursos Win32 e não como assemblies satélite do
+  .NET, então a configuração usual para removê-los não os alcança. Agora ficam só as
+  correspondentes a um idioma que a interface fala: quinze em vez de oitenta e oito.
+
+### Alterado
+
+- A opção por processo se chama *Só o aplicativo alvo pode falar com a VPN*, que é o que
+  ela faz. Nunca governou o túnel inteiro.
+
+### Adicionado
+
+- **Mais dez verificações que operam a janela de verdade**, sobre as caixas de diálogo e o
+  que há nelas. Escrevê-las encontrou duas coisas sozinha: uma caixa de diálogo aqui não é
+  uma janela nem se chama como parecia, então quatro testes procuravam algo que nunca
+  existiu; e Iniciar fica indisponível sem um perfil, em vez de aceitar o clique e não
+  fazer nada.
+
 ## [0.5.11] - 2026-09-12
 
 ### Corrigido
@@ -452,6 +475,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
