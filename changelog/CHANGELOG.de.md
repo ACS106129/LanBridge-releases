@@ -1,9 +1,50 @@
-# Änderungsprotokoll
+﻿# Änderungsprotokoll
 
 Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
+
+## [0.5.14] - 2026-09-12
+
+### Hinzugefügt
+
+- **Ein importiertes Profil gehört jetzt der Anwendung.** Bisher wurde nur gemerkt, wo die
+  Datei liegt, und bei jedem Start erneut von dort gelesen — das trägt, bis die Datei
+  umzieht, der Stick abgezogen oder Downloads geleert wird. Jetzt wird sie in einen
+  eigenen Ordner kopiert, samt jedem Zertifikat und Schlüssel, auf den sie verweist, und
+  diese Verweise werden auf die Kopien umgeschrieben.
+- **Ein Ort, an dem man sieht, was verwahrt wird.** Eine Schaltfläche Verwalten neben
+  Importieren: was gespeichert ist, was benutzt wird, umbenennen, löschen, Ordner öffnen.
+- **OpenVPN, falls Sie es nicht haben.** Diese Anwendung steuert den
+  OpenVPN-Community-Client, sie enthält ihn nicht. Sie sagt das jetzt vor dem Start und
+  bietet an, die aktuelle Fassung von OpenVPNs eigenem Server zu holen und zu
+  installieren — und führt nichts aus, dem Windows nicht traut oder das nicht von OpenVPN
+  signiert ist.
+- **Tests für den Installer.** Was im Paket steckt, und ein Durchgang durch seine Seiten
+  in beiden Sprachen. Am Zusammenfassungsschritt wird abgebrochen: Der Testlauf
+  installiert nichts.
+- **Ein Test, der die Pixel ansieht.** Jede Erklärzeile wird in beiden Designs
+  fotografiert und gegen ihren Hintergrund gemessen.
+
+### Behoben
+
+- **Drei Zeilen im Info-Dialog waren unsichtbar.** Sie wurden mit einem Pinsel aus den
+  Anwendungsressourcen gezeichnet, der sich am Design der Anwendung auflöst — und das
+  kann eine nicht paketierte WinUI-Anwendung nach dem Start nicht mehr ändern, während
+  die Dialoge im gewählten Design gezeichnet werden.
+- **Die Updateprüfung hört auf zu klopfen.** Sechzig pro Stunde ist genau das
+  unauthentifizierte Limit. Sie liest jetzt, wann das Kontingent zurückkommt, und wartet.
+
+- **Der Installer schrieb über seine eigene Grafik.** Diese Bitmaps sind keine Bilder neben
+  dem Text — sie sind der Grund, auf den der Dialog in seiner eigenen dunklen Farbe
+  schreibt, und wo, entscheidet der Dialog. Alle 493 Pixel mit einem blauen Verlauf zu
+  füllen setzte jede Überschrift dunkel auf dunkel. Die Grafik ist jetzt ein Streifen links
+  und ein Block rechts im Banner; der Rest bleibt Papier.
+### Geändert
+
+- Unter jeder Einstellung steht eine Zeile, was sie ändert und wo sie liegt.
+- Der Info-Dialog erklärt, wie nach Updates gesucht wird, und nennt OpenVPN und WinDivert.
 
 ## [0.5.13] - 2026-09-12
 

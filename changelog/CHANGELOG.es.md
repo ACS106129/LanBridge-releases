@@ -1,9 +1,51 @@
-# Registro de cambios
+﻿# Registro de cambios
 
 Aquí se recogen todos los cambios relevantes de LanBridge.
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
+
+## [0.5.14] - 2026-09-12
+
+### Añadido
+
+- **Un perfil importado ahora pertenece a la aplicación.** Antes se recordaba dónde estaba
+  el archivo y se leía otra vez en cada arranque, lo cual funciona hasta que el archivo se
+  mueve, se saca el pendrive o se vacía Descargas. Ahora se copia a una carpeta propia,
+  junto con cada certificado y clave a los que se refiere, y esas referencias se reescriben
+  para apuntar a las copias. Borra el original y no cambia nada.
+- **Un sitio donde ver lo que se guarda.** Un botón Gestionar junto a Importar: qué hay,
+  cuál se usa, renombrar, eliminar y una puerta a la carpeta.
+- **OpenVPN, si no lo tienes.** Esta aplicación maneja el cliente comunitario de OpenVPN;
+  no lo contiene. Antes, una máquina sin él recibía una frase pidiendo que lo instalaras.
+  Ahora lo dice antes de empezar y ofrece descargar la versión actual del propio servidor
+  de OpenVPN e instalarla, rechazando cualquier cosa que Windows no acepte o que no esté
+  firmada por OpenVPN.
+- **Pruebas para el instalador.** Lo que hay dentro del paquete y un recorrido por sus
+  páginas en los dos idiomas. Se detiene en el resumen y cancela: pasar las pruebas no
+  instala nada.
+- **Una prueba que mira los píxeles.** Cada línea explicativa se fotografía en ambos temas
+  y se mide contra lo que tiene detrás.
+
+### Corregido
+
+- **Tres líneas del cuadro Acerca de eran invisibles.** Estaban pintadas con un pincel
+  tomado de los recursos de la aplicación, que se resuelve contra el tema de la propia
+  aplicación — y una aplicación WinUI sin empaquetar no puede cambiarlo tras arrancar,
+  mientras que los diálogos se dibujan con el tema que elegiste.
+- **La comprobación de actualizaciones dejó de insistir.** Sesenta al día por hora es
+  justo el límite sin autenticar; pasado eso todo se rechaza. Ahora lee cuándo vuelve el
+  cupo y espera.
+
+- **El instalador escribía encima de su propia ilustración.** Esos mapas de bits no son
+  imágenes junto al texto: son el fondo sobre el que el diálogo escribe, en su propio color
+  oscuro, y el diálogo decide dónde. Rellenar los 493 píxeles con un degradado azul dejaba
+  cada título en oscuro sobre oscuro. Ahora la ilustración es una franja a la izquierda y un
+  bloque a la derecha del banner, y el resto queda en blanco.
+### Cambiado
+
+- Cada ajuste lleva debajo una línea que dice qué cambia y dónde se guarda.
+- Acerca de explica cómo se buscan las actualizaciones y da crédito a OpenVPN y WinDivert.
 
 ## [0.5.13] - 2026-09-12
 
