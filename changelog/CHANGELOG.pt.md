@@ -5,6 +5,19 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.15] - 2026-09-13
+
+### Corrigido
+
+- **Uma única recusa do servidor encerrava a tentativa.** O openvpn trata um login
+  recusado como fatal e sai na primeira, o que está certo para um servidor seu e errado
+  para um relé público: esses recusam porque estão cheios ou porque quem o mantinha sumiu,
+  e o mesmo perfil conecta um minuto depois. Agora ele tenta de novo e para na terceira,
+  para que uma senha realmente errada ainda seja relatada.
+- **"EXITING auth-failure" não explicava nada.** Parece senha errada, e depois de um
+  certificado já ter sido aceito normalmente não é. A mensagem agora diz qual etapa falhou
+  e o que isso significa.
+
 ## [0.5.14] - 2026-09-12
 
 ### Adicionado

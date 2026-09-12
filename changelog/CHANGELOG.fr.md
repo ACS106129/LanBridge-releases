@@ -5,6 +5,20 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.15] - 2026-09-13
+
+### Corrigé
+
+- **Un seul refus du serveur mettait fin à la tentative.** openvpn considère un refus
+  d'authentification comme fatal et s'arrête au premier, ce qui convient pour votre propre
+  serveur et pas pour un relais public : ceux-ci refusent parce qu'ils sont pleins ou que
+  le bénévole qui le tenait est parti, et le même profil se connecte une minute plus tard.
+  Il réessaie désormais, et s'arrête après trois fois pour qu'un mot de passe réellement
+  faux soit tout de même signalé.
+- **« EXITING auth-failure » n'expliquait rien.** Cela se lit comme un mot de passe erroné,
+  et après l'acceptation d'un certificat ce n'en est généralement pas un. Le message dit
+  maintenant quelle étape a échoué et ce que cela signifie.
+
 ## [0.5.14] - 2026-09-12
 
 ### Ajouté
