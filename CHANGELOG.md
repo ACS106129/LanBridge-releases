@@ -31,6 +31,11 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- **Start was below the fold.** The two buttons were the last thing in the column of
+  configuration cards, and that column scrolls. Once the cards were tall enough to fill
+  it — which they are at an ordinary window height — the primary action of the
+  application was something you had to scroll down to find. The buttons are now pinned
+  under the cards and the cards scroll behind them.
 - **The target application was running as an administrator.** The helper that starts it
   has to be one: openvpn configures a virtual adapter and WinDivert loads a driver. A
   child process inherits its parent's token, so the application being launched inherited

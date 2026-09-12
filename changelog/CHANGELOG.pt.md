@@ -20,6 +20,11 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
 ### Corrigido
 
+- **Iniciar ficava abaixo da dobra.** Os dois botões eram a última coisa na coluna de
+  cartões de configuração, e essa coluna rola. Assim que os cartões bastavam para
+  preenchê-la — e a uma altura de janela comum bastam — a ação principal do aplicativo
+  passava a ser algo que era preciso rolar para achar. Agora os botões ficam fixos abaixo
+  dos cartões, e são os cartões que rolam atrás deles.
 - **O aplicativo alvo rodava como administrador.** O auxiliar que o inicia precisa ser, e
   um processo filho herda o token do pai. Um programa elevado fica isolado da área de
   trabalho não elevada — é assim que um jogo que faz login pelo navegador nunca recebe seu

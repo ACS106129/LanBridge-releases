@@ -22,6 +22,12 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
 ### Corrigé
 
+- **Démarrer passait sous la ligne de flottaison.** Les deux boutons étaient le dernier
+  élément de la colonne de cartes de configuration, et cette colonne défile. Dès que les
+  cartes suffisaient à la remplir — ce qu'elles font à une hauteur de fenêtre ordinaire —
+  l'action principale de l'application devenait quelque chose qu'il fallait aller
+  chercher. Les boutons sont maintenant fixés sous les cartes, et ce sont les cartes qui
+  défilent derrière.
 - **L'application cible tournait en administrateur.** L'assistant qui la lance doit l'être,
   et un processus enfant hérite du jeton de son parent. Un programme élevé est isolé du
   bureau non élevé : c'est ainsi qu'un jeu qui se connecte via le navigateur ne reçoit
