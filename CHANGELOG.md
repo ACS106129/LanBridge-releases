@@ -5,6 +5,32 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.11] - 2026-09-12
+
+### Fixed
+
+- **Dark mode was white text on a white page.** The last attempt painted the background on
+  one element and applied the theme to the one inside it, so the text resolved in the dark
+  theme and the surface behind it in the light one. The theme now goes on the element that
+  paints the background, where both agree.
+- **The target section's icon drew as an empty box.** A code point sitting inside a font's
+  character map does not mean the font has a glyph for it. The three section marks are
+  emoji now, which have no such doubt and match the diagram above them.
+- **The controls inside each section sat centred** in a card that was already the right
+  width. An expander stretches itself but not its contents unless told to.
+- **Choosing to attach and pressing start without picking a program threw an exception.**
+  The check added for a missing executable did not cover attaching, which needs a
+  different kind of nothing. It now says which choice is missing, and the message no longer
+  tells anyone to type a process id at a control that is a list.
+
+### Added
+
+- **Tests that drive the real window.** Every visual defect reported so far — a button
+  laid out and clickable but never painted, controls centred in a full-width card, a
+  warning that widened its column instead of wrapping, a process list offering this
+  application to itself — could pass every unit test in the project, because none of them
+  are about what a method returns. Nineteen checks now open the published build and look.
+
 ## [0.5.10] - 2026-09-12
 
 ### Fixed
@@ -415,6 +441,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
 [0.5.9]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.9
 [0.5.8]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.8
