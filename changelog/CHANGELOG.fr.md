@@ -41,6 +41,10 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
   propre couleur sombre, et c'est elle qui choisit où. Remplir les 493 pixels d'un dégradé
   bleu mettait chaque titre en sombre sur sombre. L'illustration est désormais une bande à
   gauche et un bloc à droite de la bannière, le reste restant blanc.
+- **La mise à jour proposait à tout le monde l'installateur anglais.** Une publication
+  contient un MSI par langue et le programme de mise à jour prenait le premier de la liste,
+  c'est-à-dire celui téléversé en premier. Il demande maintenant celui qui correspond à la
+  langue de la fenêtre, et retombe sur l'anglais quand cette langue n'a pas le sien.
 ### Modifié
 
 - Chaque réglage porte une ligne disant ce qu'il change et où il est conservé.

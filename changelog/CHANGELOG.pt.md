@@ -38,6 +38,10 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
   do texto: são o fundo em que a caixa de diálogo escreve, na cor escura dela, e é ela quem
   escolhe onde. Preencher os 493 pixels com um degradê azul deixava cada título escuro sobre
   escuro. Agora a arte é uma faixa à esquerda e um bloco à direita do banner.
+- **A atualização oferecia a todos o instalador em inglês.** Uma versão traz um MSI por
+  idioma e o atualizador pegava o primeiro da lista, ou seja, o que foi enviado antes.
+  Agora ele pede o que corresponde ao idioma da janela, e cai para o inglês quando aquele
+  idioma não tem instalador próprio.
 ### Alterado
 
 - Cada configuração tem abaixo uma linha dizendo o que muda e onde fica guardada.
