@@ -5,6 +5,32 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.13] - 2026-09-12
+
+### Adicionado
+
+- **Som.** O WinUI traz um sistema de som em cada controle — foco, invocação, caixas de
+  diálogo abrindo e fechando — e fica calado a menos que o aplicativo peça. Este nunca
+  pediu, então cada toque foi silencioso por omissão e não por escolha. Agora é escolha, é
+  espacial, e há uma caixa nas configurações para quem prefere um utilitário calado.
+- **Movimento onde algo aconteceu.** As duas colunas surgem enquanto a janela se monta, o
+  texto de status sobe ao mudar, a contagem retransmitida dá um salto ao subir, a luz de
+  status respira durante uma sessão, e uma linha de aviso empurra as vizinhas em vez de
+  aparecer do nada.
+- **O desenho relata em vez de encenar.** Ele fazia a mesma animação acontecendo algo ou
+  não, o que é decoração vestida de instrumento. Sem sessão fica apagado e parado, com ela
+  se move, e a célula bloqueada mostra quantos pacotes o guardião de fato descartou — um
+  número que a interface nunca havia recebido, porque ninguém assinava o evento que o leva.
+- **Um instalador com a cara deste produto**, com imagens geradas em vez das de espaço
+  reservado do WiX.
+- **Um instalador no seu idioma**: um MSI por idioma em vez de inglês para todos. Inglês e
+  chinês tradicional para começar.
+
+### Alterado
+
+- O aviso do confinamento por processo aparece quando a caixa está **desmarcada**, que é o
+  estado que merece aviso, e diz o que esse estado significa em vez de repetir o rótulo.
+
 ## [0.5.12] - 2026-09-12
 
 ### Corrigido
@@ -475,6 +501,7 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Retransmissão genérica de broadcast UDP para outros jogos, configurada por porta.
 - Versão de linha de comando do mesmo motor.
 
+[0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10

@@ -5,6 +5,35 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.13] - 2026-09-12
+
+### Ajouté
+
+- **Le son.** WinUI intègre un système sonore à chaque contrôle — focus, activation,
+  ouverture et fermeture des boîtes de dialogue — et il se tait tant qu'une application ne
+  le demande pas. Celle-ci ne l'avait jamais demandé : chaque clic était donc silencieux
+  par omission et non par choix. C'est un choix désormais, c'est spatialisé, et une case
+  dans les paramètres reste là pour qui préfère un utilitaire muet.
+- **Du mouvement là où quelque chose s'est produit.** Les deux colonnes apparaissent tandis
+  que la fenêtre s'assemble, le texte d'état remonte quand il change, le compteur relayé
+  tressaille quand il monte, le voyant respire pendant une session, et une ligne
+  d'avertissement pousse ses voisines au lieu de surgir de nulle part.
+- **Le dessin rend compte au lieu de mimer.** Il jouait la même animation qu'il se passe
+  quelque chose ou non — de la décoration déguisée en instrument. Il est terne et immobile
+  sans session, il s'anime avec elle, et la case bloquée affiche le nombre de paquets
+  réellement écartés : un chiffre qui n'était jamais parvenu à l'interface, faute d'avoir
+  jamais été écouté.
+- **Un installateur qui ressemble à ce produit**, avec des images générées plutôt que
+  celles fournies par défaut par WiX.
+- **Un installateur dans votre langue** : un MSI par langue plutôt que l'anglais pour tous.
+  Anglais et chinois traditionnel pour commencer.
+
+### Modifié
+
+- L'avertissement du confinement par processus apparaît maintenant quand la case est
+  **décochée**, l'état qui mérite un avertissement, et dit ce que cet état signifie au lieu
+  de répéter l'étiquette. Les deux avertissements portent aussi des marques différentes.
+
 ## [0.5.12] - 2026-09-12
 
 ### Corrigé
@@ -497,6 +526,7 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 - Relais générique de diffusion UDP pour d'autres jeux, configuré par port.
 - Version en ligne de commande du même moteur.
 
+[0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10

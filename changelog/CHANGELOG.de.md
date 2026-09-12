@@ -5,6 +5,36 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.13] - 2026-09-12
+
+### Hinzugefügt
+
+- **Ton.** WinUI hat in jedem Steuerelement ein Klangsystem – Fokus, Auslösen, Dialoge, die
+  auf- und zugehen – und es schweigt, solange eine Anwendung nicht darum bittet. Diese hatte
+  nie darum gebeten, jeder Druck war also aus Versäumnis still und nicht aus Entscheidung.
+  Jetzt ist es eine Entscheidung, es ist räumlich, und in den Einstellungen steht ein
+  Kästchen für alle, denen ein Werkzeug lieber den Mund hält.
+- **Bewegung dort, wo etwas geschehen ist.** Die beiden Spalten blenden sich ein, während
+  das Fenster sich zusammensetzt; der Statustext steigt auf, wenn er wechselt; der
+  weitergeleitete Zähler zuckt, wenn er steigt; die Statusleuchte atmet, solange eine
+  Sitzung läuft; und eine Warnzeile schiebt ihre Nachbarn beiseite, statt aus dem Nichts zu
+  erscheinen.
+- **Das Bild berichtet, statt zu spielen.** Es lief dieselbe Animation, ob etwas geschah
+  oder nicht — Dekoration im Gewand eines Messgeräts. Ohne Sitzung ist es matt und still,
+  mit ihr läuft es, und das gesperrte Feld zeigt die Zahl der tatsächlich verworfenen
+  Pakete: eine Zahl, die die Oberfläche nie erreicht hatte, weil das Ereignis dafür nie
+  jemand abonniert hatte.
+- **Ein Installationsprogramm, das nach diesem Produkt aussieht**, mit erzeugten Bildern
+  statt der Platzhalter von WiX.
+- **Ein Installationsprogramm in Ihrer Sprache**: ein MSI je Sprache statt Englisch für
+  alle. Zunächst Englisch und traditionelles Chinesisch.
+
+### Geändert
+
+- Die Warnung zur prozessweisen Beschränkung erscheint jetzt, wenn das Kästchen **leer**
+  ist — der Zustand, der eine Warnung verdient — und sagt, was dieser Zustand bedeutet,
+  statt die Beschriftung zu wiederholen.
+
 ## [0.5.12] - 2026-09-12
 
 ### Behoben
@@ -494,6 +524,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Allgemeine UDP-Broadcast-Weiterleitung für andere Spiele, über den Port konfiguriert.
 - Kommandozeilenversion derselben Engine.
 
+[0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10

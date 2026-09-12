@@ -5,6 +5,36 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.13] - 2026-09-12
+
+### Añadido
+
+- **Sonido.** WinUI trae un sistema de sonido en cada control —foco, invocación, diálogos
+  que se abren y cierran— y calla salvo que la aplicación lo pida. Esta nunca lo había
+  pedido, así que cada pulsación ha sido silenciosa por omisión y no por decisión. Ahora es
+  una decisión, es espacial, y hay una casilla en la configuración para quien prefiera que
+  una utilidad se calle.
+- **Movimiento donde ha pasado algo.** Las dos columnas aparecen mientras la ventana se
+  arma, el texto de estado sube al cambiar, el recuento retransmitido da un salto al subir,
+  la luz de estado respira mientras hay sesión, y una línea de aviso empuja a sus vecinos
+  en vez de surgir de la nada.
+- **El dibujo informa en lugar de actuar.** Antes hacía la misma animación pasara o no
+  algo, que es decoración vestida de instrumento. Ahora está atenuado y quieto sin sesión,
+  se mueve con ella, y la celda bloqueada muestra los paquetes que el guardián ha
+  descartado de verdad —un número que la interfaz nunca había recibido, porque nadie se
+  había suscrito al evento que lo lleva.
+- **Un instalador que se parece a este producto**, con imágenes generadas en vez de las de
+  relleno de WiX.
+- **Un instalador en tu idioma**: un MSI por idioma en vez de inglés para todos. Inglés y
+  chino tradicional para empezar.
+
+### Cambiado
+
+- El aviso del confinamiento por proceso aparece ahora cuando la casilla está **vacía**,
+  que es el estado que merece advertencia, y dice qué significa ese estado en vez de
+  repetir la etiqueta. Los dos avisos llevan además marcas distintas: un globo para adónde
+  va el tráfico, un candado abierto para quién puede usarlo.
+
 ## [0.5.12] - 2026-09-12
 
 ### Corregido
@@ -482,6 +512,7 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 - Retransmisión genérica de difusión UDP para otros juegos, configurada por puerto.
 - Versión de línea de comandos del mismo motor.
 
+[0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
 [0.5.10]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.10
