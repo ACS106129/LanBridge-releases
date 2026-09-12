@@ -41,6 +41,10 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   schreibt, und wo, entscheidet der Dialog. Alle 493 Pixel mit einem blauen Verlauf zu
   füllen setzte jede Überschrift dunkel auf dunkel. Die Grafik ist jetzt ein Streifen links
   und ein Block rechts im Banner; der Rest bleibt Papier.
+- **Das Update bot allen den englischen Installer an.** Eine Veröffentlichung enthält eine
+  MSI je Sprache, und das Update nahm die erste der Liste — also die zuerst hochgeladene.
+  Jetzt wird die zur Sprache des Fensters passende angefordert, mit Rückfall auf Englisch,
+  wenn es für diese Sprache keine gibt.
 ### Geändert
 
 - Unter jeder Einstellung steht eine Zeile, was sie ändert und wo sie liegt.

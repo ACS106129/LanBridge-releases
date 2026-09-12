@@ -38,6 +38,10 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
   accanto al testo: sono lo sfondo su cui la finestra scrive, nel suo colore scuro, e dove
   lo decide lei. Riempire tutti i 493 pixel con una sfumatura blu metteva ogni titolo scuro
   su scuro. Ora la grafica è una fascia a sinistra e un blocco a destra nel banner.
+- **L'aggiornamento offriva a tutti l'installer inglese.** Una release porta un MSI per
+  lingua e l'aggiornamento prendeva il primo dell'elenco, cioè quello caricato per primo.
+  Ora chiede quello che corrisponde alla lingua della finestra, e ripiega sull'inglese
+  quando quella lingua non ne ha uno proprio.
 ### Modificato
 
 - Sotto ogni impostazione una riga che dice cosa cambia e dove viene conservata.

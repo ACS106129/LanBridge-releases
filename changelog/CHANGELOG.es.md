@@ -42,6 +42,10 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
   oscuro, y el diálogo decide dónde. Rellenar los 493 píxeles con un degradado azul dejaba
   cada título en oscuro sobre oscuro. Ahora la ilustración es una franja a la izquierda y un
   bloque a la derecha del banner, y el resto queda en blanco.
+- **La actualización ofrecía a todos el instalador en inglés.** Una publicación lleva un
+  MSI por idioma y el actualizador tomaba el primero de la lista, que es el que se subió
+  antes. Ahora pide el que corresponde al idioma de la ventana, y recurre al inglés cuando
+  ese idioma no tiene instalador propio.
 ### Cambiado
 
 - Cada ajuste lleva debajo una línea que dice qué cambia y dónde se guarda.

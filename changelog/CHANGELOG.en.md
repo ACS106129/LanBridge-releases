@@ -56,6 +56,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   paragraph. The artwork is now a strip down the left of the welcome page and a block at
   the right of the banner, with the rest left as paper for the installer to write on. A
   test photographs each page and measures the contrast where the text is.
+- **The update offered everybody the English installer.** A release carries one MSI per
+  language and the updater took the first one in the list, which is whichever was uploaded
+  first. Building an installer per language and then handing out the English one at the
+  last step undoes the point of building them. It now asks for the one matching the
+  language the window is in, and falls back to English when that language has no installer
+  of its own.
 ### Changed
 
 - Every setting has a line under it saying what it changes, and where the settings are
