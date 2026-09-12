@@ -5,6 +5,22 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.15] - 2026-09-13
+
+### Fixed
+
+- **One refusal from the server ended the attempt.** openvpn treats a refused sign-in as
+  fatal and exits on the first one, which is right for a server of your own and wrong for
+  a public relay: those refuse because they are full or because the volunteer running one
+  has gone, and the same profile connects a minute later. It now retries, and stops after
+  three tries so a password that is genuinely wrong still gets reported rather than
+  retried forever. A profile that sets its own retry limits no longer overrides that —
+  how long to keep trying before telling you is this application's decision.
+- **"EXITING auth-failure" explained nothing.** It reads like a wrong password, and after
+  a certificate has already been accepted it usually is not one. The message now says
+  which step failed and what that means: on a public relay, that it is full or gone; on a
+  server of your own, that it wants a username and password that were not supplied.
+
 ## [0.5.14] - 2026-09-12
 
 ### Added
