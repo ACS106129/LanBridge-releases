@@ -5,6 +5,31 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.16] - 2026-09-13
+
+### Aggiunto
+
+- **Un installer in ogni lingua che l'applicazione parla.** Ne parlava undici e il suo
+  installer due. Ora sono undici, ciascuno con la codepage ANSI giusta.
+- **La finestra si apre dove l'hai lasciata.** Dimensione, posizione e se era ingrandita.
+  Si salva la dimensione ripristinata, e una posizione che non cade più su nessuno schermo
+  viene scartata.
+
+- **Una nuova icona.** La vecchia era una barra con due punti e non diceva nulla di cosa
+  faccia questo programma. Ora è una freccia che esce dall'apertura di un anello: il
+  tunnel, e l'unica applicazione che lo attraversa. Disegnata separatamente a ogni
+  dimensione. L'anello è aperto dal lato da cui esce la freccia, perché uno chiuso con una
+  linea è il segnale di divieto.
+
+### Corretto
+
+- **L'applicazione di destinazione girava come amministratore.** L'assistente che la avvia
+  deve esserlo, e un processo figlio eredita il token del padre. Un programma elevato è
+  isolato dal desktop non elevato: è così che un gioco che accede dal browser non riceve
+  mai il suo codice di autorizzazione. Ora viene avviato con il token della shell, come te.
+- **Scaricare un aggiornamento bloccava l'intera finestra.** Ora avviene in secondo piano,
+  con l'avanzamento in una barra della finestra principale.
+
 ## [0.5.15] - 2026-09-13
 
 ### Corretto
@@ -55,6 +80,7 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
   lingua e l'aggiornamento prendeva il primo dell'elenco, cioè quello caricato per primo.
   Ora chiede quello che corrisponde alla lingua della finestra, e ripiega sull'inglese
   quando quella lingua non ne ha uno proprio.
+
 ### Modificato
 
 - Sotto ogni impostazione una riga che dice cosa cambia e dove viene conservata.
