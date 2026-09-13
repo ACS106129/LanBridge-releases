@@ -5,6 +5,32 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.21] - 2026-09-14
+
+### Fixed
+
+- **Websites, die über das VPN gehen sollten, taten es nicht, und alles behauptete das
+  Gegenteil.** 0.5.20 legte die Routen an, meldete für jede „ok" und ließ sie mit guter
+  Metrik in der Tabelle. Windows ignorierte sie sämtlich.
+
+  Der nächste Hop war falsch. Ein Tunnel vergibt häufig eine Punkt-zu-Punkt-Adresse — dieser
+  ein /30 mit insgesamt vier Adressen — und als Hop war die .1 des Netzes geraten worden,
+  die es auf einer solchen Verbindung nicht gibt. Windows benutzt keine Route mit
+  unerreichbarem nächsten Hop, also ging der Verkehr über den gewohnten Adapter. Und nichts
+  sagte es: der Befehl nahm die Route an und meldete Erfolg.
+
+  Der nächste Hop wird jetzt aus der Adresse abgeleitet, die der Tunnel tatsächlich bekommen
+  hat. Und „angelegt" heißt nicht mehr „wirksam": nach jeder Route wird das System gefragt,
+  wohin es ein Paket wirklich schicken würde, und eine nicht gewählte Route wird gemeldet
+  und wieder entfernt.
+
+- **Ein über den Tunnel nicht auflösbarer Name wurde als übereinstimmend gemeldet.** Keine
+  Antwort ist nicht dieselbe Antwort.
+
+- **Die Anfrage über den Tunnel weicht jetzt auf TCP aus.** Auf dem betroffenen Tunnel
+  antwortete der Resolver über UDP auf keinen Namen, während die Verbindung zum selben Port
+  zustande kam.
+
 ## [0.5.20] - 2026-09-13
 
 ### Added

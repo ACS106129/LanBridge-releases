@@ -5,6 +5,30 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.21] - 2026-09-14
+
+### Fixed
+
+- **I siti che dovevano passare per la VPN non ci passavano, e tutto diceva di sì.** La
+  0.5.20 aggiungeva le rotte, riportava "ok" per ognuna e le lasciava in tabella con una
+  buona metrica. Windows le ignorava tutte.
+
+  Il salto successivo era sbagliato. Un tunnel spesso assegna un indirizzo punto a punto —
+  questo era un /30, con quattro indirizzi in tutto — e il salto era stato indovinato come
+  il .1 della rete, che su un collegamento simile non esiste. Windows non usa una rotta il
+  cui salto successivo non è raggiungibile, quindi il traffico usciva dall'adattatore
+  abituale. E nulla lo diceva: il comando accettava la rotta e restituiva successo.
+
+  Il salto successivo ora si ricava dall'indirizzo che il tunnel ha davvero ricevuto. E
+  "aggiunta" non vale più "funzionante": dopo ogni rotta si chiede al sistema da dove
+  manderebbe realmente un pacchetto, e una rotta non scelta viene segnalata e tolta.
+
+- **Un nome non risolvibile attraverso il tunnel veniva riportato come uguale a quello
+  locale.** Nessuna risposta non è la stessa risposta.
+
+- **La domanda attraverso il tunnel ora ripiega su TCP.** Su quel tunnel il resolver non
+  rispondeva nulla via UDP mentre la connessione alla stessa porta riusciva.
+
 ## [0.5.20] - 2026-09-13
 
 ### Added
