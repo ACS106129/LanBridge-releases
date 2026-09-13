@@ -5,6 +5,35 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.18] - 2026-09-13
+
+### Fixed
+
+- **Las plazas libres de una sala de Warcraft III nunca cambiaban en la otra máquina.**
+  Abre un puesto donde había una computadora y el otro seguía viendo la sala igual que
+  antes, hasta que salía de la lista de partidas y volvía a entrar.
+
+  Un par que ya tiene la sala en su lista no vuelve a leer el anuncio completo. Toma las
+  cifras de un pequeño paquete que el anfitrión emite en difusión cada vez que la sala
+  cambia, y sólo rehace la entrada cuando se reabre la lista. Ese paquete va por difusión,
+  y la difusión es justo lo que aquí no se puede capturar: el juego ya ocupa el puerto en
+  el que habría que escuchar. Así que ahora se deriva del anuncio y se envía cuando las
+  cifras se mueven.
+
+  Las cifras se comprueban antes de enviarse: se leen de una posición fija al final de un
+  paquete cuya disposición se dedujo, y una partida tiene entre una y veinticuatro plazas y
+  no puede tener más libres de las que tiene. Cualquier otra cosa significa que la lectura
+  está mal, y entonces no se envía nada.
+
+- **La descarga de la actualización seguía reteniendo la ventana.** 0.5.16 decía haberlo
+  arreglado. La transferencia en segundo plano, la barra de progreso y el botón de cancelar
+  estaban escritos y nada los llamaba nunca.
+
+  Ahora ocurre de verdad en segundo plano, y al empezar la descarga el diálogo ofrece
+  **Continuar en segundo plano**: la ventana se cierra, la transferencia sigue y se informa
+  en la barra de la ventana principal, donde también puede cancelarse. Cancelar y fallar ya
+  se distinguen — antes ambos abrían la página de la versión en el navegador.
+
 ## [0.5.17] - 2026-09-13
 
 ### Fixed
