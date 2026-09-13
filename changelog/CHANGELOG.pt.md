@@ -9,6 +9,10 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
 ### Fixed
 
+- **A janela Sobre agradecia ao WinDivert sem dizer sob quais termos ele é usado.** É a GNU
+  LGPL v3, que pede ao programa que o diga, nomeie a licença e aponte para a cópia que
+  distribui; um agradecimento não é nenhuma das três. Agora diz as três. Também fica claro
+  que o OpenVPN é baixado de openvpn.net em vez de distribuído aqui.
 - **As vagas livres de uma sala de Warcraft III nunca mudavam na outra máquina.** Abra um
   lugar onde havia um computador e o outro continuava vendo a sala como estava, até sair da
   lista de partidas e voltar.

@@ -9,6 +9,10 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Fixed
 
+- **La ventana Acerca de agradecía a WinDivert sin decir bajo qué términos se usa.** Es la
+  GNU LGPL v3, que pide al programa que la usa decirlo, nombrar la licencia y señalar la
+  copia que distribuye; un agradecimiento no es ninguna de las tres. Ahora dice las tres.
+  También se indica que OpenVPN se descarga de openvpn.net en vez de distribuirse aquí.
 - **Las plazas libres de una sala de Warcraft III nunca cambiaban en la otra máquina.**
   Abre un puesto donde había una computadora y el otro seguía viendo la sala igual que
   antes, hasta que salía de la lista de partidas y volvía a entrar.

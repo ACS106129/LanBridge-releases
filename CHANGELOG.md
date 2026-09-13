@@ -9,6 +9,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- **The About box thanked WinDivert without saying under what terms it is used.** It is
+  under the GNU LGPL v3, which asks a program using it to say so, name the licence, and
+  point at the copy it ships — and a thank-you is none of those. About now says all three:
+  the licence, that the library is unmodified and replaceable, where the full text sits
+  beside the program, and where the source is. OpenVPN is named too, along with the fact
+  that it is fetched from openvpn.net rather than shipped here.
 - **A Warcraft III room's free places never changed on the other machine.** Open a slot
   the computer was sitting in, and the peer went on showing the room exactly as it had
   been until the player left the game list and came back.
