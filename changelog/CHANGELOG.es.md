@@ -5,6 +5,25 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.20] - 2026-09-13
+
+### Added
+
+- **Sitios que puedes mandar por la VPN sin mandar la máquina entera.** Hasta ahora, un
+  programa que necesitaba que un sitio lo *viera* llegar desde el otro extremo —en lugar de
+  necesitar alcanzar una máquina allí— sólo tenía una opción: entregarlo todo.
+
+  Nombra los sitios y sus direcciones se consultan y se enrutan por el túnel. Consultarlas
+  por el túnel es lo que importa: una red de contenidos responde según de dónde vino la
+  pregunta, y uno de estos nombres respondió con un nodo de Taipéi desde aquí y con
+  direcciones distintas dos horas después.
+
+  El registro dice lo que encontró para cada nombre, por ambos lados, coincidan o no.
+
+  Dos cosas antes de activarlo: cambia la tabla de rutas de la máquina, así que viene vacío;
+  y mientras hay sesión esos sitios sólo los alcanza la aplicación de destino. Al parar, se
+  retira cada ruta añadida.
+
 ## [0.5.19] - 2026-09-13
 
 ### Added
