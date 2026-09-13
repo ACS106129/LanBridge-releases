@@ -5,6 +5,36 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.21] - 2026-09-14
+
+### Fixed
+
+- **Sites sent through the VPN were not going through it, and everything said they were.**
+  0.5.20 added the routes, reported "ok" for every one, and left them in the routing table
+  with a good metric. Windows ignored all of them.
+
+  The next hop was wrong. A tunnel commonly hands out a point-to-point address — this one
+  was a /30, whose only addresses are four — and the next hop was guessed as the .1 of the
+  network, which on such a link does not exist. Windows will not use a route whose next hop
+  it cannot reach, so the traffic left by the ordinary adapter, the site saw the ordinary
+  address, and nothing anywhere said so: the command that added the route accepted it and
+  returned success.
+
+  The next hop is now worked out from the address the tunnel actually got. And "added" is
+  no longer taken to mean "working": after each route the system is asked which way it
+  would really send a packet to that destination, and a route that is not chosen is
+  reported and taken straight back out, because a route in the table that nothing uses is
+  worse than no route — the next person to read the table believes it.
+
+- **A name that could not be resolved through the tunnel was reported as agreeing with the
+  local answer.** No answer is not the same answer. The log now says which it was, and
+  which resolver and transport produced it.
+
+- **Asking through the tunnel now falls back to TCP.** On the tunnel this was found on, the
+  resolver answered nothing over UDP for any name while a connection to the same address
+  and port succeeded — a relay carrying one and not the other, which is a common thing for
+  a volunteer server to do.
+
 ## [0.5.20] - 2026-09-13
 
 ### Added
