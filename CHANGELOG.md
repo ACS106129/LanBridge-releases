@@ -5,6 +5,29 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.20] - 2026-09-13
+
+### Added
+
+- **Sites you can send through the VPN without sending the whole machine.** Until now a
+  program that needed a site to *see* it arriving from the far end — rather than needing to
+  reach a machine there — had only one option, which was handing the VPN everything.
+
+  Name the sites and their addresses are looked up through the tunnel and routed through
+  it. Looking them up through the tunnel is the part that matters: a content network
+  answers according to where the question came from, and one of these names answered with
+  a Taipei edge from here and with different addresses two hours later. Routing that
+  address through a Japanese tunnel would be worse than not routing it at all.
+
+  The log says what it found for every name, from both sides, whether they agree or not —
+  so when it does not work it says where it stopped rather than only that it stopped.
+
+  Two things worth knowing before switching it on. It changes the machine's routing table,
+  so it is empty by default and asked for rather than assumed. And while a session runs
+  those sites are reachable by the target application alone: a browser opening the same
+  address will not work until the session stops, at which point every route added is taken
+  back.
+
 ## [0.5.19] - 2026-09-13
 
 ### Added

@@ -5,6 +5,25 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.20] - 2026-09-13
+
+### Added
+
+- **Websites über das VPN schicken, ohne den ganzen Rechner zu schicken.** Bisher hatte ein
+  Programm, das von einer Website vom anderen Ende kommend *gesehen* werden musste — statt
+  dort einen Rechner erreichen zu wollen —, nur eine Möglichkeit: alles abzugeben.
+
+  Nennen Sie die Websites, und ihre Adressen werden durch den Tunnel aufgelöst und geroutet.
+  Das Auflösen durch den Tunnel ist der Punkt: ein Content-Netz antwortet danach, woher die
+  Frage kam, und einer dieser Namen antwortete von hier aus mit einem Knoten in Taipeh und
+  zwei Stunden später mit anderen Adressen.
+
+  Das Protokoll nennt für jeden Namen beide Antworten, ob sie übereinstimmen oder nicht.
+
+  Zwei Dinge vorab: es ändert die Routingtabelle des Rechners, daher ist die Liste anfangs
+  leer; und während einer Sitzung erreicht nur die Zielanwendung diese Websites. Beim
+  Beenden wird jede hinzugefügte Route zurückgenommen.
+
 ## [0.5.19] - 2026-09-13
 
 ### Added
