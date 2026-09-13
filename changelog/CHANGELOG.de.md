@@ -9,6 +9,10 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Fixed
 
+- **Das Info-Fenster dankte WinDivert, ohne zu sagen, unter welchen Bedingungen es genutzt
+  wird.** Es ist die GNU LGPL v3, die von einem Programm verlangt, das zu sagen, die Lizenz
+  zu benennen und auf die mitgelieferte Kopie zu verweisen; ein Dank ist nichts davon. Jetzt
+  steht alles drei da. Auch dass OpenVPN von openvpn.net geholt und nicht mitgeliefert wird.
 - **Die freien Plätze einer Warcraft-III-Partie änderten sich auf der anderen Maschine
   nie.** Wird ein Platz, auf dem ein Computer saß, geöffnet, sah die Gegenseite die Partie
   weiter wie zuvor — bis sie die Partieliste verließ und zurückkam.
