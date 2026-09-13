@@ -5,6 +5,33 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.19] - 2026-09-13
+
+### Added
+
+- **Ein Platz für Benutzername und Kennwort.** Manche Server wollen eine Anmeldung, und es
+  gab keine Stelle, sie einzutragen. Ein `auth-user-pass` ohne Datei dahinter heißt „frag an
+  der Konsole", und openvpn läuft hier ohne Fenster und mit umgeleiteter Ausgabe: es stellt
+  eine Frage, die niemand hört, und meldet dann eine fehlgeschlagene Anmeldung. Die
+  Profilverwaltung hat jetzt je Profil eine Schaltfläche dafür.
+
+  Das Kennwort liegt unverschlüsselt, und der Dialog sagt das, statt etwas anderes
+  nahezulegen. Es steht im Ordner dieses Profils, den nur Sie, SYSTEM und Administratoren
+  öffnen können, und wird nie zur Anzeige zurückgelesen.
+
+### Fixed
+
+- **Die Zielanwendung ging über IPv6 ins Internet, am Tunnel vorbei.** Gefunden, indem eine
+  echte Sitzung beobachtet wurde: vier Minuten, vier Ziele, eines davon über IPv6. Dieser
+  Rechner hat eine globale IPv6-Adresse vom Anbieter, der Tunnel führt IPv4.
+
+  Das war ein Leck in jedem Modus, auch in dem, der den ganzen Rechner dem VPN übergibt. Das
+  IPv6 des Ziels wird während einer Sitzung nun verworfen; das aller anderen nicht.
+
+- **„Aktuell", ohne gefragt zu haben.** War das Stundenlimit aufgebraucht, meldete die
+  Prüfung die bereits installierte Fassung, als hätte sie nachgesehen. Jetzt sagt sie, dass
+  sie nicht nachsehen konnte, und wann sie es erneut versucht.
+
 ## [0.5.18] - 2026-09-13
 
 ### Fixed
