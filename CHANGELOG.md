@@ -5,6 +5,50 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.19] - 2026-09-13
+
+### Added
+
+- **Somewhere to put a user name and password.** Some servers ask to be signed in to and
+  there was nowhere to say so. A profile whose config says `auth-user-pass` with nothing
+  after it means "ask at the console", and openvpn is started here with its output
+  redirected and no window — so it asks a question nobody can hear and reports a failed
+  sign-in, which reads as a wrong password for a password that was never entered. Manage
+  profiles now has a Sign-in button per profile.
+
+  The password is stored unencrypted, and the dialog says so rather than implying
+  otherwise: openvpn reads it from a file and there is no way to hand it a secret that is
+  not a file it can open. It sits in that profile's own folder, which only you, SYSTEM and
+  Administrators can open — the same place as the private keys imported alongside it. It is
+  never read back for display: the user name is filled in, the password box is left empty,
+  and empty means keep what is stored, so a typo in the name can be fixed without retyping
+  the password.
+
+### Fixed
+
+- **The target reached the internet over IPv6, around the tunnel entirely.** Found by
+  watching a real session rather than by reading anything: four minutes of traffic, and one
+  of the four things it talked to was over IPv6 while every other conversation went where
+  it was told. This machine has a global IPv6 address from its provider, the tunnel carries
+  IPv4, and nothing in between was looking.
+
+  That was a leak in every mode, including the one that hands the whole machine to the VPN
+  — a tunnel that carries no IPv6 cannot carry what the machine sends over IPv6. The
+  target's IPv6 is now dropped while a session runs, which makes it fall back to the family
+  the tunnel actually carries. Everybody else's IPv6 is untouched.
+
+- **"No update" when nothing had been asked.** Checking for updates while the hourly limit
+  was spent reported the version you already had, as though it had looked. Every failing
+  path returns the last good answer, which is the right thing to return and the wrong thing
+  to present as current — so a release went out and the person who pressed the button was
+  told there was nothing there. It now says it could not check, and when it will try again.
+
+  The refusals were self-inflicted. The validator that makes a check cost nothing lived
+  only as long as the process, so every start spent one of the sixty requests an hour
+  allowed to an unauthenticated caller — and the allowance is per address, so anything else
+  on the machine was refused too. It is kept between runs now, which makes the ordinary
+  case, that there is no new release, free.
+
 ## [0.5.18] - 2026-09-13
 
 ### Fixed

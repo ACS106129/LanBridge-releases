@@ -5,6 +5,33 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.19] - 2026-09-13
+
+### Added
+
+- **Un endroit pour l'identifiant et le mot de passe.** Certains serveurs demandent à ce
+  qu'on s'y connecte et il n'y avait nulle part où le dire. Un `auth-user-pass` sans fichier
+  derrière signifie « demande à la console », et ici openvpn démarre sans fenêtre et avec sa
+  sortie redirigée : il pose une question que personne n'entend puis signale un échec
+  d'authentification. La gestion des profils a désormais un bouton par profil.
+
+  Le mot de passe est stocké en clair et le dialogue le dit plutôt que de laisser croire le
+  contraire. Il est dans le dossier de ce profil, que seuls vous, SYSTEM et les
+  administrateurs pouvez ouvrir. Il n'est jamais relu pour être affiché.
+
+### Fixed
+
+- **L'application cible sortait sur internet en IPv6, en contournant le tunnel.** Trouvé en
+  observant une vraie session : quatre minutes, quatre destinations, dont une en IPv6. Cette
+  machine a une adresse IPv6 globale de son opérateur et le tunnel est en IPv4.
+
+  C'était une fuite dans tous les modes, y compris celui qui confie la machine entière au
+  VPN. L'IPv6 de la cible est maintenant jeté pendant une session ; celui des autres non.
+
+- **« À jour » sans avoir demandé.** La limite horaire épuisée, la vérification annonçait la
+  version déjà installée comme si elle avait regardé. Elle dit maintenant qu'elle n'a pas pu
+  vérifier, et quand elle réessaiera.
+
 ## [0.5.18] - 2026-09-13
 
 ### Fixed
