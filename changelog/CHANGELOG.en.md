@@ -5,6 +5,32 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.17] - 2026-09-13
+
+### Fixed
+
+- **One player leaving a Warcraft III lobby closed it to everybody.** Reported as: set a
+  player's slot to computer, open or closed and they can never get back in. Those are
+  three ways of dropping that player's connection, and a player leaving on their own does
+  it too.
+
+  A TCP listener and every connection accepted on it share one local port. The record of
+  which ports belong to the game was kept per port, so the listener and the connections
+  shared one entry, and the first connection to close took it. Warcraft is still listening
+  and still advertising, so the room stays in everyone's list — but every packet arriving
+  for that port now belongs, as far as the filter is concerned, to nobody, and is dropped.
+  Visible and unjoinable, for everyone, until the host makes a new game.
+
+  Each socket is now tracked separately, and a port stops belonging to the game when its
+  last socket closes rather than its first.
+
+- **The target application was still being run as an administrator.** 0.5.16 said it had
+  fixed this and had not. Handing a process the signed-in user's identity can be done two
+  ways and they want different permissions: the one used needs a privilege an elevated
+  administrator does not have and cannot obtain, so it failed every time and the old
+  behaviour quietly took over. It now uses the one whose permission the helper actually
+  holds, and says which it did in the log.
+
 ## [0.5.16] - 2026-09-13
 
 ### Added
