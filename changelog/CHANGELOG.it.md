@@ -5,6 +5,35 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.18] - 2026-09-13
+
+### Fixed
+
+- **I posti liberi di una sala di Warcraft III non cambiavano mai sull'altra macchina.**
+  Apri un posto dove sedeva un computer e l'altro continuava a vedere la sala com'era,
+  finché non usciva dall'elenco delle partite e rientrava.
+
+  Chi ha già la sala nel proprio elenco non rilegge l'annuncio completo. Prende i numeri da
+  un piccolo pacchetto che l'host trasmette ogni volta che la sala cambia, e ricostruisce la
+  voce solo quando l'elenco viene riaperto. Quel pacchetto è in broadcast, e il broadcast è
+  proprio ciò che qui non si riesce a intercettare: la porta su cui bisognerebbe ascoltare è
+  già occupata dal gioco. Perciò ora viene ricavato dall'annuncio e inviato quando i numeri
+  si muovono.
+
+  I numeri vengono controllati prima: si leggono da una posizione fissa in fondo a un
+  pacchetto la cui disposizione è stata dedotta, e una partita ha da uno a ventiquattro
+  posti e non può averne di liberi più di quanti ne abbia. Altrimenti la lettura è
+  sbagliata, e allora non si invia nulla.
+
+- **Il download dell'aggiornamento teneva ancora ferma la finestra.** La 0.5.16 diceva di
+  averlo corretto. Il trasferimento in background, la barra di avanzamento e il pulsante di
+  annullamento erano scritti e nulla li chiamava mai.
+
+  Ora avviene davvero in background, e all'avvio la finestra di dialogo offre **Continua in
+  background**: la finestra si chiude, il trasferimento prosegue e riferisce nella barra
+  della finestra principale, dove può anche essere annullato. Annullare e fallire ora si
+  distinguono — prima entrambi aprivano la pagina della versione nel browser.
+
 ## [0.5.17] - 2026-09-13
 
 ### Fixed

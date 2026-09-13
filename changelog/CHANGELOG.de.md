@@ -5,6 +5,35 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.18] - 2026-09-13
+
+### Fixed
+
+- **Die freien Plätze einer Warcraft-III-Partie änderten sich auf der anderen Maschine
+  nie.** Wird ein Platz, auf dem ein Computer saß, geöffnet, sah die Gegenseite die Partie
+  weiter wie zuvor — bis sie die Partieliste verließ und zurückkam.
+
+  Wer die Partie bereits in der Liste hat, liest die vollständige Ankündigung nicht erneut.
+  Die Zahlen kommen aus einem kleinen Paket, das der Host bei jeder Änderung sendet, und
+  der Eintrag wird nur beim erneuten Öffnen der Liste neu aufgebaut. Dieses Paket ist ein
+  Broadcast, und Broadcasts sind genau das, was sich hier nicht mitlesen lässt: den Port,
+  auf dem man lauschen müsste, hält bereits das Spiel. Es wird deshalb aus der Ankündigung
+  abgeleitet und gesendet, wenn sich die Zahlen bewegen.
+
+  Die Zahlen werden vorher geprüft: sie stehen an einer festen Stelle am Ende eines Pakets,
+  dessen Aufbau erschlossen wurde, und eine Partie hat zwischen einem und vierundzwanzig
+  Plätzen und nie mehr freie als vorhandene. Alles andere heißt, die Stelle stimmt nicht —
+  dann wird nichts gesendet.
+
+- **Der Download der Aktualisierung hielt das Fenster weiterhin fest.** 0.5.16 behauptete,
+  das behoben zu haben. Übertragung im Hintergrund, Fortschrittsbalken und Abbrechen-Knopf
+  waren geschrieben, und nichts rief sie je auf.
+
+  Jetzt läuft es wirklich im Hintergrund, und der Dialog bietet **Im Hintergrund
+  fortsetzen** an: das Fenster schließt sich, die Übertragung läuft weiter und meldet sich
+  im Balken des Hauptfensters, wo sie auch abgebrochen werden kann. Abbruch und Fehlschlag
+  werden nun unterschieden — vorher öffneten beide die Release-Seite im Browser.
+
 ## [0.5.17] - 2026-09-13
 
 ### Fixed

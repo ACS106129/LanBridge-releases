@@ -5,6 +5,35 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.18] - 2026-09-13
+
+### Fixed
+
+- **Le nombre de places libres d'un salon Warcraft III ne changeait jamais sur l'autre
+  machine.** Ouvrez une place occupée par un ordinateur et l'autre continuait de voir le
+  salon tel quel, jusqu'à quitter la liste des parties et y revenir.
+
+  Un pair qui a déjà le salon dans sa liste ne relit pas l'annonce complète. Il prend les
+  chiffres d'un petit paquet que l'hôte diffuse chaque fois que le salon change, et ne
+  reconstruit l'entrée qu'à la réouverture de la liste. Ce paquet est diffusé, et la
+  diffusion est précisément ce qu'on ne peut pas capturer ici : le jeu occupe déjà le port
+  sur lequel il faudrait écouter. Il est donc désormais déduit de l'annonce et envoyé
+  quand les chiffres bougent.
+
+  Les chiffres sont vérifiés avant l'envoi : ils sont lus à une position fixe en fin de
+  paquet dont la disposition a été déduite, et une partie compte de une à vingt-quatre
+  places et ne peut en avoir plus de libres qu'elle n'en a. Autrement, la lecture est
+  fausse et rien n'est envoyé.
+
+- **Le téléchargement de la mise à jour retenait toujours la fenêtre.** 0.5.16 affirmait
+  l'avoir corrigé. Le transfert en arrière-plan, la barre de progression et le bouton
+  d'annulation étaient écrits et rien ne les appelait.
+
+  Cela se passe maintenant réellement en arrière-plan, et le dialogue propose
+  **Continuer en arrière-plan** dès le début : la fenêtre se ferme, le transfert continue
+  et rend compte dans la barre de la fenêtre principale, où il peut aussi être annulé.
+  Annuler et échouer sont enfin distingués — les deux ouvraient la page de version.
+
 ## [0.5.17] - 2026-09-13
 
 ### Fixed

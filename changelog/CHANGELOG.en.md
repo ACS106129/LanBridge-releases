@@ -5,6 +5,38 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.18] - 2026-09-13
+
+### Fixed
+
+- **A Warcraft III room's free places never changed on the other machine.** Open a slot
+  the computer was sitting in, and the peer went on showing the room exactly as it had
+  been until the player left the game list and came back.
+
+  A peer that already has the room in its list does not re-read the full advertisement. It
+  takes the counts from a small announce packet the host broadcasts whenever the lobby
+  changes, and only rebuilds the entry from scratch when the list is reopened. That
+  announce is broadcast, and broadcast is the one thing this cannot capture: the game
+  already holds the port it would have to listen on. So the announce is now derived from
+  the advertisement instead, and sent when the numbers move.
+
+  The counts are checked before they are sent. They are read from a fixed position at the
+  end of a packet whose layout was inferred, and a game has between one and twenty-four
+  places and cannot have more free than it has. Anything else means the reading is wrong,
+  and then nothing is sent at all.
+
+- **The update download still held the window.** 0.5.16 said this was fixed. The
+  background transfer, the progress bar in the main window and the cancel button were all
+  written and none of them were ever reached — one search of the source finds the code and
+  no caller. The download went on running inside the dialog exactly as before.
+
+  It now runs in the background for real, and the dialog offers **Continue in background**
+  once it starts: the window closes, the transfer carries on, and it reports into the bar
+  in the main window where it can also be cancelled. Opening the dialog again attaches to
+  the download already running rather than starting a second one. Cancelling and failing
+  are told apart, too — both end with no file, and both used to open the release page in a
+  browser, so stopping a download sent you to a web page.
+
 ## [0.5.17] - 2026-09-13
 
 ### Fixed
