@@ -5,6 +5,33 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.17] - 2026-09-13
+
+### Fixed
+
+- **Le départ d'un seul joueur fermait le salon Warcraft III à tout le monde.** Signalé
+  ainsi : mettez la place de quelqu'un sur ordinateur, ouverte ou fermée et il ne peut plus
+  jamais revenir. Ce sont trois façons de couper sa connexion, et un joueur qui part de
+  lui-même fait la même chose.
+
+  Une socket en écoute et chaque connexion qu'elle accepte partagent un port local. Le
+  relevé des ports appartenant au jeu se tenait par port, si bien que l'écoute et les
+  connexions partageaient une entrée, et la première connexion fermée l'emportait avec
+  elle. Warcraft écoute toujours et s'annonce toujours, donc le salon reste dans la liste
+  de chacun — mais chaque paquet arrivant sur ce port n'appartient plus à personne du point
+  de vue du filtre, et il est jeté. Visible et impossible à rejoindre, pour tout le monde,
+  jusqu'à ce que l'hôte recrée une partie.
+
+  Chaque socket est désormais suivie séparément, et un port cesse d'appartenir au jeu à la
+  fermeture de la dernière, non de la première.
+
+- **L'application cible tournait toujours en administrateur.** 0.5.16 affirmait l'avoir
+  corrigé, à tort. Donner à un processus l'identité de l'utilisateur connecté peut se faire
+  de deux manières, qui ne demandent pas les mêmes droits : celle employée exige un
+  privilège qu'un administrateur élevé n'a pas et ne peut obtenir, elle échouait donc à
+  chaque fois et l'ancien comportement reprenait la main sans rien dire. Elle utilise
+  maintenant celle dont l'assistant détient réellement le droit.
+
 ## [0.5.16] - 2026-09-13
 
 ### Ajouté

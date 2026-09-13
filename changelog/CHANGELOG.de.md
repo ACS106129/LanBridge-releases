@@ -5,6 +5,33 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.17] - 2026-09-13
+
+### Fixed
+
+- **Verließ ein Spieler die Warcraft-III-Lobby, war sie für alle geschlossen.** Gemeldet
+  als: Setzt man den Platz eines Spielers auf Computer, offen oder geschlossen, kommt er
+  nie wieder herein. Das sind drei Arten, seine Verbindung zu trennen, und ein Spieler, der
+  von sich aus geht, tut dasselbe.
+
+  Ein lauschender Socket und jede darauf angenommene Verbindung teilen sich einen lokalen
+  Port. Welche Ports zum Spiel gehören, wurde pro Port vermerkt, also teilten sich Lauscher
+  und Verbindungen einen Eintrag, und die erste Verbindung, die sich schloss, nahm ihn mit.
+  Warcraft lauscht weiter und wirbt weiter, die Partie bleibt also in allen Listen — aber
+  jedes Paket, das für diesen Port ankommt, gehört aus Sicht des Filters niemandem mehr und
+  wird verworfen. Sichtbar und nicht betretbar, für alle, bis der Host eine neue Partie
+  eröffnet.
+
+  Jeder Socket wird jetzt einzeln vermerkt, und ein Port gehört dem Spiel so lange, bis
+  sich der letzte schließt, nicht der erste.
+
+- **Die Zielanwendung lief weiterhin als Administrator.** 0.5.16 behauptete, das behoben zu
+  haben, und hatte es nicht. Einem Prozess die Identität des angemeldeten Benutzers zu
+  geben, geht auf zwei Wegen mit unterschiedlichen Rechten: der verwendete verlangt ein
+  Privileg, das ein erhöhter Administrator nicht hat und nicht bekommen kann, scheiterte
+  also jedes Mal, und das alte Verhalten übernahm stillschweigend. Jetzt wird der Weg
+  genommen, dessen Recht der Helfer tatsächlich besitzt.
+
 ## [0.5.16] - 2026-09-13
 
 ### Hinzugefügt
