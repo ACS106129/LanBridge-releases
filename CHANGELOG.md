@@ -5,6 +5,33 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.24] - 2026-09-17
+
+### Fixed
+
+- **A slow update download was thrown away just before it finished.** The client allowed
+  fifteen minutes for the whole transfer, and that limit covers reading the file, not only
+  reaching the server. Measured from a real connection, the release host served about
+  0.10 MB/s, which puts a hundred-megabyte installer at over sixteen minutes: it would
+  download almost all of it and then fail. There is no overall limit now. How long to wait
+  is the user's to decide, and cancelling is how they decide it.
+
+- **Updates download about three times faster.** The limit turned out to be per connection
+  rather than the line: one connection to the release host held 0.10 MB/s, while four
+  connections fetching different parts of the same file at the same moment came to
+  0.32 MB/s between them. The installer is now fetched in four parts at once — measured
+  end to end on a 122 MB file at 0.28 MB/s against 0.10, and checked byte for byte against
+  the published file rather than only for length.
+
+  Only when the server says it serves parts. Asking for a range from one that does not is
+  answered with the whole file, and four whole files written over each other make a corrupt
+  installer of exactly the right size.
+
+- **Progress is reported at a pace the window can use.** It was sent on every 80 KB, which
+  is thirteen hundred updates for one installer and four times that across four
+  connections, each crossing to the interface thread. Now every 512 KB, and always once
+  more at the end so the bar finishes where the file does.
+
 ## [0.5.23] - 2026-09-16
 
 ### Added
