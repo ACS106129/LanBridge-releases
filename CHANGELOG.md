@@ -5,6 +5,80 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.23] - 2026-09-16
+
+### Added
+
+- **The session writes down where the target actually went, and which of it missed the
+  tunnel.** Measuring the exit address says whether the tunnel carries what is routed
+  through it. It says nothing about whether the traffic that matters is routed at all —
+  and routing a list of names cannot help with a name nobody listed. That gap is the whole
+  of a problem this had been circling: the same application works through a whole-machine
+  VPN and not through a handful of routes, and which names belong in that handful was a
+  guess that has to be right or the feature does nothing.
+
+  So it is watched instead. Every destination the target reaches is recorded once, with
+  the system's own answer for whether a packet there leaves by the tunnel, and the end of
+  the session says what the run amounted to. One run now names exactly what is missing.
+
+- **Addresses are reported with the name they answer to.** For a content network the edge
+  name carries its location, and location is the question: the same host answered
+  `…nrt57.r.cloudfront.net` through a Japanese tunnel and `…tpe53.r.cloudfront.net` from
+  Taipei. Narita against Taipei is visible at a glance in a name and invisible in a list
+  of addresses.
+
+### Fixed
+
+- **The named hosts are followed while the session runs, rather than pinned once at the
+  start.** They answer with a sixty-second TTL. Nothing was seen to move within an hour of
+  watching, so this was not what was going wrong — but a session lasts hours, a name may
+  move at any minute, and when one does the application reaches an address nothing routes,
+  the traffic leaves the ordinary way, and every route in the table still reads "in use".
+  The failure would look exactly like success.
+
+- **The search for a working resolver stops once one has answered.** It ran per name, and
+  on a real tunnel the first candidate timed out over UDP and again over TCP for every
+  single name, six seconds each. With four names that was twenty-four seconds before the
+  session started; with the twenty-nine a real application turned out to need, it would
+  have been near three minutes — and the obvious conclusion would have been that the
+  longer list was unworkable rather than that the search was.
+
+## [0.5.22] - 2026-09-16
+
+### Added
+
+- **The application now measures, and writes down, whether the exit address actually changed.**
+  Sending an application's traffic through a tunnel is worth doing for exactly one reason: the
+  far end sees it arriving from somewhere else. Every check this feature made until now was a
+  step towards that rather than that — the command that added the route, the route sitting in
+  the table with a good metric, the name resolving through the tunnel — and each of those has
+  been true at least once while the traffic went out of the ordinary adapter the entire time.
+
+  So the same question is now put to the internet twice, once before any route is touched and
+  once after all of them are in place, and both answers go in the log. "Could not tell" is
+  written as itself and never as "did not change".
+
+### Fixed
+
+- **The log left out the half of a session you would need it for.** The steps the window
+  shows — which tunnel address arrived, whether per-process isolation started, which process
+  was adopted when the target handed off to another one — went to the window and nowhere
+  else. So did every message from the packet filter, and everything OpenVPN itself said.
+  A log read back afterwards held the routes and almost nothing around them: twice now a
+  question about a failed session could not be answered from it, including whether the
+  filter had started at all. All of it goes to the file now.
+
+- **The check that a route is really being used could reject one that was about to work.**
+  0.5.21 started verifying each route instead of trusting the command's exit code, which
+  was the right change; it just asked the question the instant the route was added. A route
+  the system has not looked at yet is indistinguishable from one it has refused, so a
+  moment's lag would have thrown away a working route — the verification defeating the
+  thing it verifies. It now allows the routing table a few hundred milliseconds to settle.
+
+- **The packet filter now records the filter it opened with.** When the target kept reaching
+  the internet over IPv6 despite being blocked from it, there was no way to tell from the
+  log whether the clause was missing or simply never matched. Now there is.
+
 ## [0.5.21] - 2026-09-14
 
 ### Fixed
