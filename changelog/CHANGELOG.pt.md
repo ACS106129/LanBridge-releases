@@ -5,6 +5,79 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.23] - 2026-09-16
+
+### Added
+
+- **A sessão anota para onde o alvo realmente foi e o que disso não passou pelo túnel.** Medir o
+  endereço de saída diz se o túnel leva aquilo que foi roteado por ele; não diz nada sobre se o
+  tráfego que importa está roteado — e rotear uma lista de nomes não ajuda em nada com um nome que
+  ninguém colocou nela. Essa lacuna era o problema inteiro: o mesmo aplicativo funciona com uma VPN
+  para a máquina toda e não com um punhado de rotas, e quais nomes entram nesse punhado era um
+  palpite que precisa acertar, senão o recurso não faz nada.
+
+  Então agora se observa. Cada destino que o alvo alcança é registrado uma vez, com a resposta do
+  próprio sistema sobre se um pacote para lá sai pelo túnel, e o fim da sessão diz no que deu. Uma
+  única execução agora nomeia exatamente o que está faltando.
+
+- **Os endereços são relatados com o nome ao qual respondem.** Numa rede de distribuição o nome do
+  nó carrega a localização dele, e a localização é a pergunta: o mesmo host respondeu
+  `…nrt57.r.cloudfront.net` através de um túnel japonês e `…tpe53.r.cloudfront.net` a partir de
+  Taipé. Narita contra Taipé se vê de relance num nome e não se vê de jeito nenhum numa lista de
+  endereços.
+
+### Fixed
+
+- **Os nomes são acompanhados enquanto a sessão dura, em vez de fixados uma vez no início.** Eles
+  respondem com TTL de sessenta segundos. Em uma hora de observação nada se moveu, então não era
+  isso que estava errado — mas uma sessão dura horas, um nome pode se mover a qualquer minuto, e
+  quando isso acontece o aplicativo alcança um endereço que nada roteia, o tráfego sai pelo caminho
+  de sempre, e cada rota na tabela continua dizendo "em uso". A falha teria exatamente a cara do
+  sucesso.
+
+- **A busca por um resolvedor que responda para assim que um responde.** Ela era feita por nome, e
+  num túnel real o primeiro candidato estourava o tempo por UDP e de novo por TCP para cada nome,
+  seis segundos cada. Com quatro nomes eram vinte e quatro segundos antes de começar; com os vinte
+  e nove que um aplicativo real acabou precisando teriam sido quase três minutos — e a conclusão
+  fácil teria sido que a lista longa era inviável, em vez de a busca.
+
+## [0.5.22] - 2026-09-16
+
+### Added
+
+- **O aplicativo agora mede, e deixa registrado, se o endereço de saída mudou de verdade.**
+  Mandar o tráfego de um programa por um túnel vale a pena por um único motivo: a outra ponta o
+  vê chegando de outro lugar. Todas as verificações que este recurso fazia até agora eram um
+  passo em direção a isso e não isso — o comando que adicionou a rota, a rota na tabela com boa
+  métrica, o nome resolvido através do túnel — e cada uma delas já foi verdadeira pelo menos uma
+  vez enquanto o tráfego saía pelo adaptador de sempre o tempo todo.
+
+  Então a mesma pergunta é feita à internet duas vezes, uma antes de mexer em qualquer rota e
+  outra com todas já no lugar, e as duas respostas vão para o registro. "Não deu para saber" é
+  escrito assim mesmo, nunca como "não mudou".
+
+### Fixed
+
+- **O registro deixava de fora justamente a metade da sessão para a qual ele serviria.** Os
+  passos que a janela mostra — qual endereço de túnel chegou, se o isolamento por processo
+  começou, qual processo foi adotado quando o alvo passou o bastão para outro — iam para a
+  janela e para mais lugar nenhum. O mesmo valia para tudo o que o filtro de pacotes dizia e
+  para tudo o que o próprio OpenVPN dizia. Relendo um registro depois, sobravam as rotas e quase
+  nada em volta: já foram duas as vezes em que uma pergunta sobre uma sessão que deu errado não
+  pôde ser respondida por ele, inclusive a de se o filtro chegou a iniciar. Agora tudo isso vai
+  para o arquivo.
+
+- **A verificação de que uma rota está mesmo sendo usada podia rejeitar uma que estava prestes a
+  funcionar.** A 0.5.21 passou a verificar cada rota em vez de confiar no código de saída do comando,
+  e a mudança estava certa; só que a pergunta era feita no instante exato em que a rota era
+  adicionada. Uma rota que o sistema ainda não olhou é indistinguível de uma que ele recusou, então
+  um momento de atraso bastava para jogar fora uma rota que ia funcionar — a verificação derrotando
+  aquilo que verifica. Agora a tabela de rotas ganha algumas centenas de milissegundos para assentar.
+
+- **O filtro de pacotes agora registra o filtro com o qual foi aberto.** Quando o programa continuava
+  saindo para a internet por IPv6 apesar de estar bloqueado, o registro não permitia distinguir se a
+  cláusula estava faltando ou se simplesmente nunca chegou a casar. Agora permite.
+
 ## [0.5.21] - 2026-09-14
 
 ### Fixed

@@ -5,6 +5,82 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.23] - 2026-09-16
+
+### Added
+
+- **La sessione annota dove il bersaglio è andato davvero e quanto di ciò ha mancato il tunnel.**
+  Misurare l'indirizzo di uscita dice se il tunnel porta quello che ci viene instradato dentro; non
+  dice nulla sul fatto che il traffico che conta sia instradato affatto — e instradare un elenco di
+  nomi non serve a niente per un nome che nessuno ci ha messo. Quel divario era l'intero problema:
+  la stessa applicazione funziona con una VPN per tutta la macchina e non con una manciata di rotte,
+  e quali nomi vadano in quella manciata era un'ipotesi che deve azzeccarci, altrimenti la funzione
+  non fa nulla.
+
+  Perciò ora si guarda. Ogni destinazione raggiunta dal bersaglio viene registrata una volta, con la
+  risposta del sistema stesso sul fatto che un pacchetto diretto lì esca dal tunnel, e la fine della
+  sessione dice a cosa è approdata. Una sola esecuzione ora nomina esattamente ciò che manca.
+
+- **Gli indirizzi sono riportati con il nome a cui rispondono.** In una rete di distribuzione il
+  nome del nodo porta con sé la sua posizione, e la posizione è la domanda: lo stesso host ha
+  risposto `…nrt57.r.cloudfront.net` attraverso un tunnel giapponese e `…tpe53.r.cloudfront.net` da
+  Taipei. Narita contro Taipei si vede a colpo d'occhio in un nome e non si vede per niente in un
+  elenco di indirizzi.
+
+### Fixed
+
+- **I nomi vengono seguiti per tutta la durata della sessione, invece di essere fissati una volta
+  all'inizio.** Rispondono con un TTL di sessanta secondi. In un'ora di osservazione non si è mosso
+  nulla, quindi non era questo il guasto — ma una sessione dura ore, un nome può muoversi in
+  qualsiasi minuto, e quando lo fa l'applicazione raggiunge un indirizzo che nessuno instrada, il
+  traffico esce dalla strada di sempre, e ogni rotta nella tabella continua a dire "in uso". Il
+  fallimento avrebbe esattamente l'aspetto del successo.
+
+- **La ricerca di un resolver che risponda si ferma appena uno risponde.** Veniva fatta per ogni
+  nome, e su un tunnel reale il primo candidato andava in timeout su UDP e di nuovo su TCP per ogni
+  singolo nome, sei secondi ciascuno. Con quattro nomi erano ventiquattro secondi prima di partire;
+  con i ventinove che un'applicazione reale si è rivelata richiedere sarebbero stati quasi tre
+  minuti — e la conclusione facile sarebbe stata che l'elenco lungo non fosse praticabile, invece
+  che la ricerca.
+
+## [0.5.22] - 2026-09-16
+
+### Added
+
+- **L'applicazione ora misura, e mette per iscritto, se l'indirizzo di uscita è davvero cambiato.**
+  Far passare il traffico di un programma per un tunnel ha senso per un motivo solo: l'altro capo
+  lo vede arrivare da un'altra parte. Tutti i controlli che questa funzione faceva finora erano un
+  passo verso quello e non quello — il comando che ha aggiunto la rotta, la rotta nella tabella con
+  una buona metrica, il nome risolto attraverso il tunnel — e ognuno di essi è stato vero almeno
+  una volta mentre il traffico usciva dall'adattatore di sempre per tutto il tempo.
+
+  Perciò la stessa domanda viene ora posta a internet due volte, una prima di toccare qualsiasi
+  rotta e una a rotte tutte a posto, ed entrambe le risposte finiscono nel registro. "Non si è
+  potuto sapere" viene scritto così e mai come "non è cambiato".
+
+### Fixed
+
+- **Il registro tralasciava esattamente la metà della sessione per cui servirebbe.** I passaggi
+  che la finestra mostra — quale indirizzo di tunnel è arrivato, se l'isolamento per processo è
+  partito, quale processo è stato adottato quando il bersaglio ha passato il lavoro a un altro —
+  finivano nella finestra e in nessun altro posto. Lo stesso valeva per tutto ciò che diceva il
+  filtro dei pacchetti e per tutto ciò che diceva OpenVPN stesso. Rileggendo un registro dopo,
+  restavano le rotte e quasi nient'altro attorno: già due volte una domanda su una sessione
+  andata male non ha trovato risposta lì dentro, compresa quella se il filtro fosse mai partito.
+  Ora tutto questo finisce nel file.
+
+- **Il controllo che una rotta sia davvero in uso poteva scartarne una che stava per funzionare.**
+  La 0.5.21 ha iniziato a verificare ogni rotta invece di fidarsi del codice di uscita del comando,
+  ed era la scelta giusta; solo che la domanda veniva posta nell'istante stesso in cui la rotta
+  veniva aggiunta. Una rotta che il sistema non ha ancora guardato è indistinguibile da una che ha
+  rifiutato, perciò bastava un attimo di ritardo per buttare via una rotta che avrebbe funzionato:
+  la verifica che sconfigge ciò che verifica. Ora si concedono alla tabella di routing qualche
+  centinaio di millisecondi per assestarsi.
+
+- **Il filtro dei pacchetti ora annota il filtro con cui è stato aperto.** Quando il programma
+  continuava a uscire su internet in IPv6 pur essendo bloccato, dal registro non si poteva capire
+  se la clausola mancasse o se semplicemente non avesse mai trovato corrispondenza. Ora si può.
+
 ## [0.5.21] - 2026-09-14
 
 ### Fixed

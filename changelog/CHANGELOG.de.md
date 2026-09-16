@@ -5,6 +5,82 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.23] - 2026-09-16
+
+### Added
+
+- **Die Sitzung schreibt mit, wohin das Zielprogramm wirklich gegangen ist und was davon den
+  Tunnel verfehlt hat.** Die Ausgangsadresse zu messen sagt, ob der Tunnel trägt, was durch ihn
+  geroutet wird. Es sagt nichts darüber, ob der Verkehr, auf den es ankommt, überhaupt geroutet
+  ist — und eine Liste von Namen zu routen hilft bei einem Namen nicht, den niemand aufgeschrieben
+  hat. Genau diese Lücke war das ganze Problem: dieselbe Anwendung funktioniert mit einem VPN für
+  die ganze Maschine und nicht mit einer Handvoll Routen, und welche Namen in diese Handvoll
+  gehören, war geraten — und Raten muss treffen, sonst tut die Funktion nichts.
+
+  Also wird jetzt hingesehen. Jedes Ziel, das erreicht wird, wird einmal festgehalten, mitsamt
+  der Antwort des Systems selbst, ob ein Paket dorthin durch den Tunnel geht, und am Ende der
+  Sitzung steht, was dabei herauskam. Ein einziger Lauf benennt jetzt genau, was fehlt.
+
+- **Adressen werden mit dem Namen gemeldet, auf den sie hören.** Bei einem Auslieferungsnetz
+  trägt der Knotenname seinen Ort, und der Ort ist die Frage: derselbe Host antwortete durch
+  einen japanischen Tunnel mit `…nrt57.r.cloudfront.net` und aus Taipeh mit
+  `…tpe53.r.cloudfront.net`. Narita gegen Taipeh sieht man im Namen sofort und in einer Liste von
+  Adressen überhaupt nicht.
+
+### Fixed
+
+- **Den Namen wird für die Dauer der Sitzung gefolgt, statt sie einmal am Anfang festzunageln.**
+  Sie antworten mit einer TTL von sechzig Sekunden. In einer Stunde Beobachtung bewegte sich
+  nichts, das war also nicht der Fehler — aber eine Sitzung dauert Stunden, ein Name kann sich in
+  jeder Minute bewegen, und dann erreicht die Anwendung eine Adresse, die nichts routet, der
+  Verkehr geht den gewöhnlichen Weg, und jede Route in der Tabelle sagt weiterhin „in
+  Verwendung“. Der Fehlschlag sähe genau aus wie Erfolg.
+
+- **Die Suche nach einem antwortenden Resolver hört auf, sobald einer antwortet.** Sie lief pro
+  Name, und an einem echten Tunnel lief der erste Kandidat bei jedem einzelnen Namen erst über
+  UDP und dann noch einmal über TCP in die Zeitüberschreitung, sechs Sekunden je Name. Bei vier
+  Namen waren das vierundzwanzig Sekunden vor dem Start; bei den neunundzwanzig, die eine echte
+  Anwendung tatsächlich braucht, wären es fast drei Minuten gewesen — und der naheliegende Schluss
+  wäre gewesen, die lange Liste sei untauglich, statt die Suche.
+
+## [0.5.22] - 2026-09-16
+
+### Added
+
+- **Die Anwendung misst jetzt selbst und schreibt mit, ob sich die Ausgangsadresse wirklich
+  geändert hat.** Den Verkehr eines Programms durch einen Tunnel zu schicken lohnt sich aus genau
+  einem Grund: die Gegenstelle sieht ihn von woanders kommen. Alle Prüfungen, die diese Funktion
+  bisher machte, waren ein Schritt dorthin und nicht das selbst — der Befehl, der die Route
+  hinzufügte, die Route in der Tabelle mit guter Metrik, der über den Tunnel aufgelöste Name —
+  und jede davon war schon mindestens einmal wahr, während der Verkehr die ganze Zeit über den
+  gewöhnlichen Adapter hinausging.
+
+  Deshalb wird dieselbe Frage nun zweimal ans Internet gestellt: einmal, bevor irgendeine Route
+  angefasst wird, und einmal, wenn alle stehen. Beide Antworten kommen ins Protokoll. „Ließ sich
+  nicht feststellen“ steht als genau das da und nie als „hat sich nicht geändert“.
+
+### Fixed
+
+- **Im Protokoll fehlte genau die Hälfte einer Sitzung, für die man es braucht.** Die Schritte,
+  die das Fenster zeigt — welche Tunneladresse ankam, ob die Isolierung je Prozess startete,
+  welcher Prozess übernommen wurde, als das Ziel an einen anderen übergab — gingen ans Fenster
+  und sonst nirgendwohin. Ebenso jede Meldung des Paketfilters und alles, was OpenVPN selbst
+  sagte. Beim späteren Nachlesen standen die Routen da und drumherum fast nichts: schon zweimal
+  ließ sich eine Frage zu einer misslungenen Sitzung daraus nicht beantworten, darunter die, ob
+  der Filter überhaupt gestartet war. Das alles steht jetzt in der Datei.
+
+- **Die Prüfung, ob eine Route wirklich benutzt wird, konnte eine Route verwerfen, die gleich
+  funktioniert hätte.** Die 0.5.21 hat begonnen, jede Route zu prüfen, statt dem Rückgabewert des
+  Befehls zu glauben — das war richtig; nur wurde in genau dem Augenblick gefragt, in dem die Route
+  hinzugefügt wurde. Eine Route, die das System noch nicht angesehen hat, ist von einer abgelehnten
+  nicht zu unterscheiden. Ein Augenblick Verzögerung reichte also, um eine funktionierende Route
+  wegzuwerfen — die Prüfung besiegte das, was sie prüfen sollte. Die Routing-Tabelle bekommt jetzt
+  einige hundert Millisekunden Zeit, sich zu setzen.
+
+- **Der Paketfilter schreibt jetzt mit, mit welchem Filter er geöffnet wurde.** Als das Programm
+  trotz Sperre weiter über IPv6 ins Internet kam, ließ sich am Protokoll nicht erkennen, ob die
+  Klausel fehlte oder ob sie schlicht nie zutraf. Jetzt schon.
+
 ## [0.5.21] - 2026-09-14
 
 ### Fixed

@@ -5,6 +5,81 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.23] - 2026-09-16
+
+### Added
+
+- **La sesión deja escrito a dónde fue realmente el programa objetivo y qué parte de ello no
+  pasó por el túnel.** Medir la dirección de salida dice si el túnel lleva lo que se enruta
+  por él; no dice nada sobre si el tráfico que importa está enrutado siquiera — y enrutar una
+  lista de nombres no sirve de nada para un nombre que nadie puso en ella. Ese hueco era todo
+  el problema: la misma aplicación funciona con una VPN para toda la máquina y no con un
+  puñado de rutas, y qué nombres van en ese puñado era una suposición que tiene que acertar o
+  la función no hace nada.
+
+  Así que ahora se observa. Cada destino que alcanza el objetivo se registra una vez, con la
+  respuesta del propio sistema sobre si un paquete hacia allí sale por el túnel, y al final de
+  la sesión se dice en qué quedó todo. Una sola ejecución nombra exactamente lo que falta.
+
+- **Las direcciones se informan con el nombre al que responden.** En una red de distribución
+  el nombre del nodo lleva su ubicación, y la ubicación es la pregunta: el mismo host respondió
+  `…nrt57.r.cloudfront.net` a través de un túnel japonés y `…tpe53.r.cloudfront.net` desde
+  Taipéi. Narita frente a Taipéi se ve de un vistazo en un nombre y no se ve en absoluto en una
+  lista de direcciones.
+
+### Fixed
+
+- **Los nombres se siguen mientras dura la sesión, en vez de fijarse una sola vez al empezar.**
+  Responden con un TTL de sesenta segundos. En una hora de observación no se movió ninguno, así
+  que no era esto lo que fallaba — pero una sesión dura horas, un nombre puede moverse en
+  cualquier minuto, y cuando lo hace la aplicación alcanza una dirección que nada enruta, el
+  tráfico sale por donde siempre, y todas las rutas de la tabla siguen diciendo "en uso". El
+  fallo tendría exactamente el aspecto del acierto.
+
+- **La búsqueda de un resolutor que conteste se detiene en cuanto uno contesta.** Se hacía por
+  nombre, y en un túnel real el primer candidato agotaba el tiempo por UDP y otra vez por TCP
+  para cada nombre, seis segundos cada uno. Con cuatro nombres eran veinticuatro segundos antes
+  de arrancar; con los veintinueve que una aplicación real resultó necesitar habrían sido casi
+  tres minutos — y la conclusión fácil habría sido que la lista larga no era viable, en vez de
+  que no lo era la búsqueda.
+
+## [0.5.22] - 2026-09-16
+
+### Added
+
+- **La aplicación ahora mide, y deja escrito, si la dirección de salida cambió de verdad.**
+  Mandar el tráfico de un programa por un túnel merece la pena por una sola razón: que el otro
+  extremo lo vea llegar desde otro sitio. Todas las comprobaciones que hacía esta función hasta
+  ahora eran un paso hacia eso y no eso — el comando que añadió la ruta, la ruta en la tabla con
+  buena métrica, el nombre resuelto a través del túnel — y cada una de ellas ha sido cierta al
+  menos una vez mientras el tráfico salía por el adaptador de siempre todo el rato.
+
+  Así que ahora la misma pregunta se le hace a internet dos veces, una antes de tocar ninguna
+  ruta y otra con todas ya puestas, y ambas respuestas van al registro. "No se pudo saber" se
+  escribe tal cual, nunca como "no cambió".
+
+### Fixed
+
+- **El registro se dejaba justo la mitad de la sesión para la que haría falta.** Los pasos que
+  muestra la ventana — qué dirección de túnel llegó, si arrancó el aislamiento por proceso, qué
+  proceso se adoptó cuando el programa objetivo pasó el testigo a otro — iban a la ventana y a
+  ningún otro sitio. Igual que todo lo que decía el filtro de paquetes y todo lo que decía el
+  propio OpenVPN. Al releer un registro después quedaban las rutas y casi nada alrededor: ya han
+  sido dos las veces que una pregunta sobre una sesión fallida no se ha podido responder desde
+  él, incluida la de si el filtro llegó a arrancar. Ahora todo eso va al archivo.
+
+- **La comprobación de que una ruta se está usando de verdad podía rechazar una que estaba a punto
+  de funcionar.** La 0.5.21 empezó a verificar cada ruta en lugar de fiarse del código de salida del
+  comando, y ese cambio era el correcto; solo que preguntaba en el mismo instante en que añadía la
+  ruta. Una ruta que el sistema todavía no ha mirado es indistinguible de una que ha rechazado, así
+  que un momento de retraso bastaba para tirar una ruta que iba a funcionar: la verificación
+  derrotando aquello que verifica. Ahora se le conceden a la tabla de rutas unos cientos de
+  milisegundos para asentarse.
+
+- **El filtro de paquetes ahora deja constancia del filtro con el que se abrió.** Cuando el programa
+  seguía saliendo a internet por IPv6 pese a tenerlo bloqueado, el registro no permitía distinguir si
+  faltaba la cláusula o si simplemente nunca llegó a coincidir. Ahora sí.
+
 ## [0.5.21] - 2026-09-14
 
 ### Fixed
