@@ -5,6 +5,34 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.24] - 2026-09-17
+
+### Fixed
+
+- **Ein langsamer Update-Download wurde kurz vor dem Ende weggeworfen.** Der Client gab der
+  gesamten Übertragung fünfzehn Minuten, und diese Grenze umfasst das Lesen der Datei, nicht
+  nur das Erreichen des Servers. An einer echten Verbindung gemessen lieferte der
+  Veröffentlichungs-Host etwa 0,10 MB/s, womit ein hundert Megabyte großer Installer über
+  sechzehn Minuten braucht: Er wurde fast vollständig geladen und schlug dann fehl. Eine
+  Gesamtgrenze gibt es nicht mehr. Wie lange gewartet wird, entscheidet der Benutzer, und
+  Abbrechen ist die Art, es zu entscheiden.
+
+- **Updates laden etwa dreimal so schnell.** Die Grenze lag an der einzelnen Verbindung und
+  nicht an der Leitung: eine Verbindung hielt 0,10 MB/s, während vier Verbindungen, die
+  gleichzeitig verschiedene Teile derselben Datei holten, zusammen auf 0,32 MB/s kamen. Der
+  Installer wird nun in vier Teilen gleichzeitig geholt — von Anfang bis Ende an einer 122 MB
+  großen Datei mit 0,28 MB/s gegen 0,10 gemessen und Byte für Byte gegen die veröffentlichte
+  Datei geprüft, nicht nur auf die Länge.
+
+  Nur wenn der Server sagt, dass er Teile ausliefert. Fragt man einen, der das nicht tut, nach
+  einem Bereich, antwortet er mit der ganzen Datei, und vier ganze Dateien übereinander
+  geschrieben ergeben einen beschädigten Installer von genau der richtigen Größe.
+
+- **Der Fortschritt wird in einem Takt gemeldet, mit dem das Fenster etwas anfangen kann.** Er
+  kam alle 80 KB, also dreizehnhundert Meldungen für einen Installer und das Vierfache bei vier
+  Verbindungen, jede über den Oberflächen-Thread. Jetzt alle 512 KB, und am Ende immer noch
+  einmal, damit der Balken dort endet, wo die Datei endet.
+
 ## [0.5.23] - 2026-09-16
 
 ### Added

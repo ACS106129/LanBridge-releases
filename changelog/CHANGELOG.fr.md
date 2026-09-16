@@ -5,6 +5,34 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.24] - 2026-09-17
+
+### Fixed
+
+- **Un téléchargement de mise à jour lent était jeté juste avant la fin.** Le client accordait
+  quinze minutes à l'ensemble du transfert, et cette limite couvre la lecture du fichier, pas
+  seulement le fait d'atteindre le serveur. Mesuré sur une vraie connexion, l'hôte des
+  publications servait environ 0,10 Mo/s, ce qui met un installateur de cent mégaoctets à plus
+  de seize minutes : il se téléchargeait presque entièrement puis échouait. Il n'y a plus de
+  limite globale. Combien de temps attendre appartient à l'utilisateur, et annuler est la
+  façon d'en décider.
+
+- **Les mises à jour se téléchargent environ trois fois plus vite.** La limite s'est avérée
+  être par connexion et non celle de la ligne : une connexion tenait 0,10 Mo/s, tandis que
+  quatre connexions récupérant des parties différentes du même fichier en même temps
+  totalisaient 0,32 Mo/s. L'installateur est désormais récupéré en quatre parties à la fois —
+  mesuré de bout en bout sur un fichier de 122 Mo à 0,28 Mo/s contre 0,10, et vérifié octet par
+  octet face au fichier publié, et pas seulement sur sa taille.
+
+  Uniquement quand le serveur annonce servir des parties. Demander une plage à un serveur qui
+  ne le fait pas donne le fichier entier, et quatre fichiers entiers écrits les uns sur les
+  autres font un installateur corrompu de la taille exacte.
+
+- **La progression est signalée à un rythme que la fenêtre peut suivre.** Elle l'était tous les
+  80 Ko, soit mille trois cents mises à jour pour un installateur et quatre fois plus avec
+  quatre connexions, chacune passant au fil de l'interface. Désormais tous les 512 Ko, et
+  toujours une fois de plus à la fin pour que la barre finisse là où finit le fichier.
+
 ## [0.5.23] - 2026-09-16
 
 ### Added
