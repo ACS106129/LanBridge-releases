@@ -16,8 +16,10 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
   ni la requête n'avaient de problème ; la connexion a simplement pris fin, et tout ce qui
   avait été récupéré est parti à la poubelle. Chaque partie est désormais redemandée à partir
   de l'octet atteint, jusqu'à cinq fois, en attendant un peu plus longtemps entre les essais.
-  Un serveur qui refuse le fichier n'est pas relancé — introuvable et interdit sont des
-  réponses, pas des pannes — pas plus que lorsque l'utilisateur appuie sur arrêter.
+  Plus rien ne met fin à un téléchargement, sinon vous l'arrêtez. Ni un refus, ni une
+  limite de débit, ni même un « introuvable » : un fichier en cours de remplacement, ou un nœud
+  qui n'a pas encore rattrapé, répondent ainsi pendant quelques secondes, et aucune réponse
+  qu'un serveur puisse donner ne vaut moins qu'un essai de plus une demi-minute après.
 
 - **La 0.5.24 a mis cela sur le compte d'un délai d'attente, et c'était faux.** Elle disait
   qu'une limite de quinze minutes coupait les téléchargements lents près de la fin, et l'a

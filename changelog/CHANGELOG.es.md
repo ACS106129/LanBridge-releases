@@ -14,9 +14,11 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
   megas descargados, el otro extremo colgó — "la respuesta terminó antes de tiempo, faltaban
   al menos 41252358 bytes". Ni el archivo ni la petición tenían nada malo; la conexión
   simplemente terminó, y todo lo ya descargado se tiró. Ahora cada parte se vuelve a pedir
-  desde el byte al que llegó, hasta cinco veces, esperando un poco más entre intentos. A un
-  servidor que rechaza el archivo no se le insiste — no encontrado y prohibido son respuestas,
-  no fallos — ni tampoco cuando el usuario pulsa detener.
+  desde el byte al que llegó, hasta cinco veces, esperando un poco más entre intentos.
+  Ahora nada termina una descarga salvo que usted la detenga. Ni un rechazo, ni un
+  límite de peticiones, ni siquiera un "no encontrado": un archivo que se está reemplazando, o
+  un nodo que aún no se ha puesto al día, responden así durante unos segundos, y no hay
+  respuesta que un servidor pueda dar que valga menos que un intento más medio minuto después.
 
 - **La 0.5.24 culpó de esto a un tiempo de espera, y se equivocaba.** Decía que un límite de
   quince minutos cortaba las descargas lentas cerca del final, y quitó el límite. Quitarlo no

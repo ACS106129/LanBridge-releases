@@ -15,8 +15,11 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   least 41252358 additional bytes expected". Nothing was wrong with the file or with the
   request; the connection simply ended, and everything already fetched went in the bin. Each
   part is now asked for again from the byte it reached, up to five times, waiting a little
-  longer between tries. A server that refuses the file is not asked again — not found and
-  forbidden are answers, not failures — and neither is the user pressing stop.
+  longer between tries.
+  Nothing ends a download now except you stopping it. Not a refusal, not a rate
+  limit, not even "not found" — a file being replaced or an edge that has not caught up
+  both answer that way for a few seconds, and there is no answer a server can give that is
+  worth less than one more attempt half a minute later.
 
 - **0.5.24 blamed this on a timeout, and that was wrong.** It said a fifteen-minute limit on
   the transfer was cutting slow downloads off near the end, and removed the limit. Removing

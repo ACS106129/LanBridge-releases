@@ -15,9 +15,11 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
   prematuramente, mancavano almeno 41252358 byte". Né il file né la richiesta avevano nulla che
   non andasse; la connessione è semplicemente finita, e tutto ciò che era già stato scaricato è
   andato nel cestino. Ora ogni parte viene richiesta di nuovo dal byte raggiunto, fino a cinque
-  volte, aspettando un po' di più tra un tentativo e l'altro. A un server che rifiuta il file
-  non si insiste — non trovato e vietato sono risposte, non guasti — e nemmeno quando l'utente
-  preme ferma.
+  volte, aspettando un po' di più tra un tentativo e l'altro.
+  Ora nulla conclude un download tranne lei che lo ferma. Né un rifiuto, né un limite di
+  richieste, né un "non trovato": un file che si sta sostituendo, o un nodo che non si è ancora
+  allineato, rispondono così per qualche secondo, e non c'è risposta che un server possa dare che
+  valga meno di un altro tentativo mezzo minuto dopo.
 
 - **La 0.5.24 ha dato la colpa a un timeout, e sbagliava.** Diceva che un limite di quindici
   minuti tagliava i download lenti verso la fine, e ha tolto il limite. Toglierlo non fa danno
