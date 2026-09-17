@@ -15,9 +15,11 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   endete vorzeitig, es fehlten mindestens 41252358 Bytes". Weder mit der Datei noch mit der
   Anfrage war etwas falsch; die Verbindung hörte einfach auf, und alles bereits Geladene war
   hin. Jeder Teil wird nun ab dem erreichten Byte erneut angefordert, bis zu fünfmal, mit
-  wachsender Pause dazwischen. Ein Server, der die Datei verweigert, wird nicht noch einmal
-  gefragt — nicht gefunden und verboten sind Antworten, keine Störungen — und der Benutzer,
-  der auf Anhalten drückt, ebenso wenig.
+  wachsender Pause dazwischen.
+  Einen Download beendet jetzt nichts mehr außer Ihnen. Keine Verweigerung, keine
+  Drosselung, nicht einmal ein „nicht gefunden": eine Datei, die gerade ersetzt wird, oder ein
+  Knoten, der noch nicht nachgezogen hat, antworten für ein paar Sekunden genau so, und keine
+  Antwort eines Servers ist weniger wert als ein weiterer Versuch eine halbe Minute später.
 
 - **0.5.24 schob das auf eine Zeitüberschreitung, und das war falsch.** Dort hieß es, eine
   Fünfzehn-Minuten-Grenze schneide langsame Downloads kurz vor dem Ende ab, und die Grenze

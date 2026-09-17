@@ -15,8 +15,11 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
   faltavam pelo menos 41252358 bytes". Nem o arquivo nem a requisição tinham problema; a
   conexão simplesmente acabou, e tudo o que já havia sido baixado foi para o lixo. Agora cada
   parte é pedida de novo a partir do byte a que chegou, até cinco vezes, esperando um pouco
-  mais entre as tentativas. Um servidor que recusa o arquivo não é insistido — não encontrado
-  e proibido são respostas, não falhas — nem quando o usuário aperta parar.
+  mais entre as tentativas.
+  Agora nada encerra um download a não ser você parar. Nem uma recusa, nem um limite de
+  requisições, nem mesmo um "não encontrado": um arquivo sendo substituído, ou um nó que ainda
+  não se atualizou, respondem assim por alguns segundos, e não há resposta que um servidor possa
+  dar que valha menos que mais uma tentativa meio minuto depois.
 
 - **A 0.5.24 culpou isso num tempo limite, e estava errada.** Dizia que um limite de quinze
   minutos cortava downloads lentos perto do fim, e removeu o limite. Remover não faz mal e o
