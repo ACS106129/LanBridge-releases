@@ -9,6 +9,29 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Fixed
 
+- **Websites gingen nur dann durch den Tunnel, wenn sich beide Seiten zufällig auf dieselbe
+  Adresse einigten.** Eine echte Sitzung routete siebenundzwanzig Namen, legte achtzig Routen
+  an, bestätigte jede einzelne als in Verwendung und verschob die Ausgangsadresse von Taiwan
+  nach Japan — und die Anwendung erreichte weiterhin genau ein Ziel durch den Tunnel.
+
+  Achtzehn der siebenundzwanzig antworteten auf beiden Seiten verschieden.
+  apidgp-gameplayer.games.dmm.com nannte von hier aus eine Adresse in Taipeh und durch den
+  Tunnel eine in Tokio, und geroutet wurde nur die aus Tokio. Die Anwendung löst Namen aber
+  selbst auf, von hier: ihr wurde Taipeh genannt, sie ging nach Taipeh — eine Adresse, die
+  nichts routete, hinaus über den gewöhnlichen Adapter, während jede Route in der Tabelle
+  richtig und ungenutzt dastand. Das eine Ziel, das durchging, war eines der neun, deren
+  Antworten übereinstimmten.
+
+  Jetzt werden beide geroutet: die des Tunnels, weil sie benutzt werden sollte, und die lokale,
+  weil sie benutzt werden wird.
+
+- **Websites werden zeilenweise bearbeitet, in einem eigenen Fenster.** Es war ein einziges
+  Feld, in das man eine Liste tippt — in Ordnung bei zwei Namen, nicht bei siebenundzwanzig:
+  ein Tippfehler verschwindet darin, und den vierten Eintrag zu entfernen heißt, genau die
+  richtige Stelle zu markieren. Die Einstellungsseite nennt jetzt die Anzahl und die ersten
+  Namen; die Liste selbst liegt hinter einer Schaltfläche, je eine Zeile, mit Platz für eine
+  weitere.
+
 - **Ein Download, den der Server abschneidet, wird dort fortgesetzt, wo er stehen blieb,
   statt weggeworfen zu werden.** Was wirklich geschah, laut Bericht: nach dreißig Minuten,
   dreiundsechzig von hundertvier Megabyte geladen, legte die Gegenstelle auf — „die Antwort

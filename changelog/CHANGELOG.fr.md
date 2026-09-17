@@ -9,6 +9,28 @@ numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
 ### Fixed
 
+- **Les sites ne passaient par le tunnel que lorsque les deux côtés tombaient par hasard
+  d'accord sur l'adresse.** Une session réelle a routé vingt-sept noms, posé quatre-vingts
+  routes, vérifié chacune comme utilisée, et déplacé l'adresse de sortie de Taïwan au Japon —
+  et l'application n'a atteint qu'une seule destination par le tunnel.
+
+  Dix-huit des vingt-sept répondaient différemment des deux côtés.
+  apidgp-gameplayer.games.dmm.com donnait une adresse de Taipei depuis ici et une de Tokyo à
+  travers le tunnel, et seule celle de Tokyo était routée. Mais l'application résout les noms
+  elle-même, depuis ici : on lui a dit Taipei, elle est allée à Taipei, une adresse que rien ne
+  routait, par l'adaptateur habituel, pendant que chaque route de la table restait correcte et
+  inutilisée. La seule destination passée par le tunnel était l'une des neuf dont les réponses
+  concordaient.
+
+  Les deux sont routées désormais : celle du tunnel parce que c'est celle qu'il faudrait
+  utiliser, et la locale parce que c'est celle qui sera utilisée.
+
+- **Les sites s'éditent un par ligne, dans une fenêtre à part.** C'était une seule zone où
+  coller une liste, ce qui va pour deux noms et pas pour vingt-sept : une faute de frappe s'y
+  cache, et retirer le quatrième demande de sélectionner exactement le bon passage. La page de
+  réglages indique maintenant combien il y en a et nomme les premiers ; la liste est derrière un
+  bouton, une ligne par site, avec de quoi en ajouter un.
+
 - **Un téléchargement que le serveur interrompt est repris là où il s'est arrêté, au lieu
   d'être jeté.** Ce qui s'est réellement passé, d'après le rapport : au bout de trente minutes,
   soixante-trois des cent quatre mégaoctets récupérés, le bout d'en face a raccroché — « la

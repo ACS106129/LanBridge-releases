@@ -9,6 +9,27 @@ numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
 ### Fixed
 
+- **Os sites só passavam pelo túnel quando os dois lados por acaso concordavam no endereço.**
+  Uma sessão real roteou vinte e sete nomes, colocou oitenta rotas, confirmou cada uma como em
+  uso e mudou o endereço de saída de Taiwan para o Japão — e o aplicativo continuou alcançando
+  exatamente um destino pelo túnel.
+
+  Dezoito dos vinte e sete respondiam diferente de cada lado.
+  apidgp-gameplayer.games.dmm.com dava um endereço de Taipé perguntando daqui e um de Tóquio
+  perguntando pelo túnel, e só o de Tóquio foi roteado. Mas o aplicativo resolve os nomes
+  sozinho, daqui: disseram-lhe Taipé e ele foi para Taipé, um endereço que nada roteava, pelo
+  adaptador de sempre, enquanto cada rota da tabela seguia correta e sem uso. O único destino
+  que passou era um dos nove cujas respostas coincidiam.
+
+  Agora os dois são roteados: o do túnel porque é o que deveria ser usado, e o local porque é o
+  que será.
+
+- **Os sites são editados um por linha, numa janela própria.** Eram uma única caixa para colar
+  uma lista, o que serve para dois nomes e não para vinte e sete: um erro de digitação se
+  esconde ali, e remover o quarto exige selecionar exatamente aquele trecho. A página de
+  configurações agora diz quantos há e nomeia os primeiros; a lista fica atrás de um botão, uma
+  linha por site, com onde acrescentar outro.
+
 - **Um download que o servidor corta é retomado de onde parou, em vez de ser jogado fora.** O
   que aconteceu de fato, segundo o relatório: aos trinta minutos, com sessenta e três de cento
   e quatro megabytes baixados, a outra ponta desligou — "a resposta terminou prematuramente,

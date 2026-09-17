@@ -9,6 +9,28 @@ numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
 ### Fixed
 
+- **I siti passavano dal tunnel solo quando i due lati concordavano per caso sull'indirizzo.**
+  Una sessione reale ha instradato ventisette nomi, messo ottanta rotte, confermato ognuna come
+  in uso e spostato l'indirizzo di uscita dal Taiwan al Giappone — e l'applicazione ha comunque
+  raggiunto esattamente una destinazione attraverso il tunnel.
+
+  Diciotto dei ventisette rispondevano in modo diverso dai due lati.
+  apidgp-gameplayer.games.dmm.com dava un indirizzo di Taipei chiesto da qui e uno di Tokyo
+  chiesto attraverso il tunnel, e solo quello di Tokyo era instradato. Ma l'applicazione risolve
+  i nomi da sé, da qui: le è stato detto Taipei ed è andata a Taipei, un indirizzo che nessuno
+  instradava, dall'adattatore di sempre, mentre ogni rotta nella tabella restava corretta e
+  inutilizzata. L'unica destinazione che è passata era una delle nove le cui risposte
+  coincidevano.
+
+  Ora si instradano entrambe: quella del tunnel perché è quella che andrebbe usata, e quella
+  locale perché è quella che verrà usata.
+
+- **I siti si modificano uno per riga, in una finestra propria.** Erano una sola casella in cui
+  incollare un elenco: va bene per due nomi, non per ventisette — un errore di battitura ci si
+  nasconde, e togliere il quarto richiede di selezionare esattamente quel tratto. La pagina delle
+  impostazioni ora dice quanti sono e nomina i primi; l'elenco sta dietro un pulsante, una riga
+  per sito, con dove aggiungerne un altro.
+
 - **Un download che il server tronca viene ripreso da dove si è fermato, invece di essere
   buttato.** Quel che è successo davvero, dal rapporto: dopo trenta minuti, con sessantatré dei
   centoquattro megabyte scaricati, l'altro capo ha chiuso — "la risposta è terminata
