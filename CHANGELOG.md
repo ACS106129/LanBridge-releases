@@ -5,6 +5,26 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.25] - 2026-09-17
+
+### Fixed
+
+- **A download the server cuts short is picked up where it stopped, instead of thrown away.**
+  What actually happened, from the report: thirty minutes in, sixty-three of a hundred and
+  four megabytes fetched, and the far end hung up — "the response ended prematurely, with at
+  least 41252358 additional bytes expected". Nothing was wrong with the file or with the
+  request; the connection simply ended, and everything already fetched went in the bin. Each
+  part is now asked for again from the byte it reached, up to five times, waiting a little
+  longer between tries. A server that refuses the file is not asked again — not found and
+  forbidden are answers, not failures — and neither is the user pressing stop.
+
+- **0.5.24 blamed this on a timeout, and that was wrong.** It said a fifteen-minute limit on
+  the transfer was cutting slow downloads off near the end, and removed the limit. Removing
+  it does no harm and the reasoning for a download with no fixed deadline still stands, but
+  the failure it was blamed for had been running for thirty minutes when it happened, so a
+  fifteen-minute limit cannot have been what ended it. That was in the report before the
+  claim was published, and it was not read closely enough.
+
 ## [0.5.24] - 2026-09-17
 
 ### Fixed

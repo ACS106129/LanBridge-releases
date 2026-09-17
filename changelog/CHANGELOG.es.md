@@ -5,6 +5,25 @@ Aquí se recogen todos los cambios relevantes de LanBridge.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
+## [0.5.25] - 2026-09-17
+
+### Fixed
+
+- **Una descarga que el servidor corta se retoma donde quedó, en vez de tirarse.** Lo que pasó
+  de verdad, según el informe: a los treinta minutos, con sesenta y tres de ciento cuatro
+  megas descargados, el otro extremo colgó — "la respuesta terminó antes de tiempo, faltaban
+  al menos 41252358 bytes". Ni el archivo ni la petición tenían nada malo; la conexión
+  simplemente terminó, y todo lo ya descargado se tiró. Ahora cada parte se vuelve a pedir
+  desde el byte al que llegó, hasta cinco veces, esperando un poco más entre intentos. A un
+  servidor que rechaza el archivo no se le insiste — no encontrado y prohibido son respuestas,
+  no fallos — ni tampoco cuando el usuario pulsa detener.
+
+- **La 0.5.24 culpó de esto a un tiempo de espera, y se equivocaba.** Decía que un límite de
+  quince minutos cortaba las descargas lentas cerca del final, y quitó el límite. Quitarlo no
+  hace daño y el razonamiento sigue en pie, pero el fallo que se puso como prueba llevaba
+  treinta minutos corriendo cuando ocurrió, así que un límite de quince no pudo ser lo que lo
+  terminó. Estaba en el informe antes de publicar la afirmación, y no se leyó con cuidado.
+
 ## [0.5.24] - 2026-09-17
 
 ### Fixed

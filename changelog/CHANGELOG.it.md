@@ -5,6 +5,26 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.25] - 2026-09-17
+
+### Fixed
+
+- **Un download che il server tronca viene ripreso da dove si è fermato, invece di essere
+  buttato.** Quel che è successo davvero, dal rapporto: dopo trenta minuti, con sessantatré dei
+  centoquattro megabyte scaricati, l'altro capo ha chiuso — "la risposta è terminata
+  prematuramente, mancavano almeno 41252358 byte". Né il file né la richiesta avevano nulla che
+  non andasse; la connessione è semplicemente finita, e tutto ciò che era già stato scaricato è
+  andato nel cestino. Ora ogni parte viene richiesta di nuovo dal byte raggiunto, fino a cinque
+  volte, aspettando un po' di più tra un tentativo e l'altro. A un server che rifiuta il file
+  non si insiste — non trovato e vietato sono risposte, non guasti — e nemmeno quando l'utente
+  preme ferma.
+
+- **La 0.5.24 ha dato la colpa a un timeout, e sbagliava.** Diceva che un limite di quindici
+  minuti tagliava i download lenti verso la fine, e ha tolto il limite. Toglierlo non fa danno
+  e il ragionamento regge ancora, ma il guasto portato come prova durava da trenta minuti
+  quando si è verificato: un limite di quindici non può averlo concluso. Stava nel rapporto
+  prima che l'affermazione venisse pubblicata, e non è stato letto con sufficiente attenzione.
+
 ## [0.5.24] - 2026-09-17
 
 ### Fixed
