@@ -5,6 +5,27 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.25] - 2026-09-17
+
+### Fixed
+
+- **Un téléchargement que le serveur interrompt est repris là où il s'est arrêté, au lieu
+  d'être jeté.** Ce qui s'est réellement passé, d'après le rapport : au bout de trente minutes,
+  soixante-trois des cent quatre mégaoctets récupérés, le bout d'en face a raccroché — « la
+  réponse s'est terminée prématurément, il manquait au moins 41252358 octets ». Ni le fichier
+  ni la requête n'avaient de problème ; la connexion a simplement pris fin, et tout ce qui
+  avait été récupéré est parti à la poubelle. Chaque partie est désormais redemandée à partir
+  de l'octet atteint, jusqu'à cinq fois, en attendant un peu plus longtemps entre les essais.
+  Un serveur qui refuse le fichier n'est pas relancé — introuvable et interdit sont des
+  réponses, pas des pannes — pas plus que lorsque l'utilisateur appuie sur arrêter.
+
+- **La 0.5.24 a mis cela sur le compte d'un délai d'attente, et c'était faux.** Elle disait
+  qu'une limite de quinze minutes coupait les téléchargements lents près de la fin, et l'a
+  supprimée. La supprimer ne nuit pas et le raisonnement tient toujours, mais l'échec pris
+  comme preuve durait depuis trente minutes lorsqu'il s'est produit : une limite de quinze
+  minutes ne peut pas y avoir mis fin. C'était dans le rapport avant la publication de
+  l'affirmation, et cela n'a pas été lu d'assez près.
+
 ## [0.5.24] - 2026-09-17
 
 ### Fixed
