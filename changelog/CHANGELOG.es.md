@@ -9,6 +9,27 @@ versionado sigue [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Fixed
 
+- **Los sitios solo pasaban por el túnel cuando ambos lados coincidían por casualidad en la
+  dirección.** Una sesión real enrutó veintisiete nombres, puso ochenta rutas, confirmó cada
+  una como en uso y movió la dirección de salida de Taiwán a Japón — y la aplicación siguió
+  llegando a exactamente un destino por el túnel.
+
+  Dieciocho de los veintisiete respondían distinto desde cada lado.
+  apidgp-gameplayer.games.dmm.com daba una dirección de Taipéi preguntando desde aquí y una de
+  Tokio preguntando por el túnel, y solo se enrutó la de Tokio. Pero la aplicación resuelve los
+  nombres ella misma, desde aquí: le dijeron Taipéi y fue a Taipéi, una dirección que nadie
+  había enrutado, por el adaptador de siempre, mientras cada ruta de la tabla seguía correcta y
+  sin usar. El único destino que sí pasó era uno de los nueve cuyas respuestas coincidían.
+
+  Ahora se enrutan las dos: la del túnel porque es la que debería usarse, y la local porque es
+  la que se va a usar.
+
+- **Los sitios se editan uno por fila, en una ventana propia.** Eran una sola caja donde pegar
+  una lista, lo cual está bien con dos nombres y no con veintisiete: una errata se esconde y
+  quitar el cuarto exige seleccionar exactamente ese trozo de texto. La página de ajustes ahora
+  dice cuántos hay y nombra los primeros; la lista está detrás de un botón, con una fila por
+  sitio y sitio para añadir otro.
+
 - **Una descarga que el servidor corta se retoma donde quedó, en vez de tirarse.** Lo que pasó
   de verdad, según el informe: a los treinta minutos, con sesenta y tres de ciento cuatro
   megas descargados, el otro extremo colgó — "la respuesta terminó antes de tiempo, faltaban

@@ -9,6 +9,27 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- **Sites only went through the tunnel when both sides happened to agree on their address.**
+  A real session routed twenty-seven names, put eighty routes in place, confirmed every one
+  of them as in use, and moved the exit address from Taiwan to Japan — and the application
+  still reached exactly one destination through the tunnel.
+
+  Eighteen of the twenty-seven answered differently from the two sides.
+  apidgp-gameplayer.games.dmm.com gave a Taipei address when asked from here and a Tokyo one
+  when asked through the tunnel, and only the Tokyo one was routed. But the application looks
+  up names itself, from here, so it was told Taipei and went to Taipei — an address nothing
+  had routed, out of the ordinary adapter, while every route in the table sat correct and
+  unused. The one destination that did go through was one of the nine whose answers agreed.
+
+  Both answers are routed now: the tunnel's because it is the one that should be used, and
+  the local one because it is the one that will be.
+
+- **The sites are edited one to a row, in a window of their own.** They were a single box to
+  type a list into, which is fine for two names and not for twenty-seven — a typo hides in
+  it, and removing the fourth entry means selecting exactly the right run of text. The
+  settings page now shows how many there are and names the first few; the list itself is
+  behind a button, with a row each and somewhere to add another.
+
 - **A download the server cuts short is picked up where it stopped, instead of thrown away.**
   What actually happened, from the report: thirty minutes in, sixty-three of a hundred and
   four megabytes fetched, and the far end hung up — "the response ended prematurely, with at
