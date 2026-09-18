@@ -1,913 +1,421 @@
-﻿# Registro delle modifiche
+# Registro delle modifiche
 
-Qui sono annotate tutte le modifiche rilevanti di LanBridge.
+Tutte le modifiche rilevanti di LanBridge sono registrate qui.
 
-Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
-numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
+Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e le versioni
+seguono il [versionamento semantico](https://semver.org/lang/it/).
+
+## [0.5.27] - 2026-09-19
+
+### Corretto
+
+- **L'applicazione di destinazione non raggiunge più nulla se non attraverso il tunnel**: il primo pacchetto di una connessione verso un indirizzo che nessuna rotta copre viene scartato anziché partire con l'indirizzo reale di questa macchina, ed era questo a causare i 403 ripetuti e la schermata di caricamento bloccata.
+- **Scartare quel pacchetto è ciò che aggiunge la rotta**, così la connessione riesce alla prima ritrasmissione invece di fallire.
+- **Un pacchetto IPv6 bloccato non viene più registrato come fuga**; ora il registro dice che è stato scartato perché il client ripieghi su IPv4, che era l'intento.
+
+### Modificato
+
+- **Le rotte tornano a uscire dal tunnel**: un indirizzo viene rilasciato quando nessun nome seguito lo restituisce più e la destinazione non ha connessioni aperte verso di esso, invece di far crescere l'insieme per tutta la sessione.
+- **Una rotta adottata scade dopo cinque minuti di inattività** e restituisce il proprio posto nel limite della sessione.
 
 ## [0.5.26] - 2026-09-18
 
-### Changed
+### Modificato
 
-- **L'elenco dei siti non deve più essere giusto.** Finora è stato tutto un tentativo di renderlo
-  giusto: i nomi sono stati presi dai file dell'applicazione stessa anziché indovinati, dalla 0.5.25
-  vengono instradate le risposte di entrambi i lati, e vengono richieste di nuovo ogni trenta secondi.
-  Niente di tutto ciò copre l'indirizzo che l'applicazione raggiunge e che non era in nessuna delle
-  due risposte — il caso ordinario per un nome con un record di sessanta secondi e una dozzina di nodi
-  alle spalle.
-
-  Così l'elenco ora serve solo per partire. Porta la prima connessione nel tunnel invece che fuori
-  dalla porta principale. Da lì in poi si osserva dove l'applicazione va davvero, e ogni destinazione
-  raggiunta senza il tunnel riceve una rotta propria. La connessione successiva la prende.
-
-  Questo non sposta una connessione già aperta: una rotta si consulta quando si invia un pacchetto,
-  non quando si ricorda un socket. Ciò che impedisce è commettere due volte lo stesso errore, che per
-  un launcher che interroga e riprova sono quasi tutti.
-
-  Quattro cose non vengono mai adottate: l'indirizzo del server VPN stesso, le reti proprie di questa
-  macchina, broadcast e multicast, e IPv6. La prima è quella che conta. Una rotta che manda il
-  traffico del server nel tunnel gli fa trasportare i pacchetti che lo tengono in piedi, così il
-  tunnel cade e non può tornare, perché riconnettersi richiede la rotta che ora punta a qualcosa che
-  è caduto.
-
-- **Il riepilogo finale non dà più per mancata una destinazione dopo che è stata instradata.** Chiede
-  di nuovo al sistema invece di rileggere l'elenco delle rotte aggiunte, perché una rotta aggiunta e
-  non usata è esattamente il guasto attorno a cui questa funzione è stata costruita.
+- **L'elenco dei siti non deve più essere corretto**: ora è solo un avvio a caldo, e tutto ciò che la destinazione raggiunge senza il tunnel ottiene una rotta propria, tranne il server VPN, le reti di questa macchina, il broadcast e IPv6.
+- **Il riepilogo finale non chiama più mancata una destinazione dopo averla instradata**, perché interroga di nuovo il sistema anziché rileggere le rotte aggiunte.
 
 ## [0.5.25] - 2026-09-17
 
-### Fixed
+### Corretto
 
-- **I siti passavano dal tunnel solo quando i due lati concordavano per caso sull'indirizzo.**
-  Una sessione reale ha instradato ventisette nomi, messo ottanta rotte, confermato ognuna come
-  in uso e spostato l'indirizzo di uscita dal Taiwan al Giappone — e l'applicazione ha comunque
-  raggiunto esattamente una destinazione attraverso il tunnel.
-
-  Diciotto dei ventisette rispondevano in modo diverso dai due lati.
-  apidgp-gameplayer.games.dmm.com dava un indirizzo di Taipei chiesto da qui e uno di Tokyo
-  chiesto attraverso il tunnel, e solo quello di Tokyo era instradato. Ma l'applicazione risolve
-  i nomi da sé, da qui: le è stato detto Taipei ed è andata a Taipei, un indirizzo che nessuno
-  instradava, dall'adattatore di sempre, mentre ogni rotta nella tabella restava corretta e
-  inutilizzata. L'unica destinazione che è passata era una delle nove le cui risposte
-  coincidevano.
-
-  Ora si instradano entrambe: quella del tunnel perché è quella che andrebbe usata, e quella
-  locale perché è quella che verrà usata.
-
-- **I siti si modificano uno per riga, in una finestra propria.** Erano una sola casella in cui
-  incollare un elenco: va bene per due nomi, non per ventisette — un errore di battitura ci si
-  nasconde, e togliere il quarto richiede di selezionare esattamente quel tratto. La pagina delle
-  impostazioni ora dice quanti sono e nomina i primi; l'elenco sta dietro un pulsante, una riga
-  per sito, con dove aggiungerne un altro.
-
-- **Un download che il server tronca viene ripreso da dove si è fermato, invece di essere
-  buttato.** Quel che è successo davvero, dal rapporto: dopo trenta minuti, con sessantatré dei
-  centoquattro megabyte scaricati, l'altro capo ha chiuso — "la risposta è terminata
-  prematuramente, mancavano almeno 41252358 byte". Né il file né la richiesta avevano nulla che
-  non andasse; la connessione è semplicemente finita, e tutto ciò che era già stato scaricato è
-  andato nel cestino. Ora ogni parte viene richiesta di nuovo dal byte raggiunto, fino a cinque
-  volte, aspettando un po' di più tra un tentativo e l'altro.
-  Ora nulla conclude un download tranne lei che lo ferma. Né un rifiuto, né un limite di
-  richieste, né un "non trovato": un file che si sta sostituendo, o un nodo che non si è ancora
-  allineato, rispondono così per qualche secondo, e non c'è risposta che un server possa dare che
-  valga meno di un altro tentativo mezzo minuto dopo.
-
-- **La 0.5.24 ha dato la colpa a un timeout, e sbagliava.** Diceva che un limite di quindici
-  minuti tagliava i download lenti verso la fine, e ha tolto il limite. Toglierlo non fa danno
-  e il ragionamento regge ancora, ma il guasto portato come prova durava da trenta minuti
-  quando si è verificato: un limite di quindici non può averlo concluso. Stava nel rapporto
-  prima che l'affermazione venisse pubblicata, e non è stato letto con sufficiente attenzione.
+- **I siti passavano dal tunnel solo quando i due lati concordavano per caso sull'indirizzo**: diciotto nomi su ventisette rispondevano in modo diverso, veniva instradata solo la risposta del tunnel e l'applicazione usava quella locale; ora si instradano entrambe.
+- **I siti si modificano uno per riga, in una finestra dedicata**, invece di un'unica casella con ventisette nomi.
+- **Un download interrotto dal server riprende da dove si era fermato** anziché essere buttato, richiedendo ogni parte fino a cinque volte.
+- **La 0.5.24 lo attribuì a un timeout e sbagliava**: il guasto durava da trenta minuti, quindi un limite di quindici non può averlo concluso.
 
 ## [0.5.24] - 2026-09-17
 
-### Fixed
+### Corretto
 
-- **Un download di aggiornamento lento veniva buttato via poco prima di finire.** Il client
-  concedeva quindici minuti all'intero trasferimento, e quel limite copre la lettura del file,
-  non solo il raggiungere il server. Misurato su una connessione reale, l'host delle
-  pubblicazioni serviva circa 0,10 MB/s, il che porta un installatore da cento megabyte a oltre
-  sedici minuti: veniva scaricato quasi tutto e poi falliva. Ora non c'è più un limite
-  complessivo. Quanto aspettare spetta all'utente, e annullare è il modo in cui lo decide.
-
-- **Gli aggiornamenti si scaricano circa tre volte più in fretta.** Il limite si è rivelato per
-  connessione e non della linea: una connessione teneva 0,10 MB/s, mentre quattro connessioni che
-  prendevano parti diverse dello stesso file nello stesso momento arrivavano insieme a 0,32 MB/s.
-  L'installatore viene ora preso in quattro parti insieme — misurato da capo a fondo su un file da
-  122 MB a 0,28 MB/s contro 0,10, e confrontato byte per byte con il file pubblicato, non solo
-  nella dimensione.
-
-  Solo quando il server dichiara di servire parti. Chiedere un intervallo a uno che non lo fa
-  ottiene in risposta il file intero, e quattro file interi scritti uno sull'altro danno un
-  installatore corrotto della dimensione esatta.
-
-- **L'avanzamento viene riportato a un ritmo che la finestra può usare.** Veniva inviato ogni
-  80 KB, cioè milletrecento aggiornamenti per un installatore e quattro volte tanto con quattro
-  connessioni, ognuno passando al thread dell'interfaccia. Ora ogni 512 KB, e sempre una volta in
-  più alla fine perché la barra finisca dove finisce il file.
+- **Un download lento veniva buttato poco prima di finire**, perché il limite di quindici minuti copriva la lettura del file e non solo il raggiungimento del server; ora non c'è più un limite complessivo.
+- **Gli aggiornamenti scaricano circa tre volte più in fretta**, perché l'host di pubblicazione limita ogni connessione e non la linea: l'installer viene preso in quattro parti insieme.
+- **L'avanzamento è segnalato ogni 512 KB anziché ogni 80 KB**, un ritmo che la finestra può sfruttare.
 
 ## [0.5.23] - 2026-09-16
 
-### Added
+### Aggiunto
 
-- **La sessione annota dove il bersaglio è andato davvero e quanto di ciò ha mancato il tunnel.**
-  Misurare l'indirizzo di uscita dice se il tunnel porta quello che ci viene instradato dentro; non
-  dice nulla sul fatto che il traffico che conta sia instradato affatto — e instradare un elenco di
-  nomi non serve a niente per un nome che nessuno ci ha messo. Quel divario era l'intero problema:
-  la stessa applicazione funziona con una VPN per tutta la macchina e non con una manciata di rotte,
-  e quali nomi vadano in quella manciata era un'ipotesi che deve azzeccarci, altrimenti la funzione
-  non fa nulla.
+- **La sessione annota dove la destinazione è andata davvero e quanto di ciò ha mancato il tunnel**, così un'esecuzione nomina ciò che manca invece di lasciare l'elenco dei nomi a un'ipotesi.
+- **Gli indirizzi sono riportati con il nome a cui rispondono**, perché il nome di un nodo di una rete di distribuzione porta con sé il luogo, e il luogo è tutta la questione.
 
-  Perciò ora si guarda. Ogni destinazione raggiunta dal bersaglio viene registrata una volta, con la
-  risposta del sistema stesso sul fatto che un pacchetto diretto lì esca dal tunnel, e la fine della
-  sessione dice a cosa è approdata. Una sola esecuzione ora nomina esattamente ciò che manca.
+### Corretto
 
-- **Gli indirizzi sono riportati con il nome a cui rispondono.** In una rete di distribuzione il
-  nome del nodo porta con sé la sua posizione, e la posizione è la domanda: lo stesso host ha
-  risposto `…nrt57.r.cloudfront.net` attraverso un tunnel giapponese e `…tpe53.r.cloudfront.net` da
-  Taipei. Narita contro Taipei si vede a colpo d'occhio in un nome e non si vede per niente in un
-  elenco di indirizzi.
-
-### Fixed
-
-- **I nomi vengono seguiti per tutta la durata della sessione, invece di essere fissati una volta
-  all'inizio.** Rispondono con un TTL di sessanta secondi. In un'ora di osservazione non si è mosso
-  nulla, quindi non era questo il guasto — ma una sessione dura ore, un nome può muoversi in
-  qualsiasi minuto, e quando lo fa l'applicazione raggiunge un indirizzo che nessuno instrada, il
-  traffico esce dalla strada di sempre, e ogni rotta nella tabella continua a dire "in uso". Il
-  fallimento avrebbe esattamente l'aspetto del successo.
-
-- **La ricerca di un resolver che risponda si ferma appena uno risponde.** Veniva fatta per ogni
-  nome, e su un tunnel reale il primo candidato andava in timeout su UDP e di nuovo su TCP per ogni
-  singolo nome, sei secondi ciascuno. Con quattro nomi erano ventiquattro secondi prima di partire;
-  con i ventinove che un'applicazione reale si è rivelata richiedere sarebbero stati quasi tre
-  minuti — e la conclusione facile sarebbe stata che l'elenco lungo non fosse praticabile, invece
-  che la ricerca.
+- **I nomi configurati sono seguiti per tutta la sessione**, invece di essere fissati una volta all'avvio, dato che rispondono con un TTL di sessanta secondi e una sessione dura ore.
+- **La ricerca di un resolver funzionante si ferma appena uno risponde**, senza andare in timeout nome per nome e costare minuti prima di partire.
 
 ## [0.5.22] - 2026-09-16
 
-### Added
+### Aggiunto
 
-- **L'applicazione ora misura, e mette per iscritto, se l'indirizzo di uscita è davvero cambiato.**
-  Far passare il traffico di un programma per un tunnel ha senso per un motivo solo: l'altro capo
-  lo vede arrivare da un'altra parte. Tutti i controlli che questa funzione faceva finora erano un
-  passo verso quello e non quello — il comando che ha aggiunto la rotta, la rotta nella tabella con
-  una buona metrica, il nome risolto attraverso il tunnel — e ognuno di essi è stato vero almeno
-  una volta mentre il traffico usciva dall'adattatore di sempre per tutto il tempo.
+- **L'indirizzo di uscita viene misurato prima e dopo aver posato le rotte, e entrambe le risposte finiscono nel registro**, perché ogni verifica precedente era un passo verso quello e non quello stesso — e «non determinabile» è scritto così com'è.
 
-  Perciò la stessa domanda viene ora posta a internet due volte, una prima di toccare qualsiasi
-  rotta e una a rotte tutte a posto, ed entrambe le risposte finiscono nel registro. "Non si è
-  potuto sapere" viene scritto così e mai come "non è cambiato".
+### Corretto
 
-### Fixed
-
-- **Il registro tralasciava esattamente la metà della sessione per cui servirebbe.** I passaggi
-  che la finestra mostra — quale indirizzo di tunnel è arrivato, se l'isolamento per processo è
-  partito, quale processo è stato adottato quando il bersaglio ha passato il lavoro a un altro —
-  finivano nella finestra e in nessun altro posto. Lo stesso valeva per tutto ciò che diceva il
-  filtro dei pacchetti e per tutto ciò che diceva OpenVPN stesso. Rileggendo un registro dopo,
-  restavano le rotte e quasi nient'altro attorno: già due volte una domanda su una sessione
-  andata male non ha trovato risposta lì dentro, compresa quella se il filtro fosse mai partito.
-  Ora tutto questo finisce nel file.
-
-- **Il controllo che una rotta sia davvero in uso poteva scartarne una che stava per funzionare.**
-  La 0.5.21 ha iniziato a verificare ogni rotta invece di fidarsi del codice di uscita del comando,
-  ed era la scelta giusta; solo che la domanda veniva posta nell'istante stesso in cui la rotta
-  veniva aggiunta. Una rotta che il sistema non ha ancora guardato è indistinguibile da una che ha
-  rifiutato, perciò bastava un attimo di ritardo per buttare via una rotta che avrebbe funzionato:
-  la verifica che sconfigge ciò che verifica. Ora si concedono alla tabella di routing qualche
-  centinaio di millisecondi per assestarsi.
-
-- **Il filtro dei pacchetti ora annota il filtro con cui è stato aperto.** Quando il programma
-  continuava a uscire su internet in IPv6 pur essendo bloccato, dal registro non si poteva capire
-  se la clausola mancasse o se semplicemente non avesse mai trovato corrispondenza. Ora si può.
+- **Il registro conserva finalmente la metà di sessione per cui servirebbe**: i passaggi della finestra, ogni messaggio del filtro dei pacchetti e tutto ciò che ha detto OpenVPN finiscono nel file.
+- **Una rotta non viene più respinta un istante prima di funzionare**; alla tabella di routing si lasciano alcune centinaia di millisecondi per assestarsi.
+- **Il filtro dei pacchetti annota il filtro con cui è stato aperto**, così una clausola assente si distingue da una che non ha mai corrisposto.
 
 ## [0.5.21] - 2026-09-14
 
-### Fixed
+### Corretto
 
-- **I siti che dovevano passare per la VPN non ci passavano, e tutto diceva di sì.** La
-  0.5.20 aggiungeva le rotte, riportava "ok" per ognuna e le lasciava in tabella con una
-  buona metrica. Windows le ignorava tutte.
-
-  Il salto successivo era sbagliato. Un tunnel spesso assegna un indirizzo punto a punto —
-  questo era un /30, con quattro indirizzi in tutto — e il salto era stato indovinato come
-  il .1 della rete, che su un collegamento simile non esiste. Windows non usa una rotta il
-  cui salto successivo non è raggiungibile, quindi il traffico usciva dall'adattatore
-  abituale. E nulla lo diceva: il comando accettava la rotta e restituiva successo.
-
-  Il salto successivo ora si ricava dall'indirizzo che il tunnel ha davvero ricevuto. E
-  "aggiunta" non vale più "funzionante": dopo ogni rotta si chiede al sistema da dove
-  manderebbe realmente un pacchetto, e una rotta non scelta viene segnalata e tolta.
-
-- **Un nome non risolvibile attraverso il tunnel veniva riportato come uguale a quello
-  locale.** Nessuna risposta non è la stessa risposta.
-
-- **La domanda attraverso il tunnel ora ripiega su TCP.** Su quel tunnel il resolver non
-  rispondeva nulla via UDP mentre la connessione alla stessa porta riusciva.
+- **I siti mandati nella VPN non ci passavano mentre tutto diceva di sì**: il salto successivo era indovinato come .1 della rete, che su una /30 non esiste; ora si ricava dall'indirizzo che il tunnel ha davvero ottenuto e ogni rotta è verificata come quella che il sistema userebbe realmente.
+- **Un nome non risolvibile attraverso il tunnel veniva riportato come concorde con la risposta locale**; nessuna risposta non è la stessa risposta, e il registro indica quale resolver e quale trasporto.
+- **L'interrogazione attraverso il tunnel ripiega su TCP**, perché un relay che porta l'uno e non l'altro è comune tra i server gestiti da volontari.
 
 ## [0.5.20] - 2026-09-13
 
-### Added
+### Aggiunto
 
-- **Siti da mandare nella VPN senza mandarci l'intera macchina.** Finora un programma che
-  aveva bisogno che un sito lo *vedesse* arrivare dall'altro capo — invece di dover
-  raggiungere una macchina là — aveva una sola scelta: consegnare tutto.
-
-  Indica i siti e i loro indirizzi vengono risolti e instradati attraverso il tunnel.
-  Risolverli attraverso il tunnel è il punto: una rete di distribuzione risponde in base a
-  da dove è arrivata la domanda, e uno di questi nomi ha risposto da qui con un nodo di
-  Taipei e due ore dopo con indirizzi diversi.
-
-  Il registro riporta per ogni nome entrambe le risposte, che coincidano o no.
-
-  Due cose prima di attivarlo: cambia la tabella di instradamento della macchina, perciò
-  parte vuoto; e durante una sessione quei siti li raggiunge solo l'applicazione di
-  destinazione. All'arresto ogni rotta aggiunta viene tolta.
+- **Siti che potete mandare nella VPN senza mandarci l'intera macchina**: i siti indicati vengono risolti attraverso il tunnel e instradati attraverso di esso, e durante la sessione li raggiunge solo l'applicazione di destinazione.
 
 ## [0.5.19] - 2026-09-13
 
-### Added
+### Aggiunto
 
-- **Un posto per nome utente e password.** Alcuni server chiedono di accedere e non c'era
-  dove scriverlo. Un `auth-user-pass` senza file dopo significa "chiedi alla console", e qui
-  openvpn parte senza finestra e con l'output reindirizzato: fa una domanda che nessuno sente
-  e poi segnala un accesso fallito. La gestione dei profili ora ha un pulsante per ciascuno.
+- **Un posto per nome utente e password**, per i server che chiedono l'accesso; la finestra dice apertamente che openvpn può leggerla solo da un file, quindi resta in chiaro nella cartella propria di quel profilo.
 
-  La password è salvata in chiaro e la finestra lo dice invece di lasciar credere altro. Si
-  trova nella cartella di quel profilo, che possono aprire solo tu, SYSTEM e gli
-  amministratori, e non viene mai riletta per essere mostrata.
+### Corretto
 
-### Fixed
-
-- **L'applicazione di destinazione usciva su internet via IPv6, aggirando il tunnel.**
-  Trovato osservando una sessione vera: quattro minuti, quattro destinazioni, una via IPv6.
-  Questa macchina ha un indirizzo IPv6 globale dell'operatore e il tunnel è IPv4.
-
-  Era una perdita in ogni modalità, compresa quella che consegna l'intera macchina alla VPN.
-  Ora l'IPv6 della destinazione viene scartato durante la sessione; quello degli altri no.
-
-- **"Aggiornato" senza aver chiesto.** A limite orario esaurito, il controllo riportava la
-  versione già installata come se avesse guardato. Ora dice che non è riuscito a controllare
-  e quando riproverà.
+- **La destinazione raggiungeva Internet via IPv6, aggirando del tutto il tunnel**: una fuga in ogni modalità, poiché un tunnel che porta IPv4 non può portare ciò che la macchina invia su IPv6; ora l'IPv6 della destinazione viene scartato.
+- **«Nessun aggiornamento» quando non era stato chiesto nulla**: a quota esaurita riportava la versione già presente, e il validatore che rende gratuita la verifica ora si conserva tra le esecuzioni.
 
 ## [0.5.18] - 2026-09-13
 
-### Fixed
+### Corretto
 
-- **La finestra Informazioni ringraziava WinDivert senza dire a quali condizioni è usato.**
-  È la GNU LGPL v3, che chiede al programma di dirlo, di nominare la licenza e di indicare
-  la copia che distribuisce; un ringraziamento non è nessuna delle tre. Ora ci sono tutte e
-  tre. Ed è indicato che OpenVPN viene scaricato da openvpn.net anziché distribuito qui.
-- **I posti liberi di una sala di Warcraft III non cambiavano mai sull'altra macchina.**
-  Apri un posto dove sedeva un computer e l'altro continuava a vedere la sala com'era,
-  finché non usciva dall'elenco delle partite e rientrava.
-
-  Chi ha già la sala nel proprio elenco non rilegge l'annuncio completo. Prende i numeri da
-  un piccolo pacchetto che l'host trasmette ogni volta che la sala cambia, e ricostruisce la
-  voce solo quando l'elenco viene riaperto. Quel pacchetto è in broadcast, e il broadcast è
-  proprio ciò che qui non si riesce a intercettare: la porta su cui bisognerebbe ascoltare è
-  già occupata dal gioco. Perciò ora viene ricavato dall'annuncio e inviato quando i numeri
-  si muovono.
-
-  I numeri vengono controllati prima: si leggono da una posizione fissa in fondo a un
-  pacchetto la cui disposizione è stata dedotta, e una partita ha da uno a ventiquattro
-  posti e non può averne di liberi più di quanti ne abbia. Altrimenti la lettura è
-  sbagliata, e allora non si invia nulla.
-
-- **Il download dell'aggiornamento teneva ancora ferma la finestra.** La 0.5.16 diceva di
-  averlo corretto. Il trasferimento in background, la barra di avanzamento e il pulsante di
-  annullamento erano scritti e nulla li chiamava mai.
-
-  Ora avviene davvero in background, e all'avvio la finestra di dialogo offre **Continua in
-  background**: la finestra si chiude, il trasferimento prosegue e riferisce nella barra
-  della finestra principale, dove può anche essere annullato. Annullare e fallire ora si
-  distinguono — prima entrambi aprivano la pagina della versione nel browser.
+- **La finestra Informazioni ringraziava WinDivert senza dire a quali condizioni è usato**, e ora nomina la LGPL v3, la copia distribuita accanto al programma e dove sono i sorgenti.
+- **I posti liberi di una stanza di Warcraft III non cambiavano mai sull'altra macchina**, perché l'annuncio che l'altro capo legge è broadcast e non si può catturare; ora è ricavato dall'inserzione e controllato prima di essere inviato.
+- **Il download dell'aggiornamento continuava a tenere la finestra**: la 0.5.16 lo dava per risolto mentre nulla richiamava quel codice; ora gira davvero in secondo piano, con **Continua in secondo piano** nella finestra di dialogo e l'annullamento in quella principale.
 
 ## [0.5.17] - 2026-09-13
 
-### Fixed
+### Corretto
 
-- **Bastava che un giocatore uscisse dalla sala di Warcraft III perché non entrasse più
-  nessuno.** Segnalato così: metti il posto di qualcuno su computer, aperto o chiuso e non
-  riesce più a rientrare. Sono tre modi di far cadere la sua connessione, e un giocatore
-  che se ne va da solo fa lo stesso.
-
-  Un socket in ascolto e ogni connessione accettata su di esso condividono una porta
-  locale. L'elenco di quali porte appartengono al gioco era tenuto per porta, così
-  l'ascolto e le connessioni condividevano una voce, e la prima connessione a chiudersi se
-  la portava via. Warcraft è ancora in ascolto e continua ad annunciarsi, quindi la sala
-  resta nell'elenco di tutti — ma ogni pacchetto che arriva su quella porta non è più di
-  nessuno agli occhi del filtro, e viene scartato. Visibile e inaccessibile, per tutti,
-  finché l'host non crea un'altra partita.
-
-  Ora ogni socket è tenuto da conto separatamente, e una porta smette di appartenere al
-  gioco quando si chiude l'ultimo, non il primo.
-
-- **L'applicazione di destinazione girava ancora come amministratore.** La 0.5.16 diceva di
-  averlo corretto e non l'aveva fatto. Dare a un processo l'identità dell'utente connesso si
-  può fare in due modi, che chiedono permessi diversi: quello usato richiede un privilegio
-  che un amministratore con elevazione non ha e non può ottenere, quindi falliva ogni volta
-  e il vecchio comportamento subentrava in silenzio. Ora usa quello il cui permesso
-  l'assistente possiede davvero.
+- **Se un giocatore usciva dalla lobby di Warcraft III, nessuno riusciva più a entrare**, perché il listener e ogni connessione accettata condividevano una sola voce di porta e la prima chiusura se la portava via; ora ogni socket è seguito a parte.
+- **L'applicazione di destinazione girava ancora come amministratore**: la via della 0.5.16 richiedeva un privilegio che un helper elevato non può avere, quindi si usa quello che ha e il registro dice quale.
 
 ## [0.5.16] - 2026-09-13
 
 ### Aggiunto
 
-- **Un installer in ogni lingua che l'applicazione parla.** Ne parlava undici e il suo
-  installer due. Ora sono undici, ciascuno con la codepage ANSI giusta.
-- **La finestra si apre dove l'hai lasciata.** Dimensione, posizione e se era ingrandita.
-  Si salva la dimensione ripristinata, e una posizione che non cade più su nessuno schermo
-  viene scartata.
-- **Una nuova icona.** La vecchia era una barra con due punti e non diceva nulla di cosa
-  faccia questo programma. Ora è una freccia che esce dall'apertura di un anello: il
-  tunnel, e l'unica applicazione che lo attraversa. Disegnata separatamente a ogni
-  dimensione. L'anello è aperto dal lato da cui esce la freccia, perché uno chiuso con una
-  linea è il segnale di divieto.
+- **Un installer in ogni lingua parlata dall'applicazione**, ciascuno con la codepage ANSI della propria cultura, e l'aggiornamento propone quello corrispondente alla lingua della finestra.
+- **La finestra si apre dove l'avete lasciata**, a meno che quella posizione non cada più su uno schermo.
+- **Una nuova icona**: una freccia che esce dall'apertura di un anello, disegnata separatamente a ogni dimensione anziché ridotta da un'immagine grande.
 
 ### Corretto
 
-- **Avvia finiva sotto la piega.** I due pulsanti erano l'ultima cosa nella colonna delle
-  schede di configurazione, e quella colonna scorre. Non appena le schede bastavano a
-  riempirla — e a un'altezza di finestra ordinaria bastano — l'azione principale
-  dell'applicazione diventava qualcosa da cercare scorrendo. Ora i pulsanti sono fissati
-  sotto le schede, e sono le schede a scorrere dietro di loro.
-- **L'applicazione di destinazione girava come amministratore.** L'assistente che la avvia
-  deve esserlo, e un processo figlio eredita il token del padre. Un programma elevato è
-  isolato dal desktop non elevato: è così che un gioco che accede dal browser non riceve
-  mai il suo codice di autorizzazione. Ora viene avviato con il token della shell, come te.
-- **Scaricare un aggiornamento bloccava l'intera finestra.** Ora avviene in secondo piano,
-  con l'avanzamento in una barra della finestra principale.
+- **Avvia stava sotto la piega**; i pulsanti ora sono fissati sotto le schede, che scorrono dietro di essi.
+- **L'applicazione di destinazione girava come amministratore**, così un accesso dal browser non poteva mai consegnarle il codice di autorizzazione; ora parte con il token della shell.
+- **Scaricare un aggiornamento teneva in ostaggio l'intera finestra**, e ora gira in secondo piano con barra di avanzamento e un pulsante di annullamento che funziona.
 
 ## [0.5.15] - 2026-09-13
 
 ### Corretto
 
-- **Un solo rifiuto del server chiudeva il tentativo.** openvpn considera fatale un
-  accesso rifiutato ed esce al primo: giusto per un server tuo, sbagliato per un relay
-  pubblico, che rifiuta perché è pieno o perché il volontario che lo teneva non c'è più, e
-  lo stesso profilo si connette un minuto dopo. Ora riprova, e si ferma dopo tre volte
-  così che una password davvero sbagliata venga comunque segnalata.
-- **"EXITING auth-failure" non spiegava nulla.** Sembra una password sbagliata, e dopo che
-  un certificato è stato accettato di solito non lo è. Il messaggio ora dice quale passo è
-  fallito e cosa significa.
+- **Un solo rifiuto del server chiudeva il tentativo**, corretto per un server proprio e sbagliato per un relay pubblico; ora riprova tre volte prima di segnalare.
+- **«EXITING auth-failure» non spiegava nulla** e ora dice quale passaggio è fallito e cosa significa per il tipo di server che usate.
 
 ## [0.5.14] - 2026-09-12
 
 ### Aggiunto
 
-- **Un profilo importato ora appartiene all'applicazione.** Prima si ricordava dove fosse
-  il file e lo si rileggeva a ogni avvio, il che regge finché il file non si sposta, la
-  chiavetta non esce o la cartella Download non viene svuotata. Ora viene copiato in una
-  cartella propria, insieme a ogni certificato e chiave a cui fa riferimento, e quei
-  riferimenti vengono riscritti verso le copie.
-- **Un posto dove vedere cosa è conservato.** Un pulsante Gestisci accanto a Importa: cosa
-  c'è, quale è in uso, rinomina, elimina e una porta sulla cartella.
-- **OpenVPN, se non ce l'hai.** Questa applicazione pilota il client community di OpenVPN;
-  non lo contiene. Ora lo dice prima di partire e propone di scaricare la versione attuale
-  dal server ufficiale di OpenVPN e installarla, rifiutando qualunque cosa Windows non
-  accetti o che non sia firmata da OpenVPN.
-- **Test per l'installer.** Cosa c'è nel pacchetto e un percorso fra le sue pagine nelle
-  due lingue. Si ferma al riepilogo e annulla: eseguire la suite non installa nulla.
-- **Un test che guarda i pixel.** Ogni riga di spiegazione viene fotografata in entrambi i
-  temi e misurata contro ciò che ha dietro.
+- **Un profilo importato ora appartiene all'applicazione**: il .ovpn e ogni certificato e chiave a cui rimanda vengono copiati in una cartella propria, quindi cancellare l'originale non cambia nulla.
+- **Un posto per vedere cosa è conservato**, con rinomina, eliminazione e un accesso alla cartella, con la conferma nella riga stessa.
+- **OpenVPN, se non lo avete**, prelevato dall'host di download di OpenVPN e rifiutando tutto ciò di cui Windows non si fida o che OpenVPN non ha firmato.
+- **Test per l'installer**, che ne percorrono le pagine nelle due lingue e annullano al riepilogo, così eseguire la suite non installa nulla.
+- **Un test che guarda i pixel**, misurando ogni riga esplicativa di Impostazioni e Informazioni contro il proprio sfondo, in entrambi i temi.
 
 ### Corretto
 
-- **Tre righe della finestra Informazioni erano invisibili.** Erano dipinte con un pennello
-  preso dalle risorse dell'applicazione, che si risolve sul tema dell'applicazione stessa —
-  e un'applicazione WinUI non pacchettizzata non può cambiarlo dopo l'avvio, mentre le
-  finestre di dialogo sono disegnate nel tema che hai scelto.
-- **Il controllo aggiornamenti ha smesso di bussare.** Sessanta all'ora è esattamente il
-  limite senza autenticazione. Ora legge quando torna la quota e aspetta.
-
-- **L'installer scriveva sopra la propria grafica.** Quelle immagini non sono disegni
-  accanto al testo: sono lo sfondo su cui la finestra scrive, nel suo colore scuro, e dove
-  lo decide lei. Riempire tutti i 493 pixel con una sfumatura blu metteva ogni titolo scuro
-  su scuro. Ora la grafica è una fascia a sinistra e un blocco a destra nel banner.
-- **L'aggiornamento offriva a tutti l'installer inglese.** Una release porta un MSI per
-  lingua e l'aggiornamento prendeva il primo dell'elenco, cioè quello caricato per primo.
-  Ora chiede quello che corrisponde alla lingua della finestra, e ripiega sull'inglese
-  quando quella lingua non ne ha uno proprio.
+- **Tre righe in Informazioni erano invisibili**, perché un pennello preso dalle risorse dell'applicazione si risolve con il tema dell'applicazione stessa, che un'app WinUI non pacchettizzata non può cambiare dopo l'avvio.
+- **Il controllo aggiornamenti aveva smesso di chiedere con garbo**: ora legge quando torna la quota e aspetta, e lo dice una volta invece di sessanta.
+- **L'installer scriveva sopra la propria grafica**, che è lo sfondo su cui la finestra scrive e non un'immagine accanto al testo.
+- **L'aggiornamento dava a tutti l'installer inglese**, e ora chiede quello corrispondente alla lingua della finestra.
 
 ### Modificato
 
-- Sotto ogni impostazione una riga che dice cosa cambia e dove viene conservata.
-- Informazioni spiega come vengono cercati gli aggiornamenti e cita OpenVPN e WinDivert.
+- Sotto ogni impostazione una riga dice cosa cambia e dove sono conservate le impostazioni.
+- Informazioni indica ogni quanto si cercano gli aggiornamenti e ringrazia il client della community di OpenVPN e WinDivert.
 
 ## [0.5.13] - 2026-09-12
 
 ### Aggiunto
 
-- **Il suono.** WinUI ha un sistema sonoro dentro ogni controllo — messa a fuoco,
-  attivazione, finestre di dialogo che si aprono e si chiudono — e tace finché
-  un'applicazione non lo chiede. Questa non l'aveva mai chiesto: ogni pressione era muta per
-  omissione e non per scelta. Ora è una scelta, è spaziale, e nelle impostazioni c'è una
-  casella per chi preferisce un'utilità silenziosa.
-- **Movimento dove è successo qualcosa.** Le due colonne compaiono mentre la finestra si
-  monta, il testo di stato riemerge quando cambia, il conteggio inoltrato sobbalza quando
-  sale, la spia respira durante una sessione, e una riga di avviso spinge le vicine invece
-  di comparire dal nulla.
-- **Il disegno riferisce invece di recitare.** Faceva la stessa animazione che stesse
-  accadendo qualcosa o no: decorazione travestita da strumento. Senza sessione è smorzato e
-  fermo, con la sessione si muove, e la cella bloccata mostra quanti pacchetti la guardia
-  ha davvero scartato — un numero che all'interfaccia non era mai arrivato, perché nessuno
-  aveva mai ascoltato l'evento che lo porta.
-- **Un programma di installazione che somiglia a questo prodotto**, con immagini generate
-  al posto dei segnaposto di WiX.
-- **Un programma di installazione nella tua lingua**: un MSI per lingua invece dell'inglese
-  per tutti. Inglese e cinese tradizionale per cominciare.
+- **Un pianoforte a coda**: i suoni dei controlli passano dal sintetizzatore General MIDI già presente in Windows, su una scala pentatonica perché due note qualsiasi si accordino, con una casella per zittirlo.
+- **Movimento dove è successo qualcosa**, e non ovunque.
+- **Il diagramma riferisce invece di mimare**: fermo senza sessione, e la cella dei bloccati mostra i pacchetti che la guardia ha davvero scartato.
+- **Un installer che somiglia a questo prodotto**, con grafica generata anziché i segnaposto di WiX.
+- **Un installer nella vostra lingua**, un MSI per lingua, per cominciare inglese e cinese tradizionale.
 
 ### Modificato
 
-- L'avviso sul confinamento per processo compare ora quando la casella è **vuota**, che è
-  lo stato che merita un avviso, e dice cosa significa quello stato invece di ripetere
-  l'etichetta.
+- L'avviso sotto il confinamento per processo compare ora quando la casella è **vuota**, lo stato su cui vale la pena avvertire.
 
 ## [0.5.12] - 2026-09-12
 
 ### Corretto
 
-- **La cartella di installazione conteneva ottantotto cartelle di traduzioni per lingue che
-  questa applicazione non offre** — af-ZA, sl-SI, fil-PH e le altre. Sono le stringhe del
-  Windows App SDK stesso, distribuite come risorse Win32 e non come assembly satellite
-  .NET, quindi l'impostazione consueta per sfoltirle non le raggiunge. Ora restano solo
-  quelle corrispondenti a una lingua che l'interfaccia parla: quindici invece di ottantotto.
+- **La cartella di installazione conteneva ottantotto cartelle di traduzioni per lingue che questa applicazione non offre**, incluse come risorse Win32 che la consueta impostazione di sfoltimento non raggiunge; ora ne restano quindici.
 
 ### Modificato
 
-- L'opzione per processo si chiama *Solo l'applicazione di destinazione può parlare con la
-  VPN*, che è ciò che fa. Non ha mai governato l'intero tunnel.
+- L'opzione per processo si chiama *Solo l'applicazione di destinazione può parlare con la VPN*, che è ciò che fa; non ha mai governato l'intero tunnel.
 
 ### Aggiunto
 
-- **Altre dieci verifiche che guidano la finestra vera**, sulle finestre di dialogo e su
-  ciò che contengono. Scriverle ha trovato due cose da sé: una finestra di dialogo qui non
-  è una finestra e non si chiama come sembrava, così quattro test cercavano qualcosa che
-  non è mai esistito; e Avvia non è disponibile senza un profilo, invece di accettare la
-  pressione e non fare nulla.
+- **Altri dieci controlli che pilotano la finestra vera**, sulle finestre di dialogo e sulle scelte al loro interno — e scriverli ha trovato quattro test che cercavano qualcosa mai esistito.
 
 ## [0.5.11] - 2026-09-12
 
 ### Corretto
 
-- **La modalità scura era testo bianco su pagina bianca.** Il tentativo precedente dipingeva
-  lo sfondo su un elemento e applicava il tema a quello interno, così il testo si risolveva
-  nel tema scuro e la superficie dietro nel chiaro. Il tema ora sta sull'elemento che
-  dipinge lo sfondo, dove i due concordano.
-- **L'icona della sezione di destinazione veniva disegnata come un quadrato vuoto.** Che un
-  code point sia nella tabella caratteri di un font non significa che il font ne abbia il
-  glifo. I tre segni di sezione ora sono emoji.
-- **I controlli di ogni sezione stavano centrati** in una scheda che aveva già la larghezza
-  giusta. Un expander allarga sé stesso, non il proprio contenuto.
-- **Scegliere il collegamento e premere Avvia senza scegliere un programma sollevava
-  un'eccezione.** Il controllo aggiunto per un eseguibile mancante non copre il
-  collegamento, a cui manca altro. Ora dice cosa manca, e il messaggio non chiede più di
-  digitare un identificatore di processo in un controllo che è un elenco.
+- **La modalità scura era testo bianco su pagina bianca**, perché il tema era applicato a un elemento interno a quello che dipinge lo sfondo.
+- **L'icona della sezione destinazione appariva come un quadrato vuoto**, poiché un code point presente nella mappa di un font non significa che esista un glifo.
+- **I controlli di ogni sezione erano centrati** in una scheda che aveva già la larghezza giusta.
+- **Scegliere di agganciarsi e premere avvia senza scegliere un programma sollevava un'eccezione**, e ora viene detto quale scelta manca.
 
 ### Aggiunto
 
-- **Test che guidano la finestra vera.** Tutti i difetti visivi segnalati finora
-  supererebbero qualunque test unitario del progetto, perché nessuno riguarda ciò che
-  restituisce un metodo. Diciannove verifiche ora aprono la build pubblicata e guardano.
+- **Test che pilotano la finestra vera**: diciannove controlli aprono la build pubblicata e guardano, perché ogni difetto visivo segnalato finora poteva superare tutti i test unitari del progetto.
 
 ## [0.5.10] - 2026-09-12
 
 ### Corretto
 
-- **La riga di avviso allargava la colonna invece di andare a capo.** Una pila orizzontale
-  misura i figli con larghezza illimitata, quindi un blocco di testo a capo automatico al
-  suo interno non va mai a capo: allarga tutto ciò che ha accanto, pulsante compreso.
-  Entrambe le note ora stanno in una griglia che dà al testo una larghezza vera.
-- **Impostazioni e informazioni comparivano due volte.** La coppia accanto alle schede di
-  stato è rimasta lì quando sono salite in alto a destra.
-- **L'elenco dei processi proponeva questa stessa applicazione.** Collegare il tunnel alla
-  finestra che lo configura non è nelle intenzioni di nessuno.
+- **La riga di avviso allargava la colonna invece di andare a capo**, perché una pila orizzontale misura i figli con larghezza illimitata.
+- **Impostazioni e informazioni sull'applicazione comparivano due volte**, con la vecchia coppia rimasta al suo posto quando sono passate in alto a destra.
+- **Il selettore dei processi offriva questa stessa applicazione.**
 
 ### Modificato
 
-- **Il disegno usa lo spazio che gli è stato dato.** Le rotte si allungano con la finestra
-  invece di restare a larghezza fissa nell'angolo di una scheda grande e vuota, e i pacchetti
-  percorrono tutta quella larghezza.
-- **La nota sul confinamento per processo compare solo quando è attivo**, con lo stesso segno
-  di avviso di quella sull'instradamento, e dice cosa fa: i pacchetti di ogni altro programma
-  di qui vengono fermati.
-- Il percorso del programma di destinazione si vede per intero al passaggio del puntatore,
-  per quanto stretta sia la casella.
+- **Il diagramma riempie lo spazio che gli viene dato**, invece di restare a larghezza fissa nell'angolo di una scheda grande e vuota.
+- **La nota sotto il confinamento per processo compare solo mentre è attivo**, e dice cosa fa.
+- Il percorso della destinazione si vede per intero al passaggio del mouse, per quanto stretta sia la casella.
 
 ## [0.5.9] - 2026-09-12
 
 ### Corretto
 
-- **La modalità scura era inutilizzabile.** La pagina non dipingeva mai uno sfondo proprio,
-  quindi il testo seguiva il tema e la superficie dietro no: testo chiaro su fondo chiaro.
-  Anche le finestre di dialogo mantenevano l'aspetto di sistema, perché una finestra di
-  dialogo è ospitata dalla radice della finestra e non dall'elemento su cui il tema è stato
-  impostato, e andava avvisata a parte.
+- **La modalità scura era inutilizzabile**, perché la pagina non dipingeva mai uno sfondo proprio e alle finestre di dialogo il tema andava indicato a parte.
 
 ### Aggiunto
 
-- **I due interruttori di confinamento ora sono un disegno.** Una griglia di chi invia
-  contro dove, con il traffico che percorre ogni rotta: dal tunnel, dall'uscita di sempre,
-  oppure fermato. Le quattro celle sono tutte le combinazioni delle due impostazioni, e
-  rispondono a colpo d'occhio a ciò che due paragrafi di testo non riuscivano a spiegare.
-- **Il collegamento si sceglie da un elenco di programmi in esecuzione** invece di chiedere
-  un identificatore di processo cercato altrove, con un pulsante per aggiornarlo.
+- **I due interruttori di confinamento ora sono un'immagine**, una griglia di chi invia contro dove, che risponde a colpo d'occhio a ciò che due paragrafi non riuscivano a dire.
+- **L'aggancio si sceglie da un elenco di programmi in esecuzione**, invece di chiedere un identificatore di processo copiato da altrove.
 
 ### Modificato
 
-- L'avviso sull'instradamento compare solo finché quell'opzione è attiva, dice una cosa
-  sola, e la dice nel colore di un avviso.
-- Le sezioni hanno perso la numerazione: non sono mai stati passi da seguire in ordine.
-- Impostazioni e informazioni sull'applicazione sono passate in alto a destra, con le
-  schede di stato subito sotto.
+- L'avviso di routing compare solo mentre quell'opzione è attiva, dice una cosa e la dice nel colore di un avviso.
+- Le sezioni hanno perso la numerazione; non sono mai stati passaggi da seguire in ordine.
+- Impostazioni e informazioni sono passate in alto a destra, con le schede di stato sotto.
 
 ## [0.5.8] - 2026-09-12
 
 ### Corretto
 
-- **Riservare il tunnel a una sola applicazione funzionava in una direzione soltanto.**
-  Scartava il traffico che gli altri programmi di qui mandavano alla VPN e non faceva nulla
-  di quello che ne arrivava: tutti gli altri programmi di questo computer restavano quindi
-  raggiungibili dall'altro capo, che è la metà che conta quando non si sa chi ci sia. Ora
-  vale in entrambe le direzioni, e la spiegazione lo dice invece di promettere più di quanto
-  facesse.
+- **Confinare il tunnel a una sola applicazione funzionava solo in una direzione**, lasciando ogni altro programma qui raggiungibile dall'altro capo, che è la metà che conta quando non sapete chi ci sia.
 
 ### Modificato
 
-- **L'opzione di instradamento è ora al contrario.** Tenere il resto del computer fuori dal
-  tunnel è lo stato sicuro e quello che vogliono quasi tutti, quindi non dovrebbe essere da
-  attivare. La casella ora dice *Inviare tutto il traffico attraverso la VPN*, è disattivata
-  per impostazione predefinita e spiega cosa comporta attivarla: tutto ciò che questo
-  computer invia passa prima dal server VPN, e chi lo gestisce vede tutto. Conta soprattutto
-  con un profilo che ti ha dato qualcun altro.
+- **L'opzione di routing è ora al contrario**: *Invia tutto il traffico attraverso la VPN*, disattivata per impostazione predefinita, dicendo cosa significa attivarla per chi gestisce quel server.
 
 ### Aggiunto
 
-- **Aspetto chiaro e scuro**, o come il sistema, applicato subito e ricordato. In Aspetto,
-  nelle impostazioni.
-- **Icone in tutta l'interfaccia** — su ogni sezione, su Avvia e Arresta e sulle azioni del
-  registro — e una spia di stato verde finché una sessione è in corso.
+- **Aspetto chiaro e scuro**, o seguendo il sistema, applicato subito e ricordato.
+- **Icone in tutta l'interfaccia** e una spia di stato verde mentre una sessione è in corso.
 
 ## [0.5.7] - 2026-09-12
 
 ### Corretto
 
-- **Uno scaricamento non si poteva annullare.** Il pulsante diceva *Annulla* e non era
-  premibile: lo scaricamento veniva eseguito trattenendo il rinvio del clic della finestra
-  di dialogo, e una finestra con un rinvio in sospeso disabilita i propri pulsanti, compreso
-  l'unico che avrebbe potuto fermarlo. Ora il trasferimento procede accanto alla finestra
-  anziché dentro il suo gestore del clic, così il pulsante è attivo esattamente finché c'è
-  qualcosa da annullare.
-- **Uno scaricamento annullato o fallito lasciava il proprio file parziale**, uno per
-  tentativo, per sempre. Ora il file incompleto viene scartato quando il trasferimento non
-  arriva in fondo, e uno scaricamento completato ripulisce i programmi di installazione
-  precedenti.
-- **Premere Avvia senza nulla da avviare non faceva assolutamente niente**: nessun
-  messaggio, nessuna riga di registro, nessun cambiamento. Senza profilo, o senza
-  un'applicazione scelta, ora dice quale manca invece di sembrare guasto.
+- **Un download non si poteva annullare**, perché girava tenendo il differimento del clic della finestra, che le fa disattivare i propri pulsanti.
+- **Un download annullato o fallito lasciava il file parziale**, uno per tentativo, per sempre.
+- **Premere Avvia senza nulla da avviare non faceva proprio nulla**, e ora viene detto quale scelta manca.
 
 ### Modificato
 
-- **Installare un aggiornamento mentre una sessione è in corso ora avvisa prima**, e la
-  risposta prudente è quella predefinita. Installare ferma il tunnel e disconnette
-  l'applicazione di destinazione: non è una cosa da scoprire dopo.
+- **Installare un aggiornamento con una sessione in corso avverte prima**, con la risposta sicura come predefinita, poiché l'installazione disconnette l'applicazione di destinazione.
 
 ## [0.5.6] - 2026-09-12
 
 ### Corretto
 
-- **Una nuova versione viene notata circa un minuto dopo la pubblicazione**, invece che al
-  controllo programmato successivo. Chiedere così spesso è sostenibile perché la richiesta è
-  condizionale: si rimanda indietro il validatore della risposta precedente e, finché la
-  versione non cambia, la risposta è «non modificato» — senza corpo e senza contare per il
-  limite di richieste. Solo una versione davvero nuova consuma una richiesta. Resta
-  comunque un'interrogazione e non una notifica, quindi un minuto e non un istante, ma non
-  c'è nulla da premere né da riavviare.
-- **Chiudere l'avviso di aggiornamento non lasciava modo di tornarci.** La chiusura valeva
-  per tutta la sessione e solo un riavvio lo riportava. Ora sia la finestra delle
-  informazioni sia le impostazioni offrono *Aggiorna ora* finché un aggiornamento è in
-  attesa, così chiudere l'avviso chiude soltanto l'avviso.
-- **Il pulsante diceva *Arresta* quando non restava più nulla da arrestare.** Quando
-  l'applicazione di destinazione esce, la sessione attende fino a venti secondi per vedere
-  se un launcher passa il testimone a un altro processo: in quel frattempo ciò per cui la
-  sessione esiste è già morto. In quella finestra il pulsante dice *Arresto forzato*, che è
-  ciò che fa davvero: chiudere subito la sessione invece di aspettare il passaggio.
+- **Una nuova versione viene notata circa un minuto dopo la pubblicazione**, con una richiesta condizionale che non costa nulla finché nulla è cambiato.
+- **Chiudere l'avviso di aggiornamento non lasciava modo di tornarci**; impostazioni e finestra informazioni offrono ora *Aggiorna ora* finché uno è in attesa.
+- **Interrompi diceva *Interrompi* quando non c'era più nulla da interrompere**, e dice *Forza interruzione* durante l'attesa di un passaggio di consegne.
 
 ### Modificato
 
-- **Tutto ciò che riguarda l'aggiornamento è ora nella finestra delle informazioni
-  sull'applicazione**, e il suo pulsante porta un contrassegno finché un aggiornamento è in
-  attesa. Il controllo automatico, il controllo immediato, l'ora dell'ultimo controllo e
-  l'aggiornamento stesso stanno accanto alla versione con cui si confrontano, invece di
-  essere divisi fra lì e le impostazioni.
-- **Il programma di installazione scaricato viene conservato se si sceglie *Più tardi*.**
-  Prima, non installare subito buttava via lo scaricamento; ora lo stesso pulsante offre
-  *Installa ora* finché la versione a cui appartiene non viene superata.
+- **Tutto ciò che riguarda l'aggiornamento sta nella finestra informazioni**, accanto alla versione con cui si confronta.
+- **Un installer scaricato viene conservato se scegliete *Più tardi***, finché la sua versione non è superata.
 
 ## [0.5.5] - 2026-09-12
 
 ### Corretto
 
-- **I controlli automatici degli aggiornamenti erano troppo radi per sembrare automatici.**
-  Quattro ore fra l'uno e l'altro volevano dire che in pratica solo un riavvio trovava
-  qualcosa, e il meccanismo vero diventava un pulsante nelle impostazioni — e nessuno vuole
-  premere un pulsante per sentirsi dire che non c'è niente di nuovo. Ora il controllo
-  avviene ogni trenta minuti, e anche quando si porta la finestra in primo piano se
-  l'ultimo risale a più di cinque minuti fa. Le impostazioni mostrano quando è avvenuto
-  l'ultimo, così si vede che accade.
-- **Le due opzioni di confinamento si leggevano come doppioni.** Entrambe erano formulate
-  come «limitare il tunnel», senza dire che limitano cose diverse. Ora ogni etichetta nomina
-  il proprio asse — *Solo gli indirizzi della VPN passano dal tunnel* contro *Solo
-  l'applicazione di destinazione può usare il tunnel* — e ogni spiegazione apre dicendo a
-  quale domanda risponde: quali destinazioni, o quale programma.
+- **I controlli automatici erano troppo rari per sembrare automatici**: ora ogni trenta minuti, e anche quando la finestra torna in primo piano se l'ultimo risale a più di cinque minuti.
+- **Le due opzioni di confinamento si leggevano come doppioni**, e ogni etichetta ora nomina il proprio asse: quali destinazioni, o quale programma.
 
 ### Modificato
 
-- **Il pulsante dell'avviso si chiama *Aggiorna ora***, non *Novità*. Quello che fa è
-  installare l'aggiornamento; mostrare le note è ciò che fa strada facendo.
-- **Le impostazioni possono avviare un aggiornamento**, non solo cercarlo.
-- **La striscia vuota in cima alla finestra non c'è più.** Impostazioni e informazioni
-  sull'applicazione sono scese accanto alle schede di stato, l'unica cosa che stava lassù.
-- **Il conteggio degli annunci inoltrati compare solo con Warcraft III.** È l'unico
-  protocollo le cui informazioni di partita vanno chieste e inoltrate; con gli altri il
-  contatore resterebbe a zero per sempre, il che si legge come un guasto e non come «non
-  applicabile».
+- **Il pulsante del banner si chiama *Aggiorna ora*** anziché *Novità*, perché installare è ciò che fa.
+- **Anche dalle impostazioni si può avviare un aggiornamento**, non solo cercarlo.
+- **La striscia vuota in cima alla finestra è sparita.**
+- **Il conteggio degli annunci inoltrati si mostra solo per Warcraft III**, l'unico protocollo a cui si applica.
 
 ## [0.5.4] - 2026-09-12
 
 ### Corretto
 
-- **La finestra di aggiornamento mostrava le note come sorgente Markdown** — cancelletti,
-  asterischi e apici inversi — invece di formattarle, rendendo faticoso leggere proprio ciò
-  che è scritto per essere letto. Titoli, elenchi, enfasi e codice in linea ora sono
-  formattati.
-- **L'aggiornamento non chiudeva prima l'applicazione.** Il programma di installazione
-  partiva mentre il tunnel e il processo ausiliario con privilegi tenevano ancora i file
-  che stava per sostituire. Ora la sessione viene chiusa e questo processo termina prima
-  che l'installazione parta, e il programma di installazione chiude un'istanza rimasta
-  invece di lasciare che trasformi un aggiornamento in una richiesta di riavvio.
-- **La finestra e la barra delle applicazioni mantenevano un'icona generica** mentre l'area
-  di notifica e Installazione applicazioni mostravano quella vera. Una finestra non
-  pacchettizzata non prende l'icona dall'eseguibile da sola.
-- **L'etichetta cinese di «Tenere il resto del computer fuori dal tunnel» descriveva
-  l'impostazione sbagliata.** Si leggeva come «tenere fuori dal tunnel il traffico delle
-  altre applicazioni», che è ciò che fa il confinamento per applicazione, e faceva sembrare
-  le due opzioni dei doppioni. Sono ortogonali: una limita quali destinazioni usano il
-  tunnel, l'altra quale processo può usarlo.
+- **La finestra di aggiornamento mostrava le note come sorgente Markdown** invece di formattarle, rendendo faticoso da leggere ciò che era scritto per essere letto.
+- **L'aggiornamento non chiudeva prima l'applicazione**, così l'installer sostituiva file ancora tenuti dal tunnel e dall'helper.
+- **Finestra e barra delle applicazioni conservavano un'icona generica**, perché una finestra non pacchettizzata non prende da sola l'icona dall'eseguibile.
+- **L'etichetta cinese di «tenere il resto della macchina fuori dal tunnel» descriveva l'altra impostazione**, facendo sembrare doppioni due opzioni ortogonali.
 
 ### Modificato
 
-- **Il nome e il sottotitolo non occupano più la parte alta della finestra.** La barra del
-  titolo dice già di cosa si tratta, e i dettagli sono passati nella finestra delle
-  informazioni.
-- **La finestra delle informazioni non ripete più il nome che le fa da titolo** e lascia
-  l'apertura della cartella dei log al pannello del registro, dove quel pulsante già stava.
-  La versione, che è il motivo per cui la si apre, è ora abbastanza grande da leggersi al
-  volo.
+- **Nome e slogan non occupano più la parte alta della finestra**; la barra del titolo dice già cos'è.
+- **La finestra informazioni non ripete più il nome del proprio titolo**, e mostra la versione abbastanza grande da leggersi a colpo d'occhio.
 
 ## [0.5.3] - 2026-09-12
 
 ### Corretto
 
-- **Una partita ospitata su una macchina si vedeva dall'altra ma non si riusciva a
-  entrarci.** In entrata veniva aperta solo la porta di individuazione, che non è
-  necessariamente quella su cui l'host resta in ascolto: Warcraft III prende la 6112 se può
-  e sale fino alla 6119 se non può, annunciando quella che ha ottenuto. Un host spinto via
-  dalla 6112 risultava quindi visibile e irraggiungibile, e solo in quella direzione, il che
-  faceva sembrare che il problema fosse di una delle due macchine. Ora viene aperto l'intero
-  intervallo di hosting, sempre e solo verso la sottorete della VPN.
-- **Una partita restava nell'elenco dell'altro giocatore dopo che l'host l'aveva
-  lasciata.** Warcraft III annuncia la chiusura in broadcast, e un broadcast può uscire
-  dalla scheda della VPN, dove il relè deliberatamente non ascolta: l'annuncio non veniva
-  mai raccolto e l'altro capo continuava a proporre una partita che non esisteva più. Ora
-  il relè si accorge che l'host ha smesso di rispondere alle sue sonde e la ritira da sé,
-  usando l'ultimo annuncio inoltrato per dire di quale si trattava.
-- **Cambiare lingua svuotava gli elenchi dell'applicazione di destinazione e
-  dell'individuazione in rete**, e scegliere *Predefinito di sistema* svuotava l'elenco
-  delle lingue stesso. Ritradurre un elenco significa sostituire le voci che contiene, e un
-  elenco a discesa interpreta la sostituzione della voce selezionata come la sua scomparsa:
-  azzerava la selezione, e l'associazione riscriveva quel vuoto sopra la scelta. Ora le
-  voci mantengono la propria identità e cambia soltanto il loro testo, quindi non resta
-  nulla da azzerare. Due tentativi precedenti rimettevano a posto la selezione dopo il
-  fatto; questo elimina la causa.
-- **La finestra delle impostazioni manteneva la lingua precedente nel proprio titolo e
-  pulsante** quando la lingua veniva cambiata dall'interno. Tutto il contenuto della
-  finestra veniva rietichettato, ma il titolo e il pulsante di chiusura non ne fanno parte.
-- **Il registro attività non seguiva le righe nuove in modo affidabile.** Scorreva prima
-  che la riga nuova fosse disposta, finendo dove prima stava la fine e restando sempre una
-  riga indietro. Ora scorre dopo la disposizione e smette di seguire appena si sale a
-  leggere qualcosa, riprendendo quando si torna in fondo.
-- **L'aggiornamento riscriveva tutti i file, modificati o no.** La versione precedente
-  veniva rimossa per intero prima che fosse scritto un solo file nuovo, così ogni
-  aggiornamento riscriveva l'intera installazione. Ora la versione nuova viene scritta per
-  prima e quella precedente rimossa dopo: il programma di installazione salta i file
-  identici e resta da scrivere soltanto ciò che è davvero cambiato.
-- **Uno dei pulsanti del registro era disposto e cliccabile, ma non veniva mai disegnato.**
-  *Apri la cartella dei log* occupava il suo spazio e rispondeva ai clic senza mostrare
-  nulla. Le azioni del registro stanno ora su una sola fila orizzontale invece che una
-  colonna ciascuna, eliminando la disposizione per colonne che non funzionava.
+- **Una partita ospitata su una macchina si vedeva ma non si poteva raggiungere dall'altra**, perché era aperta solo la porta di individuazione mentre Warcraft III sale fino a 6119 se 6112 è occupato; ora è aperto l'intero intervallo, sempre solo verso la sottorete VPN.
+- **Una stanza restava nell'elenco dell'altro giocatore dopo che l'host l'aveva lasciata**, perché l'annuncio di chiusura è broadcast e non arriva mai; il relay si accorge che l'host non risponde più e la ritira da sé.
+- **Cambiare lingua svuotava gli elenchi dell'applicazione di destinazione e dell'individuazione LAN**, perché sostituire la voce selezionata si legge come la sua sparizione; ora le voci mantengono la propria identità e cambia solo il testo.
+- **La finestra delle impostazioni manteneva la vecchia lingua nel titolo e nel pulsante**, che non fanno parte del contenuto rietichettato.
+- **Il registro attività non seguiva in modo affidabile le nuove righe**, perché scorreva prima che la nuova riga fosse disposta.
+- **Un aggiornamento riscriveva ogni file, modificato o no**, perché la vecchia versione veniva rimossa per intero prima di scrivere un solo file nuovo.
+- **Uno dei pulsanti del registro era disposto e cliccabile ma non veniva mai disegnato.**
 
 ### Aggiunto
 
-- **Un pulsante con le informazioni sull'applicazione** accanto a quello delle
-  impostazioni: quale versione è in esecuzione, il copyright e un collegamento alle sue
-  note e ai download.
-- **Una casella *Avvia LanBridge* nell'ultima pagina del programma di installazione**,
-  selezionata per impostazione predefinita. Avvia l'applicazione senza elevazione, che è
-  come LanBridge deve funzionare: il consenso viene chiesto all'avvio di una sessione, non
-  prima.
+- **Un pulsante di informazioni sull'applicazione** accanto a quello delle impostazioni, con versione, copyright e un collegamento alle note di quella versione.
+- **Una casella *Avvia LanBridge* nell'ultima pagina dell'installer**, che lo avvia senza elevazione, come è pensato per funzionare.
 
 ### Modificato
 
-- **Chiudere l'applicazione di destinazione termina la sessione solo quando il tunnel è
-  legato a essa.** Con *Solo questa applicazione può usare la VPN* attivo, il tunnel esiste
-  per quel processo e cade con lui: altrimenti resterebbe un tunnel che nulla sulla macchina
-  ha il permesso di usare. Senza quell'opzione il tunnel è delimitato solo per destinazione
-  e potrebbe ancora trasportare traffico di altro, quindi resta attivo finché non lo fermi.
+- **Chiudere l'applicazione di destinazione termina la sessione solo quando il tunnel è legato a essa**, perché altrimenti potrebbe ancora trasportare traffico per qualcos'altro.
 
 ## [0.5.2] - 2026-09-11
 
 ### Corretto
 
-- **Le note di versione nella finestra di aggiornamento mostravano solo il primo titolo.**
-  Quando vengono estratte dal registro delle modifiche, le note sono normalizzate a
-  semplici avanzamenti di riga, mentre un controllo di testo di Windows spezza le righe sul
-  ritorno a capo: tutto ciò che seguiva la prima riga non veniva mai disegnato. Il corpo di
-  una versione in inglese contiene già i ritorni a capo, ed è per questo che sembravano
-  vuote solo le note tradotte. Ora vengono convertite prima di essere mostrate e compaiono
-  in un blocco scorrevole e selezionabile.
+- **Le note di versione mostravano solo il primo titolo**, perché il controllo spezza le righe su un ritorno a capo che le note normalizzate non contenevano più.
 
 ## [0.5.1] - 2026-09-11
 
 ### Corretto
 
-- **Le partite si vedevano ma non si riusciva a entrare, oppure non comparivano affatto.**
-  Tutto ciò che rende una partita accessibile arriva *in entrata* attraverso il tunnel, e
-  Windows lo blocca per intero in modo predefinito: l'annuncio inoltrato dal relè del
-  compagno è UDP in entrata, ed entrare in partita è una connessione TCP in entrata. La
-  versione a riga di comando apriva entrambi; l'applicazione non l'ha mai fatto, così la
-  macchina rimasta senza una sua regola risultava irraggiungibile in un verso o in
-  entrambi. Ora ogni sessione apre la porta di individuazione soltanto per la sottorete
-  della VPN — non per tutte le reti a cui la macchina è collegata —, sposta la scheda del
-  tunnel fuori dalla categoria *pubblica* che Windows le assegna, e ripristina entrambe le
-  cose alla fine.
-- **L'interfaccia si sfasciava con qualsiasi dimensione del testo superiore a quella
-  predefinita, e riavviare non la recuperava.** Il livello ingrandito veniva prima centrato
-  e poi fatto crescere dal proprio angolo in alto a sinistra, così tutto partiva più in
-  basso e più a destra del dovuto e usciva dal bordo inferiore e da quello destro,
-  portandosi via il pulsante delle impostazioni. Poiché la dimensione del testo viene
-  ricordata, ogni riavvio ricadeva nello stesso stato, senza un modo per raggiungere
-  l'impostazione che lo aveva causato.
-- **Lo scaricamento di un aggiornamento non mostrava alcun avanzamento.** La finestra si
-  chiudeva appena premuto *Scarica* e il trasferimento avveniva senza nulla sullo schermo,
-  cosa indistinguibile da uno scaricamento mai iniziato. Le note di versione ora restano
-  aperte, con una barra di avanzamento, la quantità trasferita e un *Annulla* che funziona.
-- **Riattivare il controllo automatico degli aggiornamenti non faceva nulla per un massimo
-  di quattro ore.** Il controllo in secondo piano rileggeva l'impostazione solo alla
-  successiva esecuzione programmata; ora guarda subito.
-- **La scelta sul comportamento alla chiusura sembrava scartata** se nella stessa visita
-  alle impostazioni si cambiava lingua. Tradurre l'elenco sostituisce la voce selezionata e
-  questo azzera la selezione: gli altri elenchi si ripristinano da soli, questo no.
+- **Le partite si vedevano ma non si potevano raggiungere, o non comparivano affatto**: tutto ciò che rende raggiungibile una partita arriva in entrata e Windows lo blocca per impostazione predefinita, quindi una sessione apre la porta di individuazione solo per la sottorete VPN e ripristina tutto alla fine.
+- **L'interfaccia si disfaceva a ogni dimensione di testo superiore a quella predefinita, e riavviare non la ripristinava mai**, perché il livello scalato veniva prima centrato e poi ingrandito dal proprio angolo in alto a sinistra.
+- **Scaricare un aggiornamento non mostrava alcun avanzamento**, indistinguibile da un download mai iniziato.
+- **Riattivare i controlli automatici non faceva nulla per un massimo di quattro ore.**
+- **La scelta sulla chiusura sembrava scartata** se la lingua veniva cambiata nella stessa visita alle impostazioni.
 
 ### Aggiunto
 
-- **Gli aggiornamenti vengono cercati anche mentre l'applicazione è nell'area di
-  notifica**, ogni quattro ore invece che solo all'avvio. Una nuova versione viene
-  annunciata con un fumetto nell'area di notifica, e il suggerimento dell'icona continua a
-  segnalarla dopo che il fumetto è scomparso.
-- **Un pulsante «Controlla ora» nelle impostazioni**, per quando aspettare il prossimo
-  controllo programmato non ha senso.
+- **I controlli proseguono mentre l'applicazione è nell'area di notifica**, annunciati con un fumetto e conservati nel suggerimento dell'icona.
+- **Un pulsante *Controlla ora* nelle impostazioni**, per quando aspettare il prossimo controllo non è il punto.
 
 ## [0.5.0] - 2026-09-11
 
 ### Corretto
 
-- **La VPN cadeva appena si apriva una partita.** La ricerca del processo a cui un launcher
-  passa il testimone confrontava solo eseguibili con lo stesso nome, quindi un gioco che
-  prosegue con un nome diverso non veniva mai trovato e il tunnel cadeva. Ora conta qualsiasi
-  processo ancora in esecuzione dalla stessa cartella di installazione, e la ricerca annota
-  che cosa ha cercato.
-- **Arresta non faceva nulla una volta terminata la sessione.** Chiudere la pipe verso il
-  processo ausiliario generava un errore quando l'altra estremità era già sparita, e
-  quell'errore sfuggiva alla pulizia: l'applicazione continuava a credere che una sessione
-  finita fosse ancora attiva.
-- **Cambiare lingua svuotava tutti gli elenchi a discesa** invece di tradurli. Sostituire il
-  contenuto di un elenco azzera la selezione, e l'associazione riscriveva quella selezione
-  vuota.
-- **Il registro attività non seguiva le righe nuove.** Ora scorre fino alla più recente e
-  smette di seguirle non appena si scorre verso l'alto per leggere qualcosa.
+- **La VPN cadeva appena si apriva una stanza**, perché la ricerca del processo a cui un launcher passa il testimone confrontava solo eseguibili con lo stesso nome.
+- **Interrompi non faceva nulla a sessione già conclusa**, perché chiudere la pipe verso un helper sparito sollevava un'eccezione che sfuggiva alla pulizia.
+- **Cambiare lingua svuotava ogni elenco a discesa** invece di tradurlo.
+- **Il registro attività non seguiva le nuove righe**, e ora smette di seguirle appena si scorre verso l'alto.
 
 ### Aggiunto
 
-- **Note di rilascio nella tua lingua.** I registri delle modifiche tradotti vengono
-  pubblicati insieme alle build, e la finestra di aggiornamento mostra quella corrispondente
-  alla lingua dell'interfaccia.
-- **Esporta rapporto errori**: un pulsante che compare con un contrassegno non appena
-  qualcosa fallisce. Raccoglie l'attività a schermo insieme ai file di log di entrambi i
-  processi, così un problema si può segnalare senza sapere dove stiano i log.
-- L'impostazione della dimensione del testo ora ridimensiona tutta l'interfaccia, non solo il
-  registro.
+- **Note di versione nella vostra lingua**, pubblicate accanto alle build e mostrate secondo la lingua dell'interfaccia.
+- **Esporta rapporto di errore**, che unisce l'attività a schermo ai registri di entrambi i processi.
+- L'impostazione della dimensione del testo ora scala l'intera interfaccia, non solo il registro.
 
 ## [0.4.0] - 2026-09-10
 
 ### Aggiunto
 
-- **Controllo automatico degli aggiornamenti.** L'applicazione verifica se su GitHub esiste
-  una versione più recente e mostra che cosa è cambiato prima di installarla. Attivo per
-  impostazione predefinita, disattivabile dalle impostazioni.
-- **Finestra delle impostazioni** dietro il pulsante a ingranaggio, con lingua, dimensione
-  del testo dell'interfaccia, comportamento alla chiusura e controllo aggiornamenti: così
-  una scelta memorizzata non diventa mai un vicolo cieco.
-- **Dieci lingue in più**: cinese tradizionale, cinese semplificato, giapponese, coreano,
-  spagnolo, francese, tedesco, portoghese e russo, oltre a inglese e italiano. Stato,
-  elenchi a discesa, finestre di dialogo e menu dell'area di notifica sono tradotti.
-- **Il registro attività è ora testo selezionabile**, con i pulsanti *Copia tutto* ed
-  *Esporta…*.
-- **Dimensione del testo dell'interfaccia regolabile** (10–22 pt), mantenuta tra un avvio e
-  l'altro.
-- **Icona dell'applicazione**, usata da finestra, barra delle applicazioni, area di
-  notifica e Installazione applicazioni.
-- **Il programma di installazione chiede dove installare** e propone il collegamento nel
-  menu Start e quello sul desktop come due scelte indipendenti.
+- **Controllo automatico degli aggiornamenti**, che mostra cosa è cambiato prima di installare; attivo per impostazione predefinita.
+- **Finestra delle impostazioni** dietro il pulsante a ingranaggio, con lingua, dimensione del carattere, comportamento alla chiusura e controllo aggiornamenti.
+- **Altre dieci lingue dell'interfaccia**, accanto a inglese e cinese tradizionale.
+- **Il registro attività è testo selezionabile**, con *Copia tutto* ed *Esporta…*.
+- **Dimensione del carattere regolabile** (10–22 pt), ricordata tra le esecuzioni.
+- **Icona dell'applicazione**, usata da finestra, barra delle applicazioni, area di notifica ed elenco programmi.
+- **L'installer chiede dove installare** e offre i due collegamenti come scelte indipendenti.
 
 ### Corretto
 
-- **La VPN cadeva proprio quando il gioco finiva di caricare.** Warcraft III, come la
-  maggior parte dei titoli con un launcher o un aggiornatore, chiude il primo processo e
-  passa il testimone a un altro. Quella chiusura veniva interpretata come «il bersaglio si
-  è chiuso» e il tunnel veniva smontato nel momento peggiore. Ora la sessione segue
-  l'applicazione attraverso il passaggio di consegne.
-- **L'icona nell'area di notifica non compariva mai.** L'handle dell'icona veniva distrutto
-  prima che Windows lo usasse, e `Shell_NotifyIcon` con un handle distrutto non mostra
-  nulla senza segnalare alcun errore.
-- **Riaprire dall'area di notifica avviava una seconda copia** invece di ripristinare
-  quella in esecuzione. Ora c'è una sola istanza per utente e un nuovo avvio riporta in
-  primo piano la finestra esistente.
-- **`WinDivert64.sys` restava bloccato dopo la chiusura.** Chiudere gli handle del driver
-  non basta: aprirne uno registra un servizio del kernel che continua a girare, e il file
-  resta bloccato finché non viene arrestato. Ora il servizio viene arrestato e rimosso alla
-  fine della sessione. Chiudere la finestra arresta anche il processo ausiliario con
-  privilegi, cosa che prima non avveniva.
-- **Riportare la lingua su «Predefinito di sistema» non faceva nulla.** La modifica veniva
-  annunciata con una sola notifica «è cambiato tutto», alla quale WinUI non reagisce in
-  modo affidabile; ora ogni stringa viene annunciata per nome.
-- **La disinstallazione chiedeva di riavviare.** Il programma di installazione chiude prima
-  l'applicazione e il suo ausiliario, quindi non restano file in uso.
-- Le righe del registro avevano la spaziatura di un elemento di elenco, che lasciava mezza
-  riga vuota fra una voce e l'altra.
+- **La VPN cadeva appena il gioco finiva di caricare**, perché l'uscita del primo processo del launcher era letta come chiusura della destinazione; ora la sessione segue il passaggio.
+- **L'icona nell'area di notifica non compariva mai**, perché il suo handle veniva distrutto prima che Windows lo usasse.
+- **Riaprire dall'area di notifica avviava una seconda copia** invece di ripristinare quella in esecuzione.
+- **`WinDivert64.sys` restava bloccato dopo la chiusura**, perché aprire un handle del driver registra un servizio kernel che continua a girare.
+- **Riportare la lingua a «Predefinita di sistema» non faceva nulla**, perché un'unica notifica «è cambiato tutto» non viene gestita in modo affidabile.
+- **La disinstallazione chiedeva un riavvio**, dato che applicazione e helper tenevano ancora dei file.
+- Le righe del registro avevano un riempimento da elemento di elenco che lasciava mezza riga vuota tra le voci.
 
 ### Modificato
 
-- I pulsanti del registro si sono spostati nel pannello attività a destra, invece di stare
-  in fondo alla colonna di configurazione.
+- Le azioni del registro sono passate nel pannello attività a destra, invece che in fondo alla colonna di configurazione.
 
 ## [0.3.0] - 2026-09-09
 
 ### Aggiunto
 
-- Registrazione degli errori in `%LOCALAPPDATA%\LanBridge\logs\`, un file per processo e
-  per esecuzione, con le eccezioni non gestite intercettate in tre punti e annotate invece
-  di far sparire l'applicazione in silenzio.
-- Persistenza delle impostazioni: scritte a ogni modifica, sopravvivono a un arresto
-  anomalo o a una chiusura forzata.
-- Supporto dell'area di notifica, con una domanda alla chiusura fra uscire e ridurre.
-- Interfaccia in cinese tradizionale oltre all'inglese.
-- Programma di installazione MSI con collegamenti, informazioni di versione e voce in
-  Installazione applicazioni.
+- Registrazione degli errori in `%LOCALAPPDATA%\LanBridge\logs\`, un file per processo e per esecuzione, con le eccezioni non gestite annotate invece di terminare in silenzio.
+- Persistenza delle impostazioni a ogni modifica, così sopravvivono a un arresto anomalo.
+- Supporto dell'area di notifica con una domanda alla chiusura.
+- Interfaccia in cinese tradizionale accanto all'inglese.
+- Installer MSI con collegamenti, metadati di versione e voce nell'elenco programmi.
 
 ### Corretto
 
-- La build pubblicata si avviava e moriva subito dentro il runtime XAML: pubblicare
-  un'applicazione WinUI non pacchettizzata non porta con sé il markup compilato, e
-  `InitializeComponent` non trovava nulla da caricare.
+- La build pubblicata si avviava e moriva nel runtime XAML, perché un'app WinUI non pacchettizzata non porta con sé il markup compilato.
 
 ## [0.2.0] - 2026-09-09
 
 ### Corretto
 
-- **La finestra non compariva mai dopo la richiesta di elevazione.** WinUI 3 non può girare
-  con privilegi elevati: l'attivazione WinRT fallisce e il processo termina senza mostrare
-  nulla. Ora l'interfaccia gira senza privilegi e affida il lavoro privilegiato a un
-  processo ausiliario separato, che chiede il consenso una volta per sessione.
-  L'interfaccia non detiene alcun privilegio e l'ausiliario li mantiene solo finché la
-  sessione è in corso.
+- **La finestra non compariva mai dopo la richiesta di elevazione**, perché WinUI 3 non può girare elevata; l'interfaccia gira senza elevazione e affida il lavoro privilegiato a un helper che chiede il consenso una volta per sessione.
 
 ## [0.1.0] - 2026-09-09
 
 ### Aggiunto
 
-- VPN per singola applicazione: importa un profilo OpenVPN e rifiuta la route predefinita e
-  il DNS inviati dal server, così solo la subnet VPN attraversa il tunnel e il resto del
-  computer conserva il percorso abituale.
-- Confinamento facoltativo per processo tramite WinDivert, scartando il traffico verso la
-  subnet VPN proveniente da qualsiasi processo diverso dal bersaglio.
-- Inoltro del rilevamento LAN per tunnel che non trasportano il broadcast, compreso il
-  protocollo W3GS di Warcraft III, le cui informazioni di partita vengono inviate solo come
-  risposta unicast e mai in broadcast: vanno quindi richieste al gioco locale e inoltrate.
-- Inoltro generico di broadcast UDP per altri giochi, configurato per porta.
-- Versione a riga di comando dello stesso motore.
+- VPN per applicazione che rifiuta la rotta predefinita e il DNS spinti, così solo la sottorete VPN attraversa il tunnel.
+- Confinamento facoltativo per processo con WinDivert, che scarta il traffico verso la sottorete VPN di qualunque processo diverso dalla destinazione.
+- Relay di individuazione LAN per tunnel che non trasportano broadcast, incluso il protocollo W3GS di Warcraft III, le cui informazioni di partita sono inviate solo come risposta unicast.
+- Relay generico di broadcast UDP per altri giochi, configurato per porta.
+- Versione a riga di comando dello stesso motore, senza interfaccia.
 
+[0.5.27]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.27
+[0.5.26]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.26
+[0.5.25]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.25
+[0.5.24]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.24
+[0.5.23]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.23
+[0.5.22]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.22
+[0.5.21]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.21
+[0.5.20]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.20
+[0.5.19]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.19
+[0.5.18]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.18
+[0.5.17]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.17
+[0.5.16]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.16
+[0.5.15]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.15
+[0.5.14]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.14
 [0.5.13]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.13
 [0.5.12]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.12
 [0.5.11]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.11
