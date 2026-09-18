@@ -48,7 +48,7 @@ local game for it and forwards the answer.
 
 ## Changes
 
-See [CHANGELOG.md](CHANGELOG.md). Each release's notes are generated from it, so the
+See [changelog/CHANGELOG.en.md](changelog/CHANGELOG.en.md), and the same file in ten other languages beside it. Each release's notes are generated from it, so the
 release page, the changelog and the in-app update dialog always say the same thing.
 
 ## Third-party components
