@@ -5,6 +5,35 @@ Qui sono annotate tutte le modifiche rilevanti di LanBridge.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e la
 numerazione segue il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.26] - 2026-09-18
+
+### Changed
+
+- **L'elenco dei siti non deve più essere giusto.** Finora è stato tutto un tentativo di renderlo
+  giusto: i nomi sono stati presi dai file dell'applicazione stessa anziché indovinati, dalla 0.5.25
+  vengono instradate le risposte di entrambi i lati, e vengono richieste di nuovo ogni trenta secondi.
+  Niente di tutto ciò copre l'indirizzo che l'applicazione raggiunge e che non era in nessuna delle
+  due risposte — il caso ordinario per un nome con un record di sessanta secondi e una dozzina di nodi
+  alle spalle.
+
+  Così l'elenco ora serve solo per partire. Porta la prima connessione nel tunnel invece che fuori
+  dalla porta principale. Da lì in poi si osserva dove l'applicazione va davvero, e ogni destinazione
+  raggiunta senza il tunnel riceve una rotta propria. La connessione successiva la prende.
+
+  Questo non sposta una connessione già aperta: una rotta si consulta quando si invia un pacchetto,
+  non quando si ricorda un socket. Ciò che impedisce è commettere due volte lo stesso errore, che per
+  un launcher che interroga e riprova sono quasi tutti.
+
+  Quattro cose non vengono mai adottate: l'indirizzo del server VPN stesso, le reti proprie di questa
+  macchina, broadcast e multicast, e IPv6. La prima è quella che conta. Una rotta che manda il
+  traffico del server nel tunnel gli fa trasportare i pacchetti che lo tengono in piedi, così il
+  tunnel cade e non può tornare, perché riconnettersi richiede la rotta che ora punta a qualcosa che
+  è caduto.
+
+- **Il riepilogo finale non dà più per mancata una destinazione dopo che è stata instradata.** Chiede
+  di nuovo al sistema invece di rileggere l'elenco delle rotte aggiunte, perché una rotta aggiunta e
+  non usata è esattamente il guasto attorno a cui questa funzione è stata costruita.
+
 ## [0.5.25] - 2026-09-17
 
 ### Fixed

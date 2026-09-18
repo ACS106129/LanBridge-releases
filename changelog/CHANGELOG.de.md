@@ -5,6 +5,37 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [0.5.26] - 2026-09-18
+
+### Changed
+
+- **Die Liste der Seiten muss nicht mehr stimmen.** Alles bisher war der Versuch, sie stimmen
+  zu lassen: die Namen stammen aus den Dateien der Anwendung selbst statt aus Vermutungen, seit
+  0.5.25 werden die Antworten beider Seiten geroutet, und alle dreißig Sekunden wird neu
+  nachgefragt. Nichts davon deckt die Adresse ab, die die Anwendung erreicht und die in keiner
+  der beiden Antworten stand — der Normalfall bei einem Namen mit sechzig Sekunden Gültigkeit
+  und einem Dutzend Edges dahinter.
+
+  Die Liste ist jetzt nur noch ein Startpunkt. Sie bringt die erste Verbindung durch den Tunnel
+  statt zur Vordertür hinaus. Danach wird beobachtet, wohin die Anwendung tatsächlich geht, und
+  jedes Ziel, das sie ohne den Tunnel erreicht hat, bekommt seine eigene Route. Die nächste
+  Verbindung dorthin nimmt sie.
+
+  Eine bereits offene Verbindung wandert dadurch nicht: eine Route wird beim Senden eines Pakets
+  herangezogen, nicht beim Merken eines Sockets. Verhindert wird, dass derselbe Fehler zweimal
+  passiert — und bei einem Launcher, der pollt und es erneut versucht, sind das die meisten.
+
+  Vier Dinge werden nie übernommen: die Adresse des VPN-Servers selbst, die eigenen Netze dieses
+  Rechners, Broadcast und Multicast sowie IPv6. Das erste ist das entscheidende. Eine Route, die
+  den Verkehr des Servers in den Tunnel schickt, lässt den Tunnel die Pakete tragen, die ihn am
+  Leben halten; er fällt aus und kommt nicht zurück, weil das Wiederverbinden genau die Route
+  braucht, die nun auf etwas Ausgefallenes zeigt.
+
+- **Die Zusammenfassung am Ende nennt ein Ziel nicht mehr verfehlt, nachdem es geroutet wurde.**
+  Sie fragt das System erneut, statt die Liste der hinzugefügten Routen zurückzulesen — denn eine
+  Route, die hinzugefügt wurde und nicht benutzt wird, ist genau der Fehler, um den herum diese
+  Funktion gebaut wurde.
+
 ## [0.5.25] - 2026-09-17
 
 ### Fixed
