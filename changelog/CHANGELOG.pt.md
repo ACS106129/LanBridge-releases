@@ -5,6 +5,33 @@ Todas as alterações relevantes do LanBridge ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e a
 numeração segue o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.26] - 2026-09-18
+
+### Changed
+
+- **A lista de sites não precisa mais estar certa.** Tudo até agora foi uma tentativa de deixá-la
+  certa: os nomes foram tirados dos próprios arquivos do aplicativo em vez de adivinhados, desde a
+  0.5.25 as respostas dos dois lados são roteadas, e elas são consultadas de novo a cada trinta
+  segundos. Nada disso cobre o endereço que o aplicativo alcança e que não estava em nenhuma das duas
+  respostas — o caso comum para um nome com registro de sessenta segundos e uma dúzia de nós atrás.
+
+  Então a lista agora só dá a partida. Leva a primeira conexão pelo túnel em vez de pela porta da
+  frente. Depois disso observa-se para onde o alvo realmente vai, e todo destino que ele alcançou sem
+  o túnel ganha uma rota própria. A conexão seguinte para lá a toma.
+
+  Isso não move uma conexão já aberta: uma rota é consultada ao enviar um pacote, não ao lembrar um
+  socket. O que evita é cometer o mesmo erro duas vezes, o que num inicializador que consulta e tenta
+  de novo é a maior parte deles.
+
+  Quatro coisas nunca são adotadas: o endereço do próprio servidor VPN, as redes desta máquina,
+  broadcast e multicast, e IPv6. A primeira é a que importa. Uma rota que manda o tráfego do servidor
+  para o túnel faz o túnel carregar os pacotes que o mantêm de pé, então ele cai, e não pode voltar,
+  porque reconectar precisa da rota que agora aponta para algo que caiu.
+
+- **O resumo do fim não chama mais um destino de perdido depois de ele ter sido roteado.** Ele
+  pergunta ao sistema de novo em vez de reler a lista de rotas adicionadas, porque uma rota que foi
+  adicionada e não é usada é exatamente a falha em torno da qual este recurso foi construído.
+
 ## [0.5.25] - 2026-09-17
 
 ### Fixed

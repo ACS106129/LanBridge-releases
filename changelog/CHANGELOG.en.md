@@ -5,6 +5,37 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.26] - 2026-09-18
+
+### Changed
+
+- **The list of sites no longer has to be right.** Everything up to now has been an attempt
+  to make it right: the names were taken out of the application's own files rather than
+  guessed, both sides' answers have been routed since 0.5.25, and they are looked up again
+  every thirty seconds. None of it covers the address the application reaches that was in
+  neither answer — the ordinary case for a name with a sixty-second record and a dozen edges
+  behind it.
+
+  So the list is only a warm start now. It gets the first connection through the tunnel
+  instead of out the front door. After that, where the target actually goes is watched, and
+  anywhere it reached without the tunnel gets a route of its own, so the next connection
+  there takes it.
+
+  This does not move a connection that is already open: a route is consulted when a packet is
+  sent, not when a socket is remembered. What it stops is the same mistake being made twice,
+  which for a launcher that polls and retries is most of them.
+
+  Four things are never taken on — the VPN server's own address, this machine's own networks,
+  broadcast and multicast, and IPv6. The first is the one that matters. A route sending the
+  server's traffic into the tunnel carries the packets that keep the tunnel up, so the tunnel
+  drops, and it cannot come back, because reconnecting needs the route that is now pointing at
+  something that is down.
+
+- **The summary at the end of a run no longer calls a destination missed after it has been
+  routed.** It asks the system again rather than reading back the list of routes that were
+  added, because a route that was added and is not used is the exact failure this feature was
+  built around.
+
 ## [0.5.25] - 2026-09-17
 
 ### Fixed

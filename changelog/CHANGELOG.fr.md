@@ -5,6 +5,35 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et la
 numérotation suit [le versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.26] - 2026-09-18
+
+### Changed
+
+- **La liste des sites n'a plus besoin d'être juste.** Tout jusqu'ici visait à la rendre juste :
+  les noms ont été tirés des fichiers de l'application elle-même plutôt que devinés, depuis 0.5.25
+  les réponses des deux côtés sont routées, et elles sont redemandées toutes les trente secondes.
+  Rien de cela ne couvre l'adresse que l'application atteint et qui ne figurait dans aucune des deux
+  réponses — le cas ordinaire pour un nom dont l'enregistrement vaut soixante secondes et derrière
+  lequel se tiennent une douzaine de nœuds.
+
+  La liste ne sert donc plus qu'au démarrage. Elle fait passer la première connexion par le tunnel
+  plutôt que par la porte d'entrée. Ensuite, on observe où l'application va réellement, et tout
+  endroit qu'elle a atteint sans le tunnel reçoit sa propre route. La connexion suivante l'emprunte.
+
+  Cela ne déplace pas une connexion déjà ouverte : une route est consultée à l'envoi d'un paquet, pas
+  au souvenir d'une socket. Ce que cela empêche, c'est de commettre deux fois la même erreur — et
+  pour un lanceur qui interroge et réessaie, c'est la plupart d'entre elles.
+
+  Quatre choses ne sont jamais adoptées : l'adresse du serveur VPN lui-même, les réseaux propres de
+  cette machine, la diffusion et la multidiffusion, et IPv6. La première est celle qui compte. Une
+  route envoyant le trafic du serveur dans le tunnel lui fait porter les paquets qui le maintiennent,
+  donc il tombe, et il ne peut pas revenir, car se reconnecter exige la route qui pointe désormais
+  vers quelque chose qui est tombé.
+
+- **Le résumé de fin ne qualifie plus une destination de manquée une fois qu'elle a été routée.** Il
+  redemande au système au lieu de relire la liste des routes ajoutées, car une route ajoutée et non
+  utilisée est exactement la panne autour de laquelle cette fonction a été bâtie.
+
 ## [0.5.25] - 2026-09-17
 
 ### Fixed
