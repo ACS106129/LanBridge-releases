@@ -9,15 +9,16 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ### Ajouté
 
-- **La liste des sites se modifie sans couper la session** : un nom ajouté entre dans le tunnel en une seconde, un nom retiré en sort dès que plus rien ne s'en sert.
+- Télécharger un VPN depuis VPN Gate.
+- Modifier la liste des sites en session.
 
 ### Modifié
 
-- **Seuls les sites suivis restent dans le tunnel** : quand la poignée de main TLS de l'application montre qu'une adresse appartient à un autre service, cette adresse repart par l'adaptateur ordinaire.
+- Seuls les sites de la cible sont tunnelisés.
 
 ### Corrigé
 
-- **Le suivi des noms survit à une reconnexion d'openvpn**, qui laissait jusqu'ici le rafraîchissement interroger l'adresse que le tunnel avait avant de changer.
+- Le suivi survit à une reconnexion openvpn.
 
 ## [0.5.28] - 2026-09-19
 

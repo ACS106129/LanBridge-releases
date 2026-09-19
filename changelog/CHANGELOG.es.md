@@ -9,15 +9,16 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 
 ### Añadido
 
-- **La lista de sitios se puede cambiar sin cortar la sesión**: un nombre añadido entra en el túnel en un segundo, y uno quitado sale en cuanto nadie lo usa.
+- Descargar una VPN desde VPN Gate.
+- Cambiar la lista de sitios en conexión.
 
 ### Cambiado
 
-- **En el túnel sólo se quedan los sitios que se están siguiendo**: cuando el propio saludo TLS de la aplicación muestra que una dirección es de otro servicio, esa dirección vuelve al adaptador normal.
+- En el túnel sólo los sitios del destino.
 
 ### Corregido
 
-- **Seguir los nombres sobrevive a una reconexión de openvpn**, que hasta ahora dejaba el refresco preguntando por la dirección que el túnel tenía antes de moverse.
+- El seguimiento sobrevive a la reconexión.
 
 ## [0.5.28] - 2026-09-19
 
