@@ -5,6 +5,12 @@ Todos los cambios notables de LanBridge se registran aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y las versiones
 siguen el [versionado semántico](https://semver.org/lang/es/).
 
+## [Sin publicar]
+
+### Corregido
+
+- Una comprobación rechazada ya no se muestra como actualizada.
+
 ## [0.5.29] - 2026-09-19
 
 ### Añadido

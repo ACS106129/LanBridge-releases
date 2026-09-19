@@ -5,6 +5,12 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [Unveröffentlicht]
+
+### Behoben
+
+- Eine abgelehnte Prüfung gilt nicht mehr als aktuell.
+
 ## [0.5.29] - 2026-09-19
 
 ### Hinzugefügt

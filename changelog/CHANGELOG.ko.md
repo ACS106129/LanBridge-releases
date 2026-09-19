@@ -5,6 +5,12 @@ LanBridge의 주목할 만한 변경은 모두 여기에 기록합니다.
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르고, 버전 번호는
 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다.
 
+## [미출시]
+
+### 수정
+
+- 확인 실패를 최신이라 하지 않음.
+
 ## [0.5.29] - 2026-09-19
 
 ### 추가

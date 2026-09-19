@@ -5,6 +5,12 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- A refused check no longer reads as up to date.
+
 ## [0.5.29] - 2026-09-19
 
 ### Added

@@ -5,6 +5,12 @@ LanBridge 所有值得记下来的变更都在这里。
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循
 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [未发布]
+
+### 修正
+
+- 更新失败不再说成已是最新。
+
 ## [0.5.29] - 2026-09-19
 
 ### 新增
