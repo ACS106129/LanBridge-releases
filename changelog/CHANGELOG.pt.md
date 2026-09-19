@@ -11,7 +11,7 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
 - **A aplicação alvo já não alcança nada a não ser através do túnel**: o primeiro pacote de uma ligação a um endereço que nenhuma rota cobre é descartado em vez de sair com o endereço real desta máquina, que era o que causava os 403 repetidos e o ecrã de carregamento preso.
 - **Descartar esse pacote é o que acrescenta a rota**, pelo que a ligação vinga na primeira retransmissão em vez de falhar.
-- **Um pacote IPv6 bloqueado já não é registado como fuga**; o registo diz que foi descartado para o cliente recorrer a IPv4, que era a intenção.
+- **Um pacote IPv6 bloqueado já não é contado nem registado como fuga**, nem na linha do momento nem no veredicto final, que descrevia uma execução medida como «22 de 73 destinos não passaram pelo túnel» quando os 51 de IPv4 passaram e os 22 eram o guarda a funcionar como previsto.
 - **Um túnel que se liga de novo com outro endereço é acompanhado**, e se o novo ficar fora da sub-rede à volta da qual o filtro de pacotes foi construído, a recusa para e di-lo, em vez de transformar em recusa cada pacote que o alvo envia.
 
 ### Alterado
