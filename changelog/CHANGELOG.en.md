@@ -5,6 +5,23 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.29] - 2026-09-19
+
+### Added
+
+- **The list of sites can be changed without disconnecting** — a name added is in the tunnel within a second, and one removed leaves it as soon as nothing is using it.
+
+### Fixed
+
+- **Following the names survives an openvpn reconnect**, which until now left the refresh asking through the address the tunnel had before it moved.
+
+## [0.5.28] - 2026-09-19
+
+### Fixed
+
+- **The update is 38.8 MB smaller** — the Windows App SDK's machine-learning stack, onnxruntime and DirectML, was being shipped in a per-application VPN that never calls it.
+- **A release is no longer visible until all of its installers are attached**, which is why 0.5.27 offered a German installer to a Chinese interface: it was published with one file uploaded and the rest still going up, and the application looks for a new release within about a minute.
+
 ## [0.5.27] - 2026-09-19
 
 ### Fixed
