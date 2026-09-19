@@ -13,6 +13,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 - Se pueden borrar perfiles sin usar durante la conexión.
 - El modo de espera ya no dice que está abriendo.
 - Los sitios no listados ya no salen del túnel.
+- Las líneas que se repiten a intervalos vuelven al registro.
 
 ## [0.5.29] - 2026-09-19
 

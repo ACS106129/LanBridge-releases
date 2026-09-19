@@ -13,6 +13,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Profiles not in use can be deleted while connected.
 - Wait-for mode no longer says it is starting the app.
 - Unlisted sites the app reaches now stay in the tunnel.
+- Lines that repeat on a timer are in the log again.
 
 ## [0.5.29] - 2026-09-19
 

@@ -13,6 +13,7 @@ seguono il [versionamento semantico](https://semver.org/lang/it/).
 - I profili non in uso si possono eliminare durante la connessione.
 - La modalità attesa non dice più che sta avviando.
 - I siti non elencati non escono più dal tunnel.
+- Le righe ripetute a intervalli regolari restano nel registro.
 
 ## [0.5.29] - 2026-09-19
 

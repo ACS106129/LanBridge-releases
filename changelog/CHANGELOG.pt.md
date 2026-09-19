@@ -13,6 +13,7 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 - Perfis sem uso podem ser apagados durante a conexão.
 - O modo de espera já não diz que está a abrir.
 - Os sites não listados já não saem do túnel.
+- As linhas repetidas a intervalos regulares ficam no registo.
 
 ## [0.5.29] - 2026-09-19
 

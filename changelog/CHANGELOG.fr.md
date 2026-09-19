@@ -13,6 +13,7 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 - Les profils inutilisés peuvent être supprimés pendant la connexion.
 - Le mode attente ne dit plus qu’il lance l’application.
 - Les sites non listés ne quittent plus le tunnel.
+- Les lignes répétées à intervalle régulier restent dans le journal.
 
 ## [0.5.29] - 2026-09-19
 

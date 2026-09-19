@@ -13,6 +13,7 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 - Nicht genutzte Profile lassen sich während der Verbindung löschen.
 - Der Wartemodus behauptet nicht mehr, zu starten.
 - Nicht gelistete Seiten verlassen den Tunnel nicht mehr.
+- Regelmäßig wiederholte Zeilen stehen wieder im Log.
 
 ## [0.5.29] - 2026-09-19
 
