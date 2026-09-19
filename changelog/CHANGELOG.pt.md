@@ -15,6 +15,7 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 ### Alterado
 
 - No túnel só os sites do destino.
+- A atualização traz um único runtime.
 
 ### Corrigido
 

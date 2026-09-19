@@ -15,6 +15,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 - Only the target's own sites stay tunnelled.
+- The update carries one runtime, not two.
 
 ### Fixed
 

@@ -15,6 +15,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 ### Cambiado
 
 - En el túnel sólo los sitios del destino.
+- La actualización trae un solo runtime.
 
 ### Corregido
 

@@ -15,6 +15,7 @@ seguono il [versionamento semantico](https://semver.org/lang/it/).
 ### Modificato
 
 - Nel tunnel solo i siti del bersaglio.
+- L'aggiornamento porta un solo runtime.
 
 ### Corretto
 

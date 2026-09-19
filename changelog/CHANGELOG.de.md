@@ -15,6 +15,7 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 ### Geändert
 
 - Im Tunnel nur die Sites des Ziels.
+- Das Update bringt nur noch eine Laufzeit.
 
 ### Behoben
 

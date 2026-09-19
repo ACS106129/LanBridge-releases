@@ -15,6 +15,7 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 ### Modifié
 
 - Seuls les sites de la cible sont tunnelisés.
+- La mise à jour n'embarque qu'un runtime.
 
 ### Corrigé
 
