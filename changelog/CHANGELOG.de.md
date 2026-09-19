@@ -12,6 +12,7 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 - **Das Ziel erreicht nichts mehr außer durch den Tunnel** — das erste Paket einer Verbindung zu einer Adresse ohne Route wird verworfen statt mit der echten Adresse dieses Rechners gesendet; das war die Ursache der wiederholten 403 und des hängenden Ladebildschirms.
 - **Das verworfene Paket ist es, was die Route anlegt**, sodass die Verbindung bei der ersten Neuübertragung gelingt statt zu scheitern.
 - **Ein blockiertes IPv6-Paket wird nicht mehr als Leck protokolliert**, sondern als verworfen, damit der Client auf IPv4 zurückfällt — wie vorgesehen.
+- **Einem Tunnel, der sich mit einer anderen Adresse neu verbindet, wird gefolgt**, und liegt die neue außerhalb des Subnetzes, um das der Paketfilter gebaut wurde, hört das Verweigern auf und sagt das, statt jedes Paket des Ziels in eine Verweigerung zu verwandeln.
 
 ### Geändert
 
