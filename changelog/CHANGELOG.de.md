@@ -10,6 +10,7 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 ### Behoben
 
 - Eine abgelehnte Prüfung gilt nicht mehr als aktuell.
+- Nicht genutzte Profile lassen sich während der Verbindung löschen.
 
 ## [0.5.29] - 2026-09-19
 

@@ -10,6 +10,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Fixed
 
 - A refused check no longer reads as up to date.
+- Profiles not in use can be deleted while connected.
 
 ## [0.5.29] - 2026-09-19
 

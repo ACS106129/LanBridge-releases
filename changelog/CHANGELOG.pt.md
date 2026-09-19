@@ -10,6 +10,7 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 ### Corrigido
 
 - Uma verificação recusada já não aparece como atualizada.
+- Perfis sem uso podem ser apagados durante a conexão.
 
 ## [0.5.29] - 2026-09-19
 

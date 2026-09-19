@@ -10,6 +10,7 @@ seguono il [versionamento semantico](https://semver.org/lang/it/).
 ### Corretto
 
 - Un controllo rifiutato non risulta più aggiornato.
+- I profili non in uso si possono eliminare durante la connessione.
 
 ## [0.5.29] - 2026-09-19
 

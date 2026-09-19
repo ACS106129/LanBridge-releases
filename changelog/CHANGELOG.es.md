@@ -10,6 +10,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 ### Corregido
 
 - Una comprobación rechazada ya no se muestra como actualizada.
+- Se pueden borrar perfiles sin usar durante la conexión.
 
 ## [0.5.29] - 2026-09-19
 
