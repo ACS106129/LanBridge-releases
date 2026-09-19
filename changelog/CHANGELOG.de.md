@@ -12,6 +12,7 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 - Eine abgelehnte Prüfung gilt nicht mehr als aktuell.
 - Nicht genutzte Profile lassen sich während der Verbindung löschen.
 - Der Wartemodus behauptet nicht mehr, zu starten.
+- Nicht gelistete Seiten verlassen den Tunnel nicht mehr.
 
 ## [0.5.29] - 2026-09-19
 
