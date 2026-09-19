@@ -11,7 +11,7 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
 - **L'application cible n'atteint plus rien en dehors du tunnel** : le premier paquet d'une connexion vers une adresse qu'aucune route ne couvre est rejeté au lieu de partir avec l'adresse réelle de cette machine, ce qui causait les 403 répétés et l'écran de chargement bloqué.
 - **Rejeter ce paquet est ce qui ajoute la route**, de sorte que la connexion aboutit dès sa première retransmission au lieu d'échouer.
-- **Un paquet IPv6 bloqué n'est plus consigné comme une fuite** ; le journal dit qu'il a été rejeté pour que le client bascule sur IPv4, ce qui était l'intention.
+- **Un paquet IPv6 bloqué n'est plus compté ni consigné comme une fuite**, ni dans la ligne du moment ni dans le verdict final, qui décrivait une exécution mesurée par « 22 destinations sur 73 ne sont pas passées par le tunnel » alors que les 51 en IPv4 y étaient passées et que les 22 étaient le garde faisant son travail.
 - **Un tunnel qui se reconnecte sur une autre adresse est suivi**, et si la nouvelle sort du sous-réseau autour duquel le filtre de paquets a été construit, le refus cesse et le dit, au lieu de transformer en refus chaque paquet que la cible envoie.
 
 ### Modifié
