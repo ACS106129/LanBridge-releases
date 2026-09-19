@@ -9,15 +9,16 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Hinzugefügt
 
-- **Die Liste der Websites lässt sich ohne Trennen ändern** — ein hinzugefügter Name ist in etwa einer Sekunde im Tunnel, ein entfernter verlässt ihn, sobald ihn nichts mehr benutzt.
+- VPN direkt von VPN Gate laden.
+- Websiteliste ohne Trennen ändern.
 
 ### Geändert
 
-- **Im Tunnel bleiben nur die verfolgten Websites** — zeigt der TLS-Handshake der Anwendung selbst, dass eine Adresse zu einem fremden Dienst gehört, geht diese Adresse wieder über den gewöhnlichen Adapter.
+- Im Tunnel nur die Sites des Ziels.
 
 ### Behoben
 
-- **Das Verfolgen der Namen übersteht eine Neuverbindung von openvpn**, bei der die Aktualisierung bisher noch über die Adresse fragte, die der Tunnel vor dem Wechsel hatte.
+- Namensverfolgung übersteht Neuverbindung.
 
 ## [0.5.28] - 2026-09-19
 

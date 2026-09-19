@@ -9,15 +9,16 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
 ### Adicionado
 
-- **A lista de sites pode ser alterada sem desconectar** — um nome adicionado entra no túnel em um segundo, e um removido sai assim que nada mais o usa.
+- Baixar uma VPN pelo VPN Gate.
+- Alterar a lista de sites conectado.
 
 ### Alterado
 
-- **No túnel ficam apenas os sites que estão sendo seguidos** — quando o próprio handshake TLS do aplicativo mostra que um endereço é de outro serviço, esse endereço volta para o adaptador comum.
+- No túnel só os sites do destino.
 
 ### Corrigido
 
-- **Seguir os nomes sobrevive a uma reconexão do openvpn**, que até agora deixava a atualização perguntando pelo endereço que o túnel tinha antes de mudar.
+- O rastreio sobrevive à reconexão.
 
 ## [0.5.28] - 2026-09-19
 
