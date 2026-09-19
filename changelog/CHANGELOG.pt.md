@@ -11,6 +11,7 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
 - Uma verificação recusada já não aparece como atualizada.
 - Perfis sem uso podem ser apagados durante a conexão.
+- O modo de espera já não diz que está a abrir.
 
 ## [0.5.29] - 2026-09-19
 

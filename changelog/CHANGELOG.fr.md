@@ -11,6 +11,7 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
 - Une vérification refusée ne s’affiche plus comme à jour.
 - Les profils inutilisés peuvent être supprimés pendant la connexion.
+- Le mode attente ne dit plus qu’il lance l’application.
 
 ## [0.5.29] - 2026-09-19
 

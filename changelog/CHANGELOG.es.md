@@ -11,6 +11,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 
 - Una comprobación rechazada ya no se muestra como actualizada.
 - Se pueden borrar perfiles sin usar durante la conexión.
+- El modo de espera ya no dice que está abriendo.
 
 ## [0.5.29] - 2026-09-19
 

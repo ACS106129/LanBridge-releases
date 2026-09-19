@@ -11,6 +11,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - A refused check no longer reads as up to date.
 - Profiles not in use can be deleted while connected.
+- Wait-for mode no longer says it is starting the app.
 
 ## [0.5.29] - 2026-09-19
 
