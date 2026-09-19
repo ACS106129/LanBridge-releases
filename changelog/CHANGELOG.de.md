@@ -11,6 +11,10 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
 - **Die Liste der Websites lässt sich ohne Trennen ändern** — ein hinzugefügter Name ist in etwa einer Sekunde im Tunnel, ein entfernter verlässt ihn, sobald ihn nichts mehr benutzt.
 
+### Geändert
+
+- **Im Tunnel bleiben nur die verfolgten Websites** — zeigt der TLS-Handshake der Anwendung selbst, dass eine Adresse zu einem fremden Dienst gehört, geht diese Adresse wieder über den gewöhnlichen Adapter.
+
 ### Behoben
 
 - **Das Verfolgen der Namen übersteht eine Neuverbindung von openvpn**, bei der die Aktualisierung bisher noch über die Adresse fragte, die der Tunnel vor dem Wechsel hatte.

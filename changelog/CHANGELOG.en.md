@@ -11,6 +11,10 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **The list of sites can be changed without disconnecting** — a name added is in the tunnel within a second, and one removed leaves it as soon as nothing is using it.
 
+### Changed
+
+- **Only the sites being followed stay in the tunnel** — when the target's own TLS handshake shows that an address belongs to somebody else's service, it is handed back to the ordinary adapter instead of being kept.
+
 ### Fixed
 
 - **Following the names survives an openvpn reconnect**, which until now left the refresh asking through the address the tunnel had before it moved.

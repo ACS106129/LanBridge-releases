@@ -11,6 +11,10 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
 - **La liste des sites se modifie sans couper la session** : un nom ajouté entre dans le tunnel en une seconde, un nom retiré en sort dès que plus rien ne s'en sert.
 
+### Modifié
+
+- **Seuls les sites suivis restent dans le tunnel** : quand la poignée de main TLS de l'application montre qu'une adresse appartient à un autre service, cette adresse repart par l'adaptateur ordinaire.
+
 ### Corrigé
 
 - **Le suivi des noms survit à une reconnexion d'openvpn**, qui laissait jusqu'ici le rafraîchissement interroger l'adresse que le tunnel avait avant de changer.

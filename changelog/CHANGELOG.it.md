@@ -11,6 +11,10 @@ seguono il [versionamento semantico](https://semver.org/lang/it/).
 
 - **L'elenco dei siti si può modificare senza interrompere**: un nome aggiunto entra nel tunnel in un secondo, e uno rimosso ne esce non appena nessuno lo usa più.
 
+### Modificato
+
+- **Nel tunnel restano solo i siti che si stanno seguendo**: quando l'handshake TLS dell'applicazione stessa mostra che un indirizzo appartiene a un altro servizio, quell'indirizzo torna sull'adattatore ordinario.
+
 ### Corretto
 
 - **Seguire i nomi sopravvive a una riconnessione di openvpn**, che finora lasciava l'aggiornamento a chiedere tramite l'indirizzo che il tunnel aveva prima di spostarsi.

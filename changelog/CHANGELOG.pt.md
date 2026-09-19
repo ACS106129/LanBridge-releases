@@ -11,6 +11,10 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
 - **A lista de sites pode ser alterada sem desconectar** — um nome adicionado entra no túnel em um segundo, e um removido sai assim que nada mais o usa.
 
+### Alterado
+
+- **No túnel ficam apenas os sites que estão sendo seguidos** — quando o próprio handshake TLS do aplicativo mostra que um endereço é de outro serviço, esse endereço volta para o adaptador comum.
+
 ### Corrigido
 
 - **Seguir os nomes sobrevive a uma reconexão do openvpn**, que até agora deixava a atualização perguntando pelo endereço que o túnel tinha antes de mudar.
