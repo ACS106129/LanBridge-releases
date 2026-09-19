@@ -12,6 +12,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 - **La aplicación objetivo ya no alcanza nada salvo a través del túnel**: el primer paquete de una conexión a una dirección que ninguna ruta cubre se descarta en lugar de salir con la dirección real de esta máquina, que es lo que provocaba los 403 repetidos y la pantalla de carga atascada.
 - **Descartar ese paquete es lo que añade la ruta**, de modo que la conexión prospera en su primera retransmisión en vez de fallar.
 - **Un paquete IPv6 bloqueado ya no se registra como fuga**; ahora dice que se descartó para que el cliente recurra a IPv4, que es lo que debía ocurrir.
+- **Se sigue al túnel cuando se reconecta con otra dirección**, y si la nueva queda fuera de la subred sobre la que se construyó el filtro de paquetes, se deja de rechazar y se dice, en lugar de convertir en rechazo cada paquete que envía el objetivo.
 
 ### Cambiado
 

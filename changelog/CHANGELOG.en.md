@@ -12,6 +12,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **The target can no longer reach anything except through the tunnel** — the opening packet of a connection to an address no route covers is dropped rather than sent from this machine's own address, which is what caused the repeated 403s and the stuck loading screen.
 - **Refusing that packet is what adds the route**, so the connection succeeds on its first retransmission instead of failing.
 - **A blocked IPv6 packet is no longer logged as a leak**; it now says the packet was dropped so the client falls back to IPv4, which is what was supposed to happen.
+- **A tunnel that reconnects onto a different address is followed**, and if the new one falls outside the subnet the packet filter was built around, refusing stops and says so rather than turning every packet the target sends into a refusal.
 
 ### Changed
 

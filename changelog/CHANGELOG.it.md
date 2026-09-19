@@ -12,6 +12,7 @@ seguono il [versionamento semantico](https://semver.org/lang/it/).
 - **L'applicazione di destinazione non raggiunge più nulla se non attraverso il tunnel**: il primo pacchetto di una connessione verso un indirizzo che nessuna rotta copre viene scartato anziché partire con l'indirizzo reale di questa macchina, ed era questo a causare i 403 ripetuti e la schermata di caricamento bloccata.
 - **Scartare quel pacchetto è ciò che aggiunge la rotta**, così la connessione riesce alla prima ritrasmissione invece di fallire.
 - **Un pacchetto IPv6 bloccato non viene più registrato come fuga**; ora il registro dice che è stato scartato perché il client ripieghi su IPv4, che era l'intento.
+- **Un tunnel che si riconnette con un altro indirizzo viene seguito**, e se il nuovo cade fuori dalla sottorete attorno a cui è stato costruito il filtro dei pacchetti, il rifiuto si ferma e lo dichiara, invece di trasformare in rifiuto ogni pacchetto che la destinazione invia.
 
 ### Modificato
 
