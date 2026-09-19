@@ -20,6 +20,7 @@ seguono il [versionamento semantico](https://semver.org/lang/it/).
 ### Corretto
 
 - Il tracciamento sopravvive alla riconnessione.
+- I controlli degli aggiornamenti non vengono più rifiutati.
 
 ## [0.5.28] - 2026-09-19
 

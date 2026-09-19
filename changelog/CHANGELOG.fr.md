@@ -20,6 +20,7 @@ suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 ### Corrigé
 
 - Le suivi survit à une reconnexion openvpn.
+- Les vérifications de mise à jour ne sont plus refusées.
 
 ## [0.5.28] - 2026-09-19
 

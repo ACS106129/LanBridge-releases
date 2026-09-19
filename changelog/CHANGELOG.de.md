@@ -20,6 +20,7 @@ Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 ### Behoben
 
 - Namensverfolgung übersteht Neuverbindung.
+- Update-Prüfungen werden nicht mehr abgelehnt.
 
 ## [0.5.28] - 2026-09-19
 

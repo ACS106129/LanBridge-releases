@@ -20,6 +20,7 @@ seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 ### Corrigido
 
 - O rastreio sobrevive à reconexão.
+- As verificações de atualização não são mais recusadas.
 
 ## [0.5.28] - 2026-09-19
 

@@ -20,6 +20,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 ### Corregido
 
 - El seguimiento sobrevive a la reconexión.
+- Las comprobaciones de actualización ya no se rechazan.
 
 ## [0.5.28] - 2026-09-19
 

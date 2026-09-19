@@ -20,6 +20,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Fixed
 
 - Name following survives an openvpn reconnect.
+- Update checks are no longer refused.
 
 ## [0.5.28] - 2026-09-19
 
