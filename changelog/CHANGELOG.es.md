@@ -11,6 +11,10 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 
 - **La lista de sitios se puede cambiar sin cortar la sesión**: un nombre añadido entra en el túnel en un segundo, y uno quitado sale en cuanto nadie lo usa.
 
+### Cambiado
+
+- **En el túnel sólo se quedan los sitios que se están siguiendo**: cuando el propio saludo TLS de la aplicación muestra que una dirección es de otro servicio, esa dirección vuelve al adaptador normal.
+
 ### Corregido
 
 - **Seguir los nombres sobrevive a una reconexión de openvpn**, que hasta ahora dejaba el refresco preguntando por la dirección que el túnel tenía antes de moverse.
