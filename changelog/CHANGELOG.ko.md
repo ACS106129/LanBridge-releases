@@ -5,7 +5,7 @@ LanBridge의 주목할 만한 변경은 모두 여기에 기록합니다.
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르고, 버전 번호는
 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다.
 
-## [미출시]
+## [0.5.30] - 2026-09-20
 
 ### 수정
 
@@ -437,6 +437,9 @@ LanBridge의 주목할 만한 변경은 모두 여기에 기록합니다.
 - 다른 게임을 위한 범용 UDP 브로드캐스트 중계. 포트로 설정합니다.
 - 같은 엔진의 헤드리스 명령줄 버전.
 
+[0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
+[0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
+[0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28
 [0.5.27]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.27
 [0.5.26]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.26
 [0.5.25]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.25

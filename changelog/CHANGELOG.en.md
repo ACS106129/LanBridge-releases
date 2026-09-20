@@ -5,7 +5,7 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.30] - 2026-09-20
 
 ### Fixed
 
@@ -437,6 +437,9 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
+[0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
+[0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28
 [0.5.27]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.27
 [0.5.26]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.26
 [0.5.25]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.25

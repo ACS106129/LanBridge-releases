@@ -5,7 +5,7 @@
 Формат следует [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), нумерация версий —
 [семантическому версионированию](https://semver.org/lang/ru/).
 
-## [Не выпущено]
+## [0.5.30] - 2026-09-20
 
 ### Исправлено
 
@@ -437,6 +437,9 @@
 - Общий ретранслятор широковещания UDP для других игр, настраиваемый по порту.
 - Версия того же движка для командной строки, без интерфейса.
 
+[0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
+[0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
+[0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28
 [0.5.27]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.27
 [0.5.26]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.26
 [0.5.25]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.25

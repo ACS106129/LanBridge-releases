@@ -5,7 +5,7 @@ LanBridge 所有值得记下来的变更都在这里。
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循
 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [未发布]
+## [0.5.30] - 2026-09-20
 
 ### 修正
 
@@ -437,6 +437,9 @@ LanBridge 所有值得记下来的变更都在这里。
 - 其他游戏用的通用 UDP 广播中继，按端口配置。
 - 同一套引擎的无界面命令行驱动程序。
 
+[0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
+[0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
+[0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28
 [0.5.27]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.27
 [0.5.26]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.26
 [0.5.25]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.25
