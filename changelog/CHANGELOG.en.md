@@ -5,6 +5,24 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.31] - 2026-09-23
+
+### Added
+
+- A ready-made DMM site list.
+
+### Changed
+
+- Only the sign-in goes through the tunnel; the game is not slowed.
+- The session no longer follows the app into another process.
+- An app already running is used instead of starting a second copy.
+
+### Fixed
+
+- The tunnel no longer dies quietly after a reconnect.
+- A sign-in address is no longer dropped between two lookups.
+- A brief drop no longer restarts the tunnel.
+
 ## [0.5.30] - 2026-09-20
 
 ### Fixed
@@ -437,6 +455,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.31]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.31
 [0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
 [0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
 [0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28

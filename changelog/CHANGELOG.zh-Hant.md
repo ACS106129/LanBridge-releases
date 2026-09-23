@@ -5,6 +5,24 @@ LanBridge 所有值得記下來的變更都在這裡。
 格式依循 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.1.0/)，版本號依循
 [語意化版本](https://semver.org/lang/zh-TW/)。
 
+## [0.5.31] - 2026-09-23
+
+### 新增
+
+- 內建 DMM 網站清單。
+
+### 變更
+
+- 只有登入走隧道，遊戲不再被拖慢。
+- 不再追著程式換到別的行程。
+- 程式已在執行就直接沿用，不再開第二份。
+
+### 修正
+
+- 重連後隧道不再悄悄失效。
+- 登入位址不再在兩次查詢間被丟掉。
+- 短暫斷線不再重啟通道。
+
 ## [0.5.30] - 2026-09-20
 
 ### 修正
@@ -437,6 +455,7 @@ LanBridge 所有值得記下來的變更都在這裡。
 - 其他遊戲用的通用 UDP 廣播中繼，依連接埠設定。
 - 同一套引擎的無介面命令列驅動程式。
 
+[0.5.31]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.31
 [0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
 [0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
 [0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28

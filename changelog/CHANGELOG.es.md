@@ -5,6 +5,24 @@ Todos los cambios notables de LanBridge se registran aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y las versiones
 siguen el [versionado semántico](https://semver.org/lang/es/).
 
+## [0.5.31] - 2026-09-23
+
+### Añadido
+
+- Una lista de sitios de DMM lista para usar.
+
+### Cambiado
+
+- Solo el inicio de sesión pasa por el túnel; el juego ya no se ralentiza.
+- La sesión ya no persigue a la aplicación hasta otro proceso.
+- Si la aplicación ya está abierta, se usa esa en vez de abrir otra.
+
+### Corregido
+
+- El túnel ya no muere en silencio tras una reconexión.
+- La dirección del inicio de sesión ya no se pierde entre dos consultas.
+- Un corte breve ya no reinicia el túnel.
+
 ## [0.5.30] - 2026-09-20
 
 ### Corregido
@@ -437,6 +455,7 @@ siguen el [versionado semántico](https://semver.org/lang/es/).
 - Relé genérico de difusión UDP para otros juegos, configurado por puerto.
 - Versión de línea de comandos del mismo motor, sin interfaz.
 
+[0.5.31]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.31
 [0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
 [0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
 [0.5.28]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.28
