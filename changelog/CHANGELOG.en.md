@@ -5,6 +5,27 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.32] - 2026-09-24
+
+### Added
+
+- DMM Game Player installs and starts in one step.
+- Sort by country, speed, latency or sessions.
+- Profiles keep the speed they were picked at.
+- Downloads show speed and time left.
+
+### Changed
+
+- Tunnel sites sit with the VPN profile.
+- Updates download much faster.
+- Every help text is one sentence.
+
+### Fixed
+
+- A dropped tunnel no longer shows as ready.
+- The same profile is stored only once.
+- The remove button clears the scrollbar.
+
 ## [0.5.31] - 2026-09-23
 
 ### Added
@@ -455,6 +476,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Generic UDP broadcast relay for other games, configured by port.
 - Headless command-line driver for the same engine.
 
+[0.5.32]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.32
 [0.5.31]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.31
 [0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
 [0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29

@@ -5,6 +5,27 @@ LanBridge の注目すべき変更はすべてここに記録します。
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョン番号は
 [セマンティック バージョニング](https://semver.org/lang/ja/) に従います。
 
+## [0.5.32] - 2026-09-24
+
+### 追加
+
+- DMM Game Player を一括で導入・起動。
+- 国・速度・遅延・接続数で並べ替え。
+- 取り込み時の速度と遅延を記録。
+- 更新の速度と残り時間を表示。
+
+### 変更
+
+- VPN 経由のサイトをプロファイル横へ。
+- 更新のダウンロードが大幅に高速化。
+- 説明文をすべて一文に。
+
+### 修正
+
+- 切れた OpenVPN を準備完了と表示しない。
+- 同じプロファイルを二重に保存しない。
+- 削除ボタンがスクロールバーに隠れない。
+
 ## [0.5.31] - 2026-09-23
 
 ### 追加
@@ -455,6 +476,7 @@ LanBridge の注目すべき変更はすべてここに記録します。
 - 他のゲーム向けの汎用 UDP ブロードキャストリレー。ポートで設定します。
 - 同じエンジンのヘッドレスなコマンドライン版。
 
+[0.5.32]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.32
 [0.5.31]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.31
 [0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
 [0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29

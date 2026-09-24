@@ -5,6 +5,27 @@ LanBridge 所有值得記下來的變更都在這裡。
 格式依循 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.1.0/)，版本號依循
 [語意化版本](https://semver.org/lang/zh-TW/)。
 
+## [0.5.32] - 2026-09-24
+
+### 新增
+
+- DMM Game Player 可一鍵安裝並啟動。
+- 可依國家、速度、延遲、連線數排序。
+- 設定檔記下匯入時的速度與延遲。
+- 下載更新顯示速度與剩餘時間。
+
+### 變更
+
+- 走 VPN 的網站移到設定檔旁。
+- 更新下載快很多。
+- 說明文字都改成一句話。
+
+### 修正
+
+- OpenVPN 斷線後不再顯示就緒。
+- 同一設定檔不再存兩份。
+- 移除鈕不再被捲軸蓋住。
+
 ## [0.5.31] - 2026-09-23
 
 ### 新增
@@ -455,6 +476,7 @@ LanBridge 所有值得記下來的變更都在這裡。
 - 其他遊戲用的通用 UDP 廣播中繼，依連接埠設定。
 - 同一套引擎的無介面命令列驅動程式。
 
+[0.5.32]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.32
 [0.5.31]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.31
 [0.5.30]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.30
 [0.5.29]: https://github.com/ACS106129/LanBridge-releases/releases/tag/v0.5.29
