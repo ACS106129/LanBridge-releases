@@ -5,6 +5,20 @@ Tutte le modifiche rilevanti di LanBridge sono registrate qui.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e le versioni
 seguono il [versionamento semantico](https://semver.org/lang/it/).
 
+## [0.5.33] - 2026-09-25
+
+### Aggiunto
+
+- La modalità DMM carica o rimuove patch di traduzione.
+
+### Modificato
+
+- Log in chiaro, una conclusione per riga.
+
+### Corretto
+
+- Un server muto viene indicato come causa.
+
 ## [0.5.32] - 2026-09-24
 
 ### Aggiunto
