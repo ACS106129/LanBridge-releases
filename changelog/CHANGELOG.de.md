@@ -5,6 +5,25 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.0.0] - 2026-09-26
+
+### Hinzugefügt
+
+- Beta-Versionen lassen sich in den Einstellungen einschalten.
+- Beta aus installiert wieder die offizielle Version.
+- Patches werden in der App verwahrt und verwaltet.
+- Warcraft III wird am Installationsort gefunden.
+
+### Geändert
+
+- Jeder Patch zeigt sein Aktualisierungsdatum.
+
+### Behoben
+
+- Das VPN bleibt aktiv, wenn die App im Hintergrund ist.
+- Beenden lässt OpenVPN nicht mehr laufen.
+- Neuigkeiten zeigen jede übersprungene Version.
+
 ## [0.5.34] - 2026-09-26
 
 ### Geändert

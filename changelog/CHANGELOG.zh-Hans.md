@@ -5,6 +5,25 @@ LanBridge 所有值得记下来的变更都在这里。
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循
 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.0.0] - 2026-09-26
+
+### 新增
+
+- 设置可开启 beta 版本。
+- 关闭 beta 会装回原本的正式版。
+- patch 可导入 App 并管理。
+- 自动找到 Warcraft III 的位置。
+
+### 变更
+
+- patch 会显示更新日期。
+
+### 修正
+
+- 程序在后台时不再中断 VPN。
+- 停止后不再残留 OpenVPN。
+- 更新内容列出跨过的所有版本。
+
 ## [0.5.34] - 2026-09-26
 
 ### 变更
