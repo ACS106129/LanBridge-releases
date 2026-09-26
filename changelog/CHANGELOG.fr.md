@@ -5,6 +5,19 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et les versions
 suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.5.34] - 2026-09-26
+
+### Modifié
+
+- Le journal affiche la ligne la plus récente en haut.
+- Seules les commandes utiles aux choix actuels s'affichent.
+- Le patch de traduction a sa propre carte.
+- Seuls les clics sur boutons et menus émettent un son.
+
+### Corrigé
+
+- Choisir un fichier qui n'est pas un patch garde l'état.
+
 ## [0.5.33] - 2026-09-25
 
 ### Ajouté

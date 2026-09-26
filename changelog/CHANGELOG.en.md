@@ -5,6 +5,19 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.34] - 2026-09-26
+
+### Changed
+
+- The log shows the newest line first.
+- Only controls the current choices use are shown.
+- The translation patch has its own card.
+- Only clicks on buttons and menus play a sound.
+
+### Fixed
+
+- Choosing a non-patch file keeps the status.
+
 ## [0.5.33] - 2026-09-25
 
 ### Added
