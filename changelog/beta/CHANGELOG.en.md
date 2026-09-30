@@ -2,6 +2,12 @@
 
 Changes in LanBridge beta versions are recorded here; releases are in [CHANGELOG.en.md](../CHANGELOG.en.md).
 
+## [1.1.0-beta.4] - 2026-10-01
+
+### Fixed
+
+- New versions are found within minutes instead of up to an hour later.
+
 ## [1.1.0-beta.3] - 2026-10-01
 
 ### Fixed

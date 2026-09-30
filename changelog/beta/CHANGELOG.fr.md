@@ -2,6 +2,12 @@
 
 Les modifications des versions bêta de LanBridge sont consignées ici ; les versions stables sont dans [CHANGELOG.fr.md](../CHANGELOG.fr.md).
 
+## [1.1.0-beta.4] - 2026-10-01
+
+### Corrigé
+
+- Les nouvelles versions sont détectées en quelques minutes, et non une heure après.
+
 ## [1.1.0-beta.3] - 2026-10-01
 
 ### Corrigé
