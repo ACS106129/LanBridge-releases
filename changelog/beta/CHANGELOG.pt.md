@@ -2,6 +2,14 @@
 
 As alterações das versões beta do LanBridge ficam aqui; as versões estáveis estão em [CHANGELOG.pt.md](../CHANGELOG.pt.md).
 
+## [1.1.0-beta.3] - 2026-10-01
+
+### Corrigido
+
+- Atualizar agora abre a janela na hora, e as notas carregam dentro dela.
+- O DMM Game Player não pisca mais na tela quando um jogo inicia.
+- Programas que o DMM Game Player não abriu não contam mais como parte da sessão.
+
 ## [1.1.0-beta.2] - 2026-10-01
 
 ### Alterado

@@ -2,6 +2,14 @@
 
 Changes in LanBridge beta versions are recorded here; releases are in [CHANGELOG.en.md](../CHANGELOG.en.md).
 
+## [1.1.0-beta.3] - 2026-10-01
+
+### Fixed
+
+- Update now opens its window at once, and the notes load inside it.
+- DMM Game Player no longer flashes on screen when a game starts.
+- Programs DMM Game Player did not start are no longer treated as part of the session.
+
 ## [1.1.0-beta.2] - 2026-10-01
 
 ### Changed
