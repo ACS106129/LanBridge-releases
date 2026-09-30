@@ -2,6 +2,12 @@
 
 Changes in LanBridge beta versions are recorded here; releases are in [CHANGELOG.en.md](../CHANGELOG.en.md).
 
+## [1.1.0-beta.5] - 2026-10-01
+
+### Fixed
+
+- DMM Game Player stays invisible when a game starts, without the flash beta.3 left.
+
 ## [1.1.0-beta.4] - 2026-10-01
 
 ### Fixed

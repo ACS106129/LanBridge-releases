@@ -2,6 +2,12 @@
 
 Les modifications des versions bêta de LanBridge sont consignées ici ; les versions stables sont dans [CHANGELOG.fr.md](../CHANGELOG.fr.md).
 
+## [1.1.0-beta.5] - 2026-10-01
+
+### Corrigé
+
+- DMM Game Player reste invisible au lancement d’un jeu, sans le clignotement de la beta.3.
+
 ## [1.1.0-beta.4] - 2026-10-01
 
 ### Corrigé

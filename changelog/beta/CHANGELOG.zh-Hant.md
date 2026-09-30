@@ -2,6 +2,12 @@
 
 LanBridge Beta 版的變更記錄在這裡；正式版請見 [CHANGELOG.zh-Hant.md](../CHANGELOG.zh-Hant.md)。
 
+## [1.1.0-beta.5] - 2026-10-01
+
+### 修正
+
+- 啟動遊戲時 DMM Game Player 完全不會出現，不再閃一下。
+
 ## [1.1.0-beta.4] - 2026-10-01
 
 ### 修正
