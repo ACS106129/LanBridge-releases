@@ -2,6 +2,22 @@
 
 As alterações das versões beta do LanBridge ficam aqui; as versões estáveis estão em [CHANGELOG.pt.md](../CHANGELOG.pt.md).
 
+## [1.1.0-beta.2] - 2026-10-01
+
+### Alterado
+
+- Ligar ou desligar a beta só oferece a atualização, e você decide se instala.
+- As notas beta aparecem no seu idioma com cada versão que a atualização traz.
+- As configurações e a lista de sites perderam dicas que nada acrescentavam.
+- A lista de sites some enquanto todo o tráfego passa pela VPN.
+- O botão de mostrar o DMM Game Player fica inativo quando ele não está aberto.
+- Os patches não alteram mais os arquivos do jogo, e o DMM Game Player não os baixa de novo.
+
+### Corrigido
+
+- Jogos DMM iniciam mesmo quando o DMM Game Player precisa baixar um arquivo antes.
+- Os títulos das notas de versão aparecem como títulos.
+
 ## [1.1.0-beta.1] - 2026-09-30
 
 ### Adicionado
