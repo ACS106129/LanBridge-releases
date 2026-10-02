@@ -2,6 +2,12 @@
 
 LanBridge Beta 版的变更记录在这里；正式版请见 [CHANGELOG.zh-Hans.md](../CHANGELOG.zh-Hans.md)。
 
+## [1.1.0-beta.6] - 2026-10-02
+
+### 修正
+
+- 连线数小时后启动 DMM 游戏，也不会再被判定为日本以外地区。
+
 ## [1.1.0-beta.5] - 2026-10-01
 
 ### 修正

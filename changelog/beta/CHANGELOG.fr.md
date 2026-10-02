@@ -2,6 +2,12 @@
 
 Les modifications des versions bêta de LanBridge sont consignées ici ; les versions stables sont dans [CHANGELOG.fr.md](../CHANGELOG.fr.md).
 
+## [1.1.0-beta.6] - 2026-10-02
+
+### Corrigé
+
+- Les jeux DMM passent la vérification de région même des heures après la connexion.
+
 ## [1.1.0-beta.5] - 2026-10-01
 
 ### Corrigé

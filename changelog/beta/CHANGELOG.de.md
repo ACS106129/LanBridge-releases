@@ -2,6 +2,12 @@
 
 Hier stehen die Änderungen der Beta-Versionen von LanBridge; die regulären Versionen stehen in [CHANGELOG.de.md](../CHANGELOG.de.md).
 
+## [1.1.0-beta.6] - 2026-10-02
+
+### Behoben
+
+- DMM-Spiele bestehen die Regionsprüfung auch Stunden nach dem Verbinden.
+
 ## [1.1.0-beta.5] - 2026-10-01
 
 ### Behoben
