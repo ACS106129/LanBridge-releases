@@ -5,6 +5,40 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-10-07
+
+### Added
+
+- An installed DMM game starts with one click.
+- The DMM account's games load automatically once connected.
+- A DMM game can be installed with desktop and Start menu shortcuts.
+- A signed-out DMM Game Player gets its sign-in page opened in the browser.
+- You can choose which DMM games appear in the launch list.
+- DMM games start with the Japanese code page even without a Japanese system locale.
+
+### Changed
+
+- DMM Game Player runs in the background and comes forward only when you show it.
+- DMM mode sends DMM Game Player's sites through the VPN without a list.
+- Patches find their own game.
+- Patches no longer change the game's files, so DMM Game Player stops downloading them.
+- Turning the beta off lands on the newest release.
+- Turning the beta on or off only offers the update, and you decide whether to install it.
+- Settings and the site list drop hints that said nothing new.
+- The site list hides while all traffic goes through the VPN.
+- The DMM Game Player show button is off while no player is running.
+- The traffic animation is shorter and the side buttons match it.
+
+### Fixed
+
+- DMM games pass the region check even hours after connecting.
+- DMM games start again when DMM Game Player has to download a file first.
+- DMM Game Player no longer flashes on screen when a game starts.
+- Programs DMM Game Player did not start are no longer treated as part of the session.
+- Update now opens its window at once, and the notes load inside it.
+- New versions are found within minutes instead of up to an hour later.
+- Headings in the release notes show as headings.
+
 ## [1.0.0] - 2026-09-26
 
 ### Added

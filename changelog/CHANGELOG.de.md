@@ -5,6 +5,40 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.1.0] - 2026-10-07
+
+### Hinzugefügt
+
+- Ein installiertes DMM-Spiel startet mit einem Klick.
+- Die Spiele des DMM-Kontos werden nach dem Verbinden automatisch geladen.
+- Ein DMM-Spiel lässt sich mit Desktop- und Startmenüverknüpfung installieren.
+- Ist DMM Game Player abgemeldet, öffnet sich seine Anmeldeseite im Browser.
+- Du kannst wählen, welche DMM-Spiele in der Startliste stehen.
+- DMM-Spiele starten auch ohne japanisches Gebietsschema mit japanischer Codepage.
+
+### Geändert
+
+- DMM Game Player läuft im Hintergrund und kommt nur nach vorne, wenn Sie es einblenden.
+- Der DMM-Modus leitet die Seiten von DMM Game Player ohne Liste über das VPN.
+- Patches finden ihr Spiel selbst.
+- Patches ändern keine Spieldateien mehr, also lädt DMM Game Player sie nicht erneut.
+- Beta aus installiert die neueste offizielle Version.
+- Das Ein- oder Ausschalten der Beta bietet nur das Update an, und Sie entscheiden.
+- Einstellungen und Seitenliste verzichten auf Hinweise ohne neuen Inhalt.
+- Die Seitenliste verschwindet, solange der gesamte Verkehr durch das VPN geht.
+- Die Anzeigen-Schaltfläche für DMM Game Player ist aus, solange er nicht läuft.
+- Die Verkehrsanimation ist niedriger und die seitlichen Schaltflächen passen dazu.
+
+### Behoben
+
+- DMM-Spiele bestehen die Regionsprüfung auch Stunden nach dem Verbinden.
+- DMM-Spiele starten wieder, wenn DMM Game Player zuerst eine Datei laden muss.
+- DMM Game Player blitzt beim Start eines Spiels nicht mehr auf dem Bildschirm auf.
+- Programme, die DMM Game Player nicht gestartet hat, zählen nicht mehr zur Sitzung.
+- Jetzt aktualisieren öffnet sein Fenster sofort, und die Hinweise laden darin.
+- Neue Versionen werden in wenigen Minuten erkannt statt bis zu einer Stunde später.
+- Überschriften in den Versionshinweisen werden als Überschriften angezeigt.
+
 ## [1.0.0] - 2026-09-26
 
 ### Hinzugefügt

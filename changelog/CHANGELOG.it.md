@@ -5,6 +5,40 @@ Tutte le modifiche rilevanti di LanBridge sono registrate qui.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e le versioni
 seguono il [versionamento semantico](https://semver.org/lang/it/).
 
+## [1.1.0] - 2026-10-07
+
+### Aggiunto
+
+- Un gioco DMM installato si avvia con un clic.
+- I giochi dell'account DMM si caricano da soli dopo la connessione.
+- Un gioco DMM si può installare con collegamenti sul desktop e nel menu Start.
+- Se DMM Game Player non ha eseguito l'accesso, la pagina di accesso si apre nel browser.
+- Puoi scegliere quali giochi DMM compaiono nell'elenco di avvio.
+- I giochi DMM usano la tabella codici giapponese anche se il sistema non è in giapponese.
+
+### Modificato
+
+- DMM Game Player gira in background e compare solo quando lo mostri.
+- La modalità DMM fa passare i siti di DMM Game Player dalla VPN senza elenco.
+- Le patch trovano da sole il proprio gioco.
+- Le patch non modificano più i file del gioco, e DMM Game Player non li riscarica.
+- Disattivare la beta installa l’ultima versione ufficiale.
+- Attivare o disattivare la beta propone solo l’aggiornamento, e decidi tu.
+- Impostazioni ed elenco dei siti perdono suggerimenti che non aggiungevano nulla.
+- L’elenco dei siti si nasconde mentre tutto il traffico passa dalla VPN.
+- Il pulsante per mostrare DMM Game Player è disattivato se non è in esecuzione.
+- L'animazione del traffico è più bassa e i pulsanti laterali si allineano.
+
+### Corretto
+
+- I giochi DMM superano il controllo della regione anche ore dopo la connessione.
+- I giochi DMM si avviano anche quando DMM Game Player deve prima scaricare un file.
+- DMM Game Player non compare più per un istante sullo schermo all’avvio di un gioco.
+- I programmi non avviati da DMM Game Player non contano più come parte della sessione.
+- Aggiorna ora apre subito la finestra, e le note si caricano al suo interno.
+- Le nuove versioni vengono rilevate in pochi minuti, non fino a un’ora dopo.
+- I titoli delle note di versione appaiono come titoli.
+
 ## [1.0.0] - 2026-09-26
 
 ### Aggiunto

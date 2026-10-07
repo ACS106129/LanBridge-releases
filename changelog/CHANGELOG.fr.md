@@ -5,6 +5,40 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et les versions
 suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [1.1.0] - 2026-10-07
+
+### Ajouté
+
+- Un jeu DMM installé se lance en un clic.
+- Les jeux du compte DMM se chargent automatiquement une fois connecté.
+- Un jeu DMM peut être installé avec des raccourcis sur le bureau et dans le menu Démarrer.
+- Si DMM Game Player est déconnecté, sa page de connexion s'ouvre dans le navigateur.
+- Vous pouvez choisir les jeux DMM affichés dans la liste de lancement.
+- Les jeux DMM utilisent la page de codes japonaise même sans système en japonais.
+
+### Modifié
+
+- DMM Game Player tourne en arrière-plan et ne s'affiche que si vous le demandez.
+- Le mode DMM fait passer les sites de DMM Game Player par le VPN sans liste.
+- Les patchs trouvent eux-mêmes leur jeu.
+- Les correctifs ne touchent plus aux fichiers du jeu, que DMM Game Player ne recharge plus.
+- Désactiver la bêta installe la dernière version officielle.
+- Activer ou désactiver la bêta propose seulement la mise à jour, et vous décidez.
+- Les paramètres et la liste des sites perdent des indications inutiles.
+- La liste des sites se masque quand tout le trafic passe par le VPN.
+- Le bouton d’affichage de DMM Game Player est inactif s’il ne tourne pas.
+- L'animation du trafic est plus basse et les boutons latéraux s'y alignent.
+
+### Corrigé
+
+- Les jeux DMM passent la vérification de région même des heures après la connexion.
+- Les jeux DMM démarrent même quand DMM Game Player doit d’abord télécharger un fichier.
+- DMM Game Player n’apparaît plus un instant à l’écran au lancement d’un jeu.
+- Les programmes que DMM Game Player n’a pas lancés ne comptent plus dans la session.
+- Mettre à jour ouvre sa fenêtre aussitôt, et les notes s’y chargent.
+- Les nouvelles versions sont détectées en quelques minutes, et non une heure après.
+- Les titres des notes de version s’affichent comme des titres.
+
 ## [1.0.0] - 2026-09-26
 
 ### Ajouté

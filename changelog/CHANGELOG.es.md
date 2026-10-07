@@ -5,6 +5,40 @@ Todos los cambios notables de LanBridge se registran aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y las versiones
 siguen el [versionado semántico](https://semver.org/lang/es/).
 
+## [1.1.0] - 2026-10-07
+
+### Añadido
+
+- Un juego de DMM instalado se inicia con un clic.
+- Los juegos de la cuenta DMM se cargan solos al conectar.
+- Un juego de DMM se puede instalar con accesos directos en el escritorio y el menú Inicio.
+- Si DMM Game Player no tiene sesión, su página de inicio de sesión se abre en el navegador.
+- Puedes elegir qué juegos DMM aparecen en la lista de inicio.
+- Los juegos DMM usan la página de códigos japonesa aunque el sistema no esté en japonés.
+
+### Cambiado
+
+- DMM Game Player se ejecuta en segundo plano y solo aparece cuando lo muestras.
+- El modo DMM envía los sitios de DMM Game Player por la VPN sin lista.
+- Los parches encuentran su propio juego.
+- Los parches no cambian los archivos del juego, y DMM Game Player ya no los descarga.
+- Al desactivar la beta se instala la oficial más reciente.
+- Activar o desactivar la beta solo ofrece la actualización, y tú decides si instalarla.
+- Los ajustes y la lista de sitios quitan indicaciones que no aportaban nada.
+- La lista de sitios se oculta mientras todo el tráfico va por la VPN.
+- El botón para mostrar DMM Game Player se desactiva si no está en marcha.
+- La animación de tráfico es más baja y los botones laterales se ajustan a ella.
+
+### Corregido
+
+- Los juegos de DMM superan la comprobación de región aun horas después de conectar.
+- Los juegos DMM arrancan aunque DMM Game Player tenga que descargar antes un archivo.
+- DMM Game Player ya no aparece un instante en pantalla al iniciar un juego.
+- Los programas que DMM Game Player no inició ya no cuentan como parte de la sesión.
+- Actualizar ahora abre su ventana al instante, y las notas se cargan dentro.
+- Las versiones nuevas se detectan en minutos, no hasta una hora después.
+- Los títulos de las notas de versión se muestran como títulos.
+
 ## [1.0.0] - 2026-09-26
 
 ### Añadido
