@@ -5,6 +5,13 @@ LanBridge의 주목할 만한 변경은 모두 여기에 기록합니다.
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르고, 버전 번호는
 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다.
 
+## [1.1.1] - 2026-10-10
+
+### 수정
+
+- LanBridge를 한동안 열어 두어도 DMM Game Player 표시 버튼이 비활성 상태로 남지 않습니다.
+- 혼잡한 VPN 서버에 연결할 때 너무 일찍 포기하지 않으며, 다섯 번 연속 실패하면 이유와 함께 멈춥니다.
+
 ## [1.1.0] - 2026-10-07
 
 ### 추가

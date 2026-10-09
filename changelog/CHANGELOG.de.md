@@ -5,6 +5,13 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.1.1] - 2026-10-10
+
+### Behoben
+
+- Die Anzeigen-Schaltfläche für DMM Game Player bleibt nicht mehr aus, wenn LanBridge eine Weile offen ist.
+- Die Verbindung zu einem ausgelasteten VPN-Server gibt nicht mehr zu früh auf und stoppt nach fünf Fehlversuchen mit dem Grund.
+
 ## [1.1.0] - 2026-10-07
 
 ### Hinzugefügt

@@ -5,6 +5,13 @@ LanBridge 所有值得记下来的变更都在这里。
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循
 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.1.1] - 2026-10-10
+
+### 修正
+
+- LanBridge 开着一段时间后，DMM Game Player 的显示按钮不会再一直无法使用。
+- 连接繁忙的 VPN 服务器时不再提早放弃，连续失败五次后会停止并说明原因。
+
 ## [1.1.0] - 2026-10-07
 
 ### 新增
