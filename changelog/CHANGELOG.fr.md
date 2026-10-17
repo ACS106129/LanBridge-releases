@@ -5,6 +5,12 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et les versions
 suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [1.1.2] - 2026-10-18
+
+### Corrigé
+
+- Les autres joueurs peuvent de nouveau rejoindre une partie que vous créez via le VPN, même si une session interrompue a laissé une règle de pare-feu pour un autre VPN ; la règle est désormais refaite pour le VPN actuel à chaque connexion.
+
 ## [1.1.1] - 2026-10-10
 
 ### Corrigé

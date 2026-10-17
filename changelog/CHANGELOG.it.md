@@ -5,6 +5,12 @@ Tutte le modifiche rilevanti di LanBridge sono registrate qui.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e le versioni
 seguono il [versionamento semantico](https://semver.org/lang/it/).
 
+## [1.1.2] - 2026-10-18
+
+### Corretto
+
+- Gli altri giocatori possono di nuovo entrare in una stanza creata da te tramite la VPN, anche se una sessione interrotta ha lasciato una regola del firewall per un’altra VPN; ora la regola viene ricreata per la VPN attuale a ogni connessione.
+
 ## [1.1.1] - 2026-10-10
 
 ### Corretto

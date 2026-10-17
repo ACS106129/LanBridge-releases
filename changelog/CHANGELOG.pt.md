@@ -5,6 +5,12 @@ Todas as alterações relevantes do LanBridge são registadas aqui.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e as versões
 seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [1.1.2] - 2026-10-18
+
+### Corrigido
+
+- Os outros jogadores voltam a conseguir entrar numa sala que você cria pela VPN, mesmo que uma sessão interrompida tenha deixado uma regra de firewall para outra VPN; agora a regra é refeita para a VPN atual a cada conexão.
+
 ## [1.1.1] - 2026-10-10
 
 ### Corrigido

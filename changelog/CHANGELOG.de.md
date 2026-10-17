@@ -5,6 +5,12 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.1.2] - 2026-10-18
+
+### Behoben
+
+- Andere können einem über das VPN erstellten Spiel wieder beitreten, auch wenn eine abgebrochene Sitzung eine Firewall-Regel für ein anderes VPN hinterlassen hat; die Regel wird jetzt bei jeder Verbindung für das aktuelle VPN neu angelegt.
+
 ## [1.1.1] - 2026-10-10
 
 ### Behoben

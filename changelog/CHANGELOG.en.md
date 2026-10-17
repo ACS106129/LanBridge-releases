@@ -5,6 +5,12 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-10-18
+
+### Fixed
+
+- Others can join a room you host over the VPN again when an earlier session that ended abruptly left a firewall rule behind for a different VPN; the rule is now rebuilt for the current VPN on every connection.
+
 ## [1.1.1] - 2026-10-10
 
 ### Fixed

@@ -5,6 +5,12 @@ LanBridge 所有值得記下來的變更都在這裡。
 格式依循 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.1.0/)，版本號依循
 [語意化版本](https://semver.org/lang/zh-TW/)。
 
+## [1.1.2] - 2026-10-18
+
+### 修正
+
+- 先前的連線異常結束、留下其他 VPN 的防火牆規則時，別人透過 VPN 加入你開的房間會失敗；現在每次連線都會依目前的 VPN 重建規則。
+
 ## [1.1.1] - 2026-10-10
 
 ### 修正
