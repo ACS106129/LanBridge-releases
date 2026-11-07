@@ -5,6 +5,19 @@ LanBridge 所有值得記下來的變更都在這裡。
 格式依循 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.1.0/)，版本號依循
 [語意化版本](https://semver.org/lang/zh-TW/)。
 
+## [1.2.0] - 2026-11-07
+
+### 新增
+
+- 可以匯入並連線 WireGuard 設定檔（.conf），用法和 OpenVPN 一樣，而且只有 VPN 網段會走通道。
+- WireGuard 設定檔需要時，LanBridge 可以幫你安裝 WireGuard。
+- LanBridge 會檢查 OpenVPN 和 WireGuard 有沒有新版，並在沒有連線時提供更新。
+
+### 變更
+
+- 設定檔清單會標示每個設定檔使用 OpenVPN 還是 WireGuard。
+- 魔獸爭霸 III 的房間搜尋現在會涵蓋整個 VPN 網段，OpenVPN 和 WireGuard 的玩家可以互相看到房間。
+
 ## [1.1.2] - 2026-10-18
 
 ### 修正

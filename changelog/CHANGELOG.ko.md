@@ -5,6 +5,19 @@ LanBridge의 주목할 만한 변경은 모두 여기에 기록합니다.
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르고, 버전 번호는
 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다.
 
+## [1.2.0] - 2026-11-07
+
+### 추가
+
+- WireGuard 프로필(.conf)을 OpenVPN과 똑같이 가져와 연결할 수 있으며, VPN 서브넷만 터널을 거칩니다.
+- WireGuard 프로필에 필요하면 LanBridge가 WireGuard를 설치해 줍니다.
+- LanBridge가 OpenVPN과 WireGuard의 새 버전을 확인하고, 연결 중이 아닐 때 업데이트를 제안합니다.
+
+### 변경
+
+- 프로필 목록에 각 프로필이 OpenVPN과 WireGuard 중 무엇을 쓰는지 표시됩니다.
+- Warcraft III 방 찾기가 이제 VPN 서브넷 전체에 닿아 OpenVPN과 WireGuard 플레이어가 서로의 방을 볼 수 있습니다.
+
 ## [1.1.2] - 2026-10-18
 
 ### 수정

@@ -5,6 +5,19 @@ Todas as alterações relevantes do LanBridge são registadas aqui.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e as versões
 seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [1.2.0] - 2026-11-07
+
+### Adicionado
+
+- Perfis do WireGuard (.conf) podem ser importados e conectados como os do OpenVPN, e só a sub-rede da VPN passa pelo túnel.
+- Quando um perfil do WireGuard precisa, o LanBridge pode instalar o WireGuard para você.
+- O LanBridge verifica se há versões novas do OpenVPN e do WireGuard e oferece a atualização quando não há sessão em andamento.
+
+### Alterado
+
+- A lista de perfis mostra se cada perfil usa OpenVPN ou WireGuard.
+- A busca de salas do Warcraft III agora alcança todos os jogadores da sub-rede da VPN, então jogadores de OpenVPN e de WireGuard veem as salas uns dos outros.
+
 ## [1.1.2] - 2026-10-18
 
 ### Corrigido
