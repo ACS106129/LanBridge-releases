@@ -5,6 +5,13 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.3] - 2026-11-07
+
+### Geändert
+
+- Eine Edition von Warcraft III erscheint nur dann in der Liste der Zielprogramme, wenn sie installiert ist, und ihr Hilfetext entfällt.
+- Die Warcraft-III-Modi zeigen kein Argumentfeld mehr und fügen -window nur beim klassischen Spiel hinzu, das es unterstützt.
+
 ## [1.2.2] - 2026-11-07
 
 ### Hinzugefügt
