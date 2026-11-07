@@ -5,6 +5,12 @@ Todos los cambios notables de LanBridge se registran aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y las versiones
 siguen el [versionado semántico](https://semver.org/lang/es/).
 
+## [1.2.4] - 2026-11-07
+
+### Cambiado
+
+- Los modos de Warcraft III ya no muestran la fila de ruta y Examinar, porque el juego que abren ya se ha encontrado.
+
 ## [1.2.3] - 2026-11-07
 
 ### Cambiado

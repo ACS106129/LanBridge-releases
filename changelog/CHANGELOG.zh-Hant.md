@@ -5,6 +5,12 @@ LanBridge 所有值得記下來的變更都在這裡。
 格式依循 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.1.0/)，版本號依循
 [語意化版本](https://semver.org/lang/zh-TW/)。
 
+## [1.2.4] - 2026-11-07
+
+### 變更
+
+- 魔獸爭霸 III 模式不再顯示路徑和「瀏覽…」那一行，因為要啟動的遊戲已經找到了。
+
 ## [1.2.3] - 2026-11-07
 
 ### 變更

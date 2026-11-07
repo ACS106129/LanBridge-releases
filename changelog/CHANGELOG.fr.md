@@ -5,6 +5,12 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et les versions
 suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [1.2.4] - 2026-11-07
+
+### Modifié
+
+- Les modes Warcraft III n’affichent plus la ligne du chemin et de Parcourir, puisque le jeu qu’ils lancent a déjà été trouvé.
+
 ## [1.2.3] - 2026-11-07
 
 ### Modifié

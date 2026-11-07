@@ -5,6 +5,12 @@ Tutte le modifiche rilevanti di LanBridge sono registrate qui.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e le versioni
 seguono il [versionamento semantico](https://semver.org/lang/it/).
 
+## [1.2.4] - 2026-11-07
+
+### Modificato
+
+- Le modalità di Warcraft III non mostrano più la riga del percorso e di Sfoglia, perché il gioco che avviano è già stato trovato.
+
 ## [1.2.3] - 2026-11-07
 
 ### Modificato

@@ -5,6 +5,12 @@ LanBridge 所有值得记下来的变更都在这里。
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循
 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.2.4] - 2026-11-07
+
+### 变更
+
+- 魔兽争霸 III 模式不再显示路径和“浏览…”那一行，因为要启动的游戏已经找到了。
+
 ## [1.2.3] - 2026-11-07
 
 ### 变更

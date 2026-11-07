@@ -5,6 +5,12 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.4] - 2026-11-07
+
+### Geändert
+
+- Die Warcraft-III-Modi zeigen die Zeile mit Pfad und Durchsuchen nicht mehr, da das Spiel bereits gefunden wurde.
+
 ## [1.2.3] - 2026-11-07
 
 ### Geändert
