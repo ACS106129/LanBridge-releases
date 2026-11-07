@@ -5,6 +5,14 @@ Todos los cambios notables de LanBridge se registran aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y las versiones
 siguen el [versionado semántico](https://semver.org/lang/es/).
 
+## [1.2.1] - 2026-11-07
+
+### Cambiado
+
+- Cuando el programa de destino es Warcraft III, LanBridge lo reconoce, elige la búsqueda de salas de Warcraft III y abre el juego en ventana con -window.
+- La opción de búsqueda de Warcraft III solo aparece cuando el programa de destino es Warcraft III.
+- Si el destino está vacío, LanBridge pone el Warcraft III instalado, sea cual sea la búsqueda elegida.
+
 ## [1.2.0] - 2026-11-07
 
 ### Añadido

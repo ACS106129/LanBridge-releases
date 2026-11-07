@@ -5,6 +5,14 @@ LanBridge の注目すべき変更はすべてここに記録します。
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョン番号は
 [セマンティック バージョニング](https://semver.org/lang/ja/) に従います。
 
+## [1.2.1] - 2026-11-07
+
+### 変更
+
+- 対象プログラムが Warcraft III のときは自動で認識し、Warcraft III の部屋探しを選んで、-window でウィンドウ表示で起動します。
+- Warcraft III の部屋探しは、対象プログラムが Warcraft III のときだけ選択肢に表示されます。
+- 対象が空のときは、どの部屋探しを選んでいても、インストール済みの Warcraft III が対象に入ります。
+
 ## [1.2.0] - 2026-11-07
 
 ### 追加

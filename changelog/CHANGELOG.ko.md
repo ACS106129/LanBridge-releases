@@ -5,6 +5,14 @@ LanBridge의 주목할 만한 변경은 모두 여기에 기록합니다.
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르고, 버전 번호는
 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다.
 
+## [1.2.1] - 2026-11-07
+
+### 변경
+
+- 대상 프로그램이 Warcraft III이면 자동으로 알아보고, Warcraft III 방 찾기를 선택하며, -window로 창 모드로 실행합니다.
+- Warcraft III 방 찾기는 대상 프로그램이 Warcraft III일 때만 선택지에 나타납니다.
+- 대상이 비어 있으면 어떤 방 찾기를 골랐든 설치된 Warcraft III가 대상으로 들어갑니다.
+
 ## [1.2.0] - 2026-11-07
 
 ### 추가

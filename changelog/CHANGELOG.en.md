@@ -5,6 +5,14 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-11-07
+
+### Changed
+
+- When the target program is Warcraft III, LanBridge recognizes it, picks Warcraft III room discovery and starts the game windowed with -window.
+- The Warcraft III discovery choice now appears only when the target program is Warcraft III.
+- An installed Warcraft III is filled in as the target whenever the target is empty, whichever discovery is chosen.
+
 ## [1.2.0] - 2026-11-07
 
 ### Added

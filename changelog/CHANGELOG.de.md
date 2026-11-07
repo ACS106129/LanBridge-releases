@@ -5,6 +5,14 @@ Alle nennenswerten Änderungen an LanBridge werden hier festgehalten.
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die
 Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.1] - 2026-11-07
+
+### Geändert
+
+- Ist das Zielprogramm Warcraft III, erkennt LanBridge es, wählt die Spielsuche von Warcraft III und startet das Spiel mit -window im Fenster.
+- Die Spielsuche von Warcraft III steht nur noch zur Wahl, wenn das Zielprogramm Warcraft III ist.
+- Ein installiertes Warcraft III wird als Ziel eingetragen, sobald das Ziel leer ist, egal welche Spielsuche gewählt ist.
+
 ## [1.2.0] - 2026-11-07
 
 ### Hinzugefügt
