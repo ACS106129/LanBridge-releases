@@ -5,6 +5,21 @@ Todas as alterações relevantes do LanBridge são registadas aqui.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e as versões
 seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [1.2.2] - 2026-11-07
+
+### Adicionado
+
+- A lista de programas de destino tem Warcraft III: Reign of Chaos e Warcraft III: The Frozen Throne como opções próprias, que encontram o jogo, o abrem com -window e escolhem a busca de salas.
+- Cada edição guarda o próprio executável, e o jogo também é encontrado pelos programas que o Windows já executou e por pastas com o nome dele, mesmo sem instalador.
+
+### Alterado
+
+- Um destino de inicialização vazio não é mais preenchido com o Warcraft III, já que o jogo tem opções próprias.
+
+### Corrigido
+
+- As salas de Reign of Chaos são retransmitidas com o próprio identificador de produto, então jogadores de Reign of Chaos veem as salas uns dos outros.
+
 ## [1.2.1] - 2026-11-07
 
 ### Alterado

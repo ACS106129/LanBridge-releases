@@ -5,6 +5,21 @@ Toutes les modifications notables de LanBridge sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et les versions
 suivent le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [1.2.2] - 2026-11-07
+
+### Ajouté
+
+- La liste des programmes cibles propose Warcraft III: Reign of Chaos et Warcraft III: The Frozen Throne comme choix à part, qui trouvent le jeu, le lancent avec -window et choisissent sa recherche de parties.
+- Chaque édition garde son propre lanceur, et le jeu est aussi trouvé grâce aux programmes déjà lancés sous Windows et aux dossiers à son nom, même sans installateur.
+
+### Modifié
+
+- Une cible de lancement vide n’est plus remplie avec Warcraft III, puisque le jeu a désormais ses propres choix.
+
+### Corrigé
+
+- Les parties de Reign of Chaos sont relayées avec leur propre identifiant de produit, si bien que les joueurs de Reign of Chaos voient les parties des autres.
+
 ## [1.2.1] - 2026-11-07
 
 ### Modifié

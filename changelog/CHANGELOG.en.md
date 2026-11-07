@@ -5,6 +5,21 @@ All notable changes to LanBridge are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2026-11-07
+
+### Added
+
+- The target program list has Warcraft III: Reign of Chaos and Warcraft III: The Frozen Throne as their own choices, which find the game, start it with -window and pick its room discovery.
+- Each edition keeps its own launcher, and the game is also found from programs Windows has run and from folders named after it, so a copy no installer registered is found too.
+
+### Changed
+
+- An empty launch target is no longer filled with Warcraft III, now that the game has its own choices.
+
+### Fixed
+
+- Reign of Chaos rooms are relayed with their own product id, so Reign of Chaos players can see each other's rooms.
+
 ## [1.2.1] - 2026-11-07
 
 ### Changed

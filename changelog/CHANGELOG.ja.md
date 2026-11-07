@@ -5,6 +5,21 @@ LanBridge の注目すべき変更はすべてここに記録します。
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョン番号は
 [セマンティック バージョニング](https://semver.org/lang/ja/) に従います。
 
+## [1.2.2] - 2026-11-07
+
+### 追加
+
+- 対象プログラムの一覧に Warcraft III: Reign of Chaos と Warcraft III: The Frozen Throne が独立した選択肢として加わり、ゲームを探して -window で起動し、部屋探しも選びます。
+- エディションごとに起動ファイルを覚え、Windows が実行したプログラムや名前の合うフォルダーからも探すので、インストーラーを使わずに置いたゲームも見つかります。
+
+### 変更
+
+- Warcraft III 専用の選択肢ができたため、空の起動対象に Warcraft III を入れることはなくなりました。
+
+### 修正
+
+- Reign of Chaos の部屋をその製品 ID で中継するようになり、Reign of Chaos のプレイヤー同士で部屋が見えます。
+
 ## [1.2.1] - 2026-11-07
 
 ### 変更
